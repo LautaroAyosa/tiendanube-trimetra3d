@@ -51,6 +51,22 @@
 
         <link rel="stylesheet" href="{{ 'css/style-async.scss' | static_url }}" media="print" onload="this.media='all'">
 
+        {% set is_contact_hours_page = template == 'page' and (page.handle == 'contacto-y-horarios' or page.handle == 'contacto-horarios' or page.handle == 'contacto-y-horarios-de-atencion' or page.handle == 'informacion-de-contacto-y-horarios' or page.handle == 'informacion-de-contacto-y-horarios-de-atencion') %}
+        {% set is_warranty_page = template == 'page' and page.handle == 'garantias-y-devoluciones' %}
+        {% set is_about_page = template == 'page' and page.handle == 'quienes-somos' %}
+
+        {% if template == 'page' and page.handle == 'envios' %}
+            <link rel="stylesheet" href="{{ 'css/shipping-page.scss' | static_url }}" media="all">
+        {% elseif template == 'page' and page.handle == 'pagos' %}
+            <link rel="stylesheet" href="{{ 'css/payment-page.scss' | static_url }}" media="all">
+        {% elseif is_warranty_page %}
+            <link rel="stylesheet" href="{{ 'css/warranty-page.scss' | static_url }}" media="all">
+        {% elseif is_contact_hours_page %}
+            <link rel="stylesheet" href="{{ 'css/contact-hours-page.scss' | static_url }}" media="all">
+        {% elseif is_about_page %}
+            <link rel="stylesheet" href="{{ 'css/about-page.scss' | static_url }}" media="all">
+        {% endif %}
+
         {# Loads custom CSS added from Advanced Settings on the admin´s theme customization screen #}
 
         <style>
@@ -163,6 +179,28 @@
                 {% include "static/js/store.js.tpl" %}
             });
         </script>
+
+        {% if template == 'page' and page.handle == 'envios' %}
+            <script type="text/javascript">
+                {% include "static/js/shipping-page.js.tpl" %}
+            </script>
+        {% elseif template == 'page' and page.handle == 'pagos' %}
+            <script type="text/javascript">
+                {% include "static/js/payment-page.js.tpl" %}
+            </script>
+        {% elseif is_warranty_page %}
+            <script type="text/javascript">
+                {% include "static/js/warranty-page.js.tpl" %}
+            </script>
+        {% elseif is_contact_hours_page %}
+            <script type="text/javascript">
+                {% include "static/js/contact-hours-page.js.tpl" %}
+            </script>
+        {% elseif is_about_page %}
+            <script type="text/javascript">
+                {% include "static/js/about-page.js.tpl" %}
+            </script>
+        {% endif %}
 
         {# Google reCAPTCHA on register page #}
 

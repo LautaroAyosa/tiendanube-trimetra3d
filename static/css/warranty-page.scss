@@ -1,0 +1,680 @@
+.warranty-page {
+  --warranty-ink: #1d241f;
+  --warranty-copy: #46514a;
+  --warranty-muted: #6b756f;
+  --warranty-line: #dde5df;
+  --warranty-panel: #ffffff;
+  --warranty-panel-soft: #f5f8f6;
+  --warranty-accent: #f05423;
+  --warranty-accent-soft: #fff0ea;
+  --warranty-success: #0d7a68;
+  --warranty-success-soft: #e7f5f1;
+  --warranty-marker: #f4c24f;
+
+  color: var(--warranty-copy);
+  background: #ffffff;
+  font-family: var(--body-font);
+  overflow: hidden;
+}
+
+.warranty-page *,
+.warranty-page *::before,
+.warranty-page *::after {
+  box-sizing: border-box;
+}
+
+.warranty-page__container {
+  max-width: 1120px;
+}
+
+.warranty-page h1,
+.warranty-page h2,
+.warranty-page h3,
+.warranty-page p {
+  margin-top: 0;
+}
+
+.warranty-page h1,
+.warranty-page h2,
+.warranty-page h3 {
+  color: var(--warranty-ink);
+  font-family: var(--heading-font);
+  font-weight: 700;
+}
+
+.warranty-page p {
+  margin-bottom: 0;
+}
+
+.warranty-page strong {
+  color: var(--warranty-ink);
+  font-weight: 700;
+}
+
+.warranty-page__hero {
+  position: relative;
+  padding: 48px 0 36px;
+  background:
+    linear-gradient(115deg, rgba(240, 84, 35, 0.10), transparent 34%),
+    linear-gradient(145deg, #ffffff 0%, #f5f8f6 72%, #eef7f4 100%);
+  border-bottom: 1px solid var(--warranty-line);
+}
+
+.warranty-page__hero::before {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 8px;
+  background: linear-gradient(90deg, var(--warranty-accent) 0 28%, var(--warranty-marker) 28% 54%, var(--warranty-success) 54% 100%);
+  content: "";
+}
+
+.warranty-page__hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.8fr);
+  gap: 28px;
+  align-items: end;
+}
+
+.warranty-page__hero-copy {
+  max-width: 820px;
+}
+
+.warranty-page__eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 9px;
+  color: var(--warranty-accent);
+  background: var(--warranty-accent-soft);
+  border: 1px solid rgba(240, 84, 35, 0.26);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.warranty-page__title {
+  max-width: 760px;
+  margin-bottom: 12px;
+  font-size: 38px;
+  line-height: 1.1;
+}
+
+.warranty-page__lead {
+  max-width: 820px;
+  color: var(--warranty-copy);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.warranty-page__hero-panel {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid var(--warranty-line);
+  border-radius: 8px;
+}
+
+.warranty-page__panel-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--warranty-line);
+}
+
+.warranty-page__panel-row span,
+.warranty-page__panel-row strong {
+  line-height: 1.35;
+}
+
+.warranty-page__panel-row span {
+  color: var(--warranty-muted);
+}
+
+.warranty-page__panel-row strong {
+  text-align: right;
+}
+
+.warranty-page__hero-actions,
+.warranty-page__cta-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.warranty-page__section,
+.warranty-page__policy,
+.warranty-page__filament,
+.warranty-page__process,
+.warranty-page__notice,
+.warranty-page__repairs,
+.warranty-page__cta {
+  padding: 42px 0;
+}
+
+.warranty-page__section-heading {
+  max-width: 780px;
+  margin-bottom: 20px;
+}
+
+.warranty-page__section-heading h2,
+.warranty-page__cta h2,
+.warranty-page__repairs h2 {
+  margin-bottom: 10px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.warranty-page__section-heading p:not(.warranty-page__eyebrow),
+.warranty-page__cta p,
+.warranty-page__repairs p {
+  color: var(--warranty-copy);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.warranty-page__quick-grid,
+.warranty-page__policy-grid,
+.warranty-page__period-grid,
+.warranty-page__notice-grid,
+.warranty-page__exclusion-grid,
+.warranty-page__faq-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.warranty-page__quick-grid,
+.warranty-page__period-grid,
+.warranty-page__notice-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.warranty-page__policy-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.warranty-page__exclusion-grid,
+.warranty-page__faq-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.warranty-page__quick-card,
+.warranty-page__policy-card,
+.warranty-page__period-card,
+.warranty-page__notice-grid article,
+.warranty-page__exclusion-card,
+.warranty-page__faq-card {
+  min-width: 0;
+  background: var(--warranty-panel);
+  border: 1px solid var(--warranty-line);
+  border-radius: 8px;
+}
+
+.warranty-page__quick-card,
+.warranty-page__policy-card,
+.warranty-page__period-card,
+.warranty-page__exclusion-card,
+.warranty-page__faq-card {
+  min-height: 100%;
+  padding: 18px;
+  box-shadow: 0 12px 28px rgba(29, 36, 31, 0.05);
+}
+
+.warranty-page__quick-card--featured,
+.warranty-page__policy-card--accent {
+  background:
+    linear-gradient(135deg, rgba(13, 122, 104, 0.12), transparent 58%),
+    #ffffff;
+  border-color: rgba(13, 122, 104, 0.28);
+}
+
+.warranty-page__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 14px;
+  color: var(--warranty-accent);
+  background: var(--warranty-accent-soft);
+  border: 1px solid rgba(240, 84, 35, 0.24);
+  border-radius: 8px;
+}
+
+.warranty-page__icon-svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.warranty-page__card-kicker {
+  margin-bottom: 7px;
+  color: var(--warranty-accent);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.warranty-page__quick-card h2 {
+  margin-bottom: 8px;
+  color: var(--warranty-accent);
+  font-size: 30px;
+  line-height: 1.05;
+}
+
+.warranty-page__quick-card p,
+.warranty-page__policy-card p,
+.warranty-page__period-card p,
+.warranty-page__notice-grid p,
+.warranty-page__exclusion-card p,
+.warranty-page__faq-card p {
+  color: var(--warranty-copy);
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.warranty-page__policy,
+.warranty-page__process,
+.warranty-page__notice {
+  background: var(--warranty-panel-soft);
+  border-top: 1px solid var(--warranty-line);
+  border-bottom: 1px solid var(--warranty-line);
+}
+
+.warranty-page__policy-card h2 {
+  margin-bottom: 10px;
+  font-size: 25px;
+  line-height: 1.18;
+}
+
+.warranty-page__policy-card p + p {
+  margin-top: 12px;
+}
+
+.warranty-page__filament {
+  background:
+    linear-gradient(135deg, rgba(244, 194, 79, 0.14), transparent 48%),
+    #ffffff;
+}
+
+.warranty-page__filament-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.warranty-page__filament-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.warranty-page__filament-checks > div {
+  min-width: 0;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid var(--warranty-line);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(29, 36, 31, 0.05);
+}
+
+.warranty-page__filament-checks strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.warranty-page__filament-checks ul,
+.warranty-page__component-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.warranty-page__filament-checks li,
+.warranty-page__component-list li {
+  position: relative;
+  padding-left: 17px;
+  color: var(--warranty-copy);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.warranty-page__filament-checks li + li,
+.warranty-page__component-list li + li {
+  margin-top: 7px;
+}
+
+.warranty-page__filament-checks li::before,
+.warranty-page__component-list li::before {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--warranty-success);
+  border-radius: 50%;
+  content: "";
+}
+
+.warranty-page__period-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.warranty-page__period-card > span {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: 28px;
+  margin-bottom: 12px;
+  padding: 5px 9px;
+  color: var(--warranty-accent);
+  background: var(--warranty-accent-soft);
+  border: 1px solid rgba(240, 84, 35, 0.24);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.warranty-page__period-card h3,
+.warranty-page__notice-grid h3,
+.warranty-page__exclusion-card h3,
+.warranty-page__faq-card h3,
+.warranty-page__timeline h3 {
+  margin-bottom: 8px;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.warranty-page__period-note {
+  margin-top: auto;
+  padding-top: 14px;
+  color: var(--warranty-success) !important;
+  font-size: 13px !important;
+  font-weight: 700;
+  line-height: 1.45 !important;
+}
+
+.warranty-page__period-card--excluded > span {
+  color: #8a3a1f;
+  background: #fff6ef;
+  border-color: rgba(240, 84, 35, 0.32);
+}
+
+.warranty-page__timeline {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.warranty-page__timeline li {
+  min-width: 0;
+  min-height: 100%;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid var(--warranty-line);
+  border-radius: 8px;
+}
+
+.warranty-page__timeline span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 14px;
+  color: #ffffff;
+  background: var(--warranty-success);
+  border-radius: 8px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.warranty-page__timeline p {
+  color: var(--warranty-copy);
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.warranty-page__notice-grid article {
+  padding: 17px;
+  background: transparent;
+  border-color: rgba(13, 122, 104, 0.22);
+}
+
+.warranty-page__notice-grid article::before {
+  display: block;
+  width: 34px;
+  height: 4px;
+  margin-bottom: 14px;
+  background: var(--warranty-success);
+  border-radius: 4px;
+  content: "";
+}
+
+.warranty-page__repairs {
+  background:
+    linear-gradient(135deg, rgba(13, 122, 104, 0.13), transparent 42%),
+    linear-gradient(120deg, #ffffff 0%, #f6f8f5 100%);
+  border-top: 1px solid var(--warranty-line);
+  border-bottom: 1px solid var(--warranty-line);
+}
+
+.warranty-page__repairs-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(160px, auto);
+  gap: 22px;
+  align-items: center;
+}
+
+.warranty-page__repairs-layout > strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  padding: 18px;
+  color: var(--warranty-ink);
+  background: var(--warranty-marker);
+  border: 1px solid rgba(29, 36, 31, 0.12);
+  border-radius: 8px;
+  font-size: 24px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.warranty-page__faq-card {
+  box-shadow: 0 12px 28px rgba(29, 36, 31, 0.04);
+}
+
+.warranty-page__cta {
+  background: #ffffff;
+  border-top: 1px solid var(--warranty-line);
+}
+
+.warranty-page__cta-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, auto);
+  gap: 22px;
+  align-items: center;
+  padding: 24px 0;
+}
+
+.warranty-page__cta p {
+  max-width: 760px;
+}
+
+.warranty-page__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 13px 18px;
+  color: #ffffff;
+  background: var(--warranty-ink);
+  border: 1px solid var(--warranty-ink);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  text-decoration: none;
+}
+
+.warranty-page__button:hover,
+.warranty-page__button:focus {
+  color: #ffffff;
+  background: var(--warranty-accent);
+  border-color: var(--warranty-accent);
+}
+
+.warranty-page__button--outline {
+  color: var(--warranty-ink);
+  background: #ffffff;
+  border-color: var(--warranty-line);
+}
+
+.warranty-page__button--outline:hover,
+.warranty-page__button--outline:focus {
+  color: var(--warranty-ink);
+  background: var(--warranty-marker);
+  border-color: var(--warranty-marker);
+}
+
+.warranty-page__admin-section {
+  padding-top: 14px;
+}
+
+.warranty-page__admin-content {
+  padding-top: 24px;
+  border-top: 1px solid var(--warranty-line);
+}
+
+.warranty-page__admin-content > *:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1199px) {
+  .warranty-page__quick-grid,
+  .warranty-page__period-grid,
+  .warranty-page__notice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .warranty-page__timeline {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 991px) {
+  .warranty-page__hero-layout,
+  .warranty-page__policy-grid,
+  .warranty-page__filament-layout,
+  .warranty-page__repairs-layout,
+  .warranty-page__cta-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .warranty-page__hero-panel {
+    max-width: 560px;
+  }
+
+  .warranty-page__exclusion-grid,
+  .warranty-page__faq-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .warranty-page__cta-layout {
+    align-items: start;
+  }
+
+  .warranty-page__button {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .warranty-page__cta-actions,
+  .warranty-page__hero-actions {
+    justify-items: start;
+  }
+}
+
+@media (max-width: 767px) {
+  .warranty-page__hero {
+    padding: 34px 0 30px;
+  }
+
+  .warranty-page__section,
+  .warranty-page__policy,
+  .warranty-page__filament,
+  .warranty-page__process,
+  .warranty-page__notice,
+  .warranty-page__repairs,
+  .warranty-page__cta {
+    padding: 30px 0;
+  }
+
+  .warranty-page__title {
+    font-size: 31px;
+  }
+
+  .warranty-page__lead {
+    font-size: 15px;
+  }
+
+  .warranty-page__section-heading h2,
+  .warranty-page__cta h2,
+  .warranty-page__repairs h2 {
+    font-size: 24px;
+  }
+
+  .warranty-page__quick-grid,
+  .warranty-page__period-grid,
+  .warranty-page__notice-grid,
+  .warranty-page__exclusion-grid,
+  .warranty-page__faq-grid,
+  .warranty-page__timeline,
+  .warranty-page__filament-checks {
+    grid-template-columns: 1fr;
+  }
+
+  .warranty-page__hero-panel,
+  .warranty-page__quick-card,
+  .warranty-page__policy-card,
+  .warranty-page__period-card,
+  .warranty-page__notice-grid article,
+  .warranty-page__exclusion-card,
+  .warranty-page__faq-card,
+  .warranty-page__filament-checks > div,
+  .warranty-page__timeline li {
+    border-radius: 8px;
+  }
+
+  .warranty-page__panel-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .warranty-page__panel-row strong {
+    text-align: left;
+  }
+
+  .warranty-page__repairs-layout > strong {
+    justify-self: start;
+    min-height: 72px;
+    font-size: 21px;
+  }
+}

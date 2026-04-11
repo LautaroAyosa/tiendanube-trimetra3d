@@ -1,0 +1,707 @@
+.contact-hours-page {
+  --contact-ink: #1d241f;
+  --contact-copy: #46514a;
+  --contact-muted: #6b756f;
+  --contact-line: #dde5df;
+  --contact-panel: #ffffff;
+  --contact-panel-soft: #f5f8f6;
+  --contact-accent: #f05423;
+  --contact-accent-soft: #fff0ea;
+  --contact-success: #0d7a68;
+  --contact-success-soft: #e7f5f1;
+  --contact-marker: #f4c24f;
+
+  color: var(--contact-copy);
+  background: #ffffff;
+  font-family: var(--body-font);
+  overflow: hidden;
+}
+
+.contact-hours-page *,
+.contact-hours-page *::before,
+.contact-hours-page *::after {
+  box-sizing: border-box;
+}
+
+.contact-hours-page__container {
+  max-width: 1120px;
+}
+
+.contact-hours-page h1,
+.contact-hours-page h2,
+.contact-hours-page h3,
+.contact-hours-page p {
+  margin-top: 0;
+}
+
+.contact-hours-page h1,
+.contact-hours-page h2,
+.contact-hours-page h3 {
+  color: var(--contact-ink);
+  font-family: var(--heading-font);
+  font-weight: 700;
+}
+
+.contact-hours-page p {
+  margin-bottom: 0;
+}
+
+.contact-hours-page strong {
+  color: var(--contact-ink);
+  font-weight: 700;
+}
+
+.contact-hours-page a {
+  color: var(--contact-success);
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact-hours-page a:hover,
+.contact-hours-page a:focus {
+  color: var(--contact-accent);
+}
+
+.contact-hours-page__hero {
+  position: relative;
+  padding: 52px 0 38px;
+  background:
+    linear-gradient(90deg, rgba(13, 122, 104, 0.13), transparent 44%),
+    linear-gradient(145deg, #ffffff 0%, #f5f8f6 70%, #fff7ef 100%);
+  border-bottom: 1px solid var(--contact-line);
+}
+
+.contact-hours-page__hero::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  background: linear-gradient(180deg, var(--contact-accent) 0 32%, var(--contact-marker) 32% 58%, var(--contact-success) 58% 100%);
+  content: "";
+}
+
+.contact-hours-page__hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: 32px;
+  align-items: center;
+}
+
+.contact-hours-page__hero-copy {
+  max-width: 780px;
+}
+
+.contact-hours-page__eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 9px;
+  color: var(--contact-accent);
+  background: var(--contact-accent-soft);
+  border: 1px solid rgba(240, 84, 35, 0.26);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.contact-hours-page__title {
+  max-width: 720px;
+  margin-bottom: 12px;
+  font-size: 39px;
+  line-height: 1.08;
+}
+
+.contact-hours-page__lead {
+  max-width: 820px;
+  color: var(--contact-copy);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.contact-hours-page__hero-panel {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--contact-line);
+  border-radius: 8px;
+  box-shadow: 0 16px 34px rgba(29, 36, 31, 0.08);
+}
+
+.contact-hours-page__panel-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--contact-line);
+}
+
+.contact-hours-page__panel-row span {
+  color: var(--contact-muted);
+  line-height: 1.35;
+}
+
+.contact-hours-page__panel-row strong {
+  text-align: right;
+  line-height: 1.35;
+}
+
+.contact-hours-page__panel-link {
+  color: var(--contact-ink);
+}
+
+.contact-hours-page__panel-link:hover,
+.contact-hours-page__panel-link:focus {
+  color: var(--contact-accent);
+}
+
+.contact-hours-page__quick-section,
+.contact-hours-page__channels,
+.contact-hours-page__hours,
+.contact-hours-page__operations,
+.contact-hours-page__social,
+.contact-hours-page__safety,
+.contact-hours-page__section {
+  padding: 42px 0;
+}
+
+.contact-hours-page__section-heading {
+  max-width: 780px;
+  margin-bottom: 22px;
+}
+
+.contact-hours-page__section-heading h2,
+.contact-hours-page__social h2,
+.contact-hours-page__safety h2 {
+  margin-bottom: 10px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.contact-hours-page__section-heading p:not(.contact-hours-page__eyebrow),
+.contact-hours-page__safety p {
+  color: var(--contact-copy);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.contact-hours-page__quick-grid,
+.contact-hours-page__channel-grid,
+.contact-hours-page__operations-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.contact-hours-page__quick-grid {
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+}
+
+.contact-hours-page__quick-card,
+.contact-hours-page__channel-card,
+.contact-hours-page__operation-card {
+  min-width: 0;
+  min-height: 100%;
+  background: var(--contact-panel);
+  border: 1px solid var(--contact-line);
+  border-radius: 8px;
+}
+
+.contact-hours-page__quick-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  box-shadow: 0 12px 28px rgba(29, 36, 31, 0.05);
+}
+
+.contact-hours-page__quick-card--accent {
+  background:
+    linear-gradient(135deg, rgba(13, 122, 104, 0.13), transparent 62%),
+    #ffffff;
+  border-color: rgba(13, 122, 104, 0.3);
+}
+
+.contact-hours-page__quick-card p {
+  margin-bottom: 6px;
+  color: var(--contact-muted);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.contact-hours-page__quick-card h2 {
+  margin-bottom: 10px;
+  color: var(--contact-ink);
+  font-size: 22px;
+  line-height: 1.16;
+}
+
+.contact-hours-page__quick-card span:not(.contact-hours-page__icon) {
+  color: var(--contact-copy);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.contact-hours-page__quick-card a {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.contact-hours-page__icon,
+.contact-hours-page__large-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--contact-accent);
+  background: var(--contact-accent-soft);
+  border: 1px solid rgba(240, 84, 35, 0.24);
+  border-radius: 8px;
+}
+
+.contact-hours-page__icon {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 14px;
+}
+
+.contact-hours-page__icon-svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.contact-hours-page__channels,
+.contact-hours-page__social {
+  background: var(--contact-panel-soft);
+  border-top: 1px solid var(--contact-line);
+  border-bottom: 1px solid var(--contact-line);
+}
+
+.contact-hours-page__channels-layout {
+  display: grid;
+  grid-template-columns: minmax(290px, 0.78fr) minmax(0, 1.22fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.contact-hours-page__primary-channel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100%;
+  padding: 22px;
+  color: #ffffff;
+  background:
+    linear-gradient(145deg, rgba(240, 84, 35, 0.94), rgba(29, 36, 31, 0.98)),
+    var(--contact-ink);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+}
+
+.contact-hours-page__primary-top {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.contact-hours-page__large-icon {
+  flex: 0 0 auto;
+  width: 54px;
+  height: 54px;
+  color: var(--contact-ink);
+  background: var(--contact-marker);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.contact-hours-page__large-icon-svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+
+.contact-hours-page__primary-channel p,
+.contact-hours-page__primary-channel h3,
+.contact-hours-page__primary-channel strong {
+  color: #ffffff;
+}
+
+.contact-hours-page__primary-channel .contact-hours-page__primary-top p {
+  margin-bottom: 3px;
+  color: #ffeadf;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.contact-hours-page__primary-channel h3 {
+  margin-bottom: 0;
+  font-size: 21px;
+  line-height: 1.2;
+}
+
+.contact-hours-page__primary-channel > strong {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 28px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.contact-hours-page__primary-channel > p {
+  margin-bottom: 20px;
+  color: #fff4ee;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.contact-hours-page__channel-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.contact-hours-page__channel-card {
+  padding: 18px;
+}
+
+.contact-hours-page__channel-card h3,
+.contact-hours-page__operation-card h3 {
+  margin-bottom: 8px;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.contact-hours-page__channel-card p,
+.contact-hours-page__operation-card p {
+  color: var(--contact-copy);
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.contact-hours-page__channel-card a {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--contact-success);
+  line-height: 1.35;
+}
+
+.contact-hours-page__hours {
+  background:
+    linear-gradient(135deg, rgba(244, 194, 79, 0.14), transparent 46%),
+    #ffffff;
+}
+
+.contact-hours-page__hours-board {
+  display: grid;
+  gap: 12px;
+}
+
+.contact-hours-page__hours-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.9fr) minmax(150px, 0.42fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  min-width: 0;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid var(--contact-line);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(29, 36, 31, 0.04);
+}
+
+.contact-hours-page__hours-row--open {
+  background:
+    linear-gradient(135deg, rgba(13, 122, 104, 0.12), transparent 60%),
+    #ffffff;
+  border-color: rgba(13, 122, 104, 0.28);
+}
+
+.contact-hours-page__hours-row span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--contact-muted);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.contact-hours-page__hours-row h3 {
+  margin-bottom: 0;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.contact-hours-page__hours-row strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 8px 10px;
+  color: var(--contact-success);
+  background: var(--contact-success-soft);
+  border: 1px solid rgba(13, 122, 104, 0.24);
+  border-radius: 8px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.contact-hours-page__hours-row p {
+  color: var(--contact-copy);
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.contact-hours-page__operations-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.contact-hours-page__operation-card {
+  padding: 19px;
+}
+
+.contact-hours-page__operation-card > span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  margin-bottom: 13px;
+  padding: 5px 8px;
+  color: var(--contact-accent);
+  background: var(--contact-accent-soft);
+  border: 1px solid rgba(240, 84, 35, 0.24);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.contact-hours-page__social-layout,
+.contact-hours-page__safety-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+}
+
+.contact-hours-page__social h2,
+.contact-hours-page__safety h2 {
+  margin-bottom: 0;
+}
+
+.contact-hours-page__social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.contact-hours-page__social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 10px 13px;
+  color: var(--contact-ink);
+  background: #ffffff;
+  border: 1px solid var(--contact-line);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.contact-hours-page__social-links a:hover,
+.contact-hours-page__social-links a:focus {
+  color: #ffffff;
+  background: var(--contact-accent);
+  border-color: var(--contact-accent);
+}
+
+.contact-hours-page__social-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.contact-hours-page__safety {
+  background:
+    linear-gradient(135deg, rgba(13, 122, 104, 0.13), transparent 42%),
+    linear-gradient(120deg, #ffffff 0%, #f6f8f5 100%);
+  border-top: 1px solid var(--contact-line);
+}
+
+.contact-hours-page__safety p {
+  max-width: 780px;
+}
+
+.contact-hours-page__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 13px 18px;
+  color: #ffffff !important;
+  background: var(--contact-ink);
+  border: 1px solid var(--contact-ink);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  text-decoration: none;
+}
+
+.contact-hours-page__button:hover,
+.contact-hours-page__button:focus {
+  color: #ffffff !important;
+  background: var(--contact-accent);
+  border-color: var(--contact-accent);
+}
+
+.contact-hours-page__button--light {
+  margin-top: auto;
+  color: var(--contact-ink) !important;
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.contact-hours-page__button--light:hover,
+.contact-hours-page__button--light:focus {
+  color: var(--contact-ink) !important;
+  background: var(--contact-marker);
+  border-color: var(--contact-marker);
+}
+
+.contact-hours-page__button--outline {
+  color: var(--contact-ink) !important;
+  background: #ffffff;
+  border-color: var(--contact-line);
+}
+
+.contact-hours-page__button--outline:hover,
+.contact-hours-page__button--outline:focus {
+  color: #ffffff !important;
+  background: var(--contact-success);
+  border-color: var(--contact-success);
+}
+
+.contact-hours-page__admin-section {
+  padding-top: 14px;
+}
+
+.contact-hours-page__admin-content {
+  padding-top: 24px;
+  border-top: 1px solid var(--contact-line);
+}
+
+.contact-hours-page__admin-content > *:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1199px) {
+  .contact-hours-page__quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 991px) {
+  .contact-hours-page__hero-layout,
+  .contact-hours-page__channels-layout,
+  .contact-hours-page__social-layout,
+  .contact-hours-page__safety-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-hours-page__hero-panel {
+    max-width: 560px;
+  }
+
+  .contact-hours-page__operations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-hours-page__hours-row {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .contact-hours-page__hours-row strong {
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 260px;
+    text-align: left;
+  }
+
+  .contact-hours-page__social-links {
+    justify-content: flex-start;
+  }
+
+  .contact-hours-page__button {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-hours-page__hero {
+    padding: 34px 0 30px;
+  }
+
+  .contact-hours-page__quick-section,
+  .contact-hours-page__channels,
+  .contact-hours-page__hours,
+  .contact-hours-page__operations,
+  .contact-hours-page__social,
+  .contact-hours-page__safety,
+  .contact-hours-page__section {
+    padding: 30px 0;
+  }
+
+  .contact-hours-page__title {
+    font-size: 31px;
+  }
+
+  .contact-hours-page__lead {
+    font-size: 15px;
+  }
+
+  .contact-hours-page__section-heading h2,
+  .contact-hours-page__social h2,
+  .contact-hours-page__safety h2 {
+    font-size: 24px;
+  }
+
+  .contact-hours-page__quick-grid,
+  .contact-hours-page__channel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-hours-page__panel-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .contact-hours-page__panel-row strong {
+    text-align: left;
+  }
+
+  .contact-hours-page__primary-channel > strong {
+    font-size: 24px;
+  }
+
+  .contact-hours-page__quick-card,
+  .contact-hours-page__channel-card,
+  .contact-hours-page__operation-card,
+  .contact-hours-page__hero-panel,
+  .contact-hours-page__primary-channel,
+  .contact-hours-page__hours-row,
+  .contact-hours-page__social-links a {
+    border-radius: 8px;
+  }
+}
