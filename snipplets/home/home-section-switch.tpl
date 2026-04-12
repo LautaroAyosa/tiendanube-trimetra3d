@@ -99,6 +99,11 @@
 		{% include 'snipplets/banner-services/banner-services.tpl' %}
 	{% endif %}
 
+{% elseif section_select == 'trustbar' %}
+
+	{#  **** Trust bar ****  #}
+	{% include 'snipplets/trust-bar.tpl' %}
+
 {% elseif section_select == 'categories' %}
 
 	{#  **** Categories banners ****  #}

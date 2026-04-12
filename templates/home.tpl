@@ -55,7 +55,7 @@
     {#  **** Hidden Sections ****  #}
     {% if show_component_help %}
         <div style="display:none">
-            {% for section_select in ['slider', 'main_categories', 'welcome', 'institutional', 'products', 'informatives', 'categories', 'main_product', 'new', 'video', 'newsletter', 'sale', 'promotion', 'best_seller', 'instafeed', 'promotional', 'news_banners', 'featured_banners', 'brands' , 'testimonials', 'reviews', 'modules'] %}
+            {% for section_select in ['slider', 'main_categories', 'welcome', 'institutional', 'products', 'informatives', 'trustbar', 'categories', 'main_product', 'new', 'video', 'newsletter', 'sale', 'promotion', 'best_seller', 'instafeed', 'promotional', 'news_banners', 'featured_banners', 'brands' , 'testimonials', 'reviews', 'modules'] %}
                 {% if section_select not in newArray %}
                     {% include 'snipplets/home/home-section-switch.tpl' %}
                 {% endif %}

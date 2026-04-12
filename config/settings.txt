@@ -1971,6 +1971,7 @@ Página de inicio
 			promotion = Productos en promoción
 			best_seller = Productos más vendidos
 			informatives = Información de envíos, pagos y compra
+			trustbar = Barra de confianza
 			welcome = Mensaje de bienvenida
 			institutional = Mensaje institucional
 			categories = Banners de categorías
