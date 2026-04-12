@@ -651,6 +651,31 @@ DOMContentLoaded.addEventOrExecute(() => {
         menuItems +=  jQueryNuvem(el).first(el => el.offsetWidth);
     });
 
+    function updateDesktopNavInfoSplit() {
+        var navInfoSplitStartX = null;
+
+        jQueryNuvem('.js-nav-info-split-start').each(function(el) {
+            if (navInfoSplitStartX === null) {
+                navInfoSplitStartX = el.getBoundingClientRect().left;
+            }
+        });
+
+        jQueryNuvem('.js-menu-and-banners-row').each(function(navRow) {
+            if (navInfoSplitStartX === null) {
+                navRow.classList.remove('nav-info-split');
+                return;
+            }
+
+            var navRowRect = navRow.getBoundingClientRect();
+            var navInfoStartX = navInfoSplitStartX - navRowRect.left;
+
+            navInfoStartX = Math.max(0, Math.min(navInfoStartX, navRow.offsetWidth));
+
+            navRow.style.setProperty('--nav-info-start-x', navInfoStartX.toString() + 'px');
+            navRow.classList.add('nav-info-split');
+        });
+    }
+
     jQueryNuvem(".js-nav-desktop-list").on("scroll", function() {
         var position = jQueryNuvem('.js-nav-desktop-list').prop("scrollLeft");
         if(position == 0) {
@@ -663,6 +688,7 @@ DOMContentLoaded.addEventOrExecute(() => {
         } else {
             jQueryNuvem(".js-nav-desktop-list-arrow-right").removeClass('disable');
         }
+        updateDesktopNavInfoSplit();
     }); 
     
     if (menuContainer < menuItems) {
@@ -675,6 +701,8 @@ DOMContentLoaded.addEventOrExecute(() => {
 
     {# Show nav row once columns layout are ready #}
 
+    updateDesktopNavInfoSplit();
+    window.addEventListener("resize", updateDesktopNavInfoSplit);
     jQueryNuvem(".js-menu-and-banners-row").css("visibility" , "visible").css("height" , "auto").css("overflow" , "initial");
 
     jQueryNuvem('.js-nav-desktop-list-arrow-right').on("click", function() {

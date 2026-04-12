@@ -4,8 +4,14 @@
 
 {% for item in navigation %}
 	{% set is_home_nav_item = not subitem and item.name == ('Inicio' | translate) %}
+	{% set item_name_normalized = item.name | lower | trim %}
+	{% set item_url_handle = '' %}
+	{% if item.url %}
+		{% set item_url_handle = item.url | trim('/') | split('/') | last | lower %}
+	{% endif %}
+	{% set is_info_nav_split_item = megamenu and not subitem and (item_name_normalized in ['quienes somos', 'quiénes somos'] or item_url_handle == 'quienes-somos') %}
 	{% if item.subitems %}
-		<li class="{% if megamenu %}js-desktop-nav-item js-item-subitems-desktop nav-item-desktop {% if not subitem %}js-nav-main-item nav-dropdown nav-main-item {% endif %}{% endif %} nav-item item-with-subitems" data-component="menu.item">
+		<li class="{% if megamenu %}js-desktop-nav-item js-item-subitems-desktop nav-item-desktop {% if not subitem %}js-nav-main-item nav-dropdown nav-main-item {% endif %}{% endif %}{% if is_info_nav_split_item %}js-nav-info-split-start {% endif %}nav-item item-with-subitems" data-component="menu.item">
 			{% if megamenu %}
 			<div class="nav-item-container">
 			{% endif %}
@@ -84,7 +90,7 @@
 			{% endif %}
 		</li>
 	{% else %}
-		<li class="js-desktop-nav-item {% if megamenu %}{% if not subitem %}js-nav-main-item nav-main-item{% endif %} nav-item-desktop{% endif %} nav-item" data-component="menu.item">
+		<li class="js-desktop-nav-item {% if megamenu %}{% if not subitem %}js-nav-main-item nav-main-item{% endif %} nav-item-desktop{% endif %} {% if is_info_nav_split_item %}js-nav-info-split-start {% endif %}nav-item" data-component="menu.item">
 			<a class="nav-list-link {{ item.current ? 'selected' : '' }}" href="{% if item.url %}{{ item.url | setting_url }}{% else %}#{% endif %}"{% if is_home_nav_item %} title="{{ 'Inicio' | translate }}" aria-label="{{ 'Inicio' | translate }}"{% endif %}>
 				{% if is_home_nav_item %}
 					{% include "snipplets/svg/home.tpl" with {svg_custom_class: "icon-inline icon-lg icon-w"} %}

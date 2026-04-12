@@ -1500,6 +1500,17 @@ input[type=number] {
     fill: var(--nav-desktop-foreground);
     background-color: var(--nav-desktop-background);
     border-bottom: var(--border-solid) var(--nav-desktop-foreground-opacity-10);
+    &.nav-info-split {
+      background:
+        linear-gradient(
+          to right,
+          transparent 0,
+          transparent var(--nav-info-start-x, 100%),
+          rgba(255, 255, 255, 0.06) var(--nav-info-start-x, 100%),
+          rgba(255, 255, 255, 0.06) 100%
+        ),
+        var(--nav-desktop-background);
+    }
     .main-categories-link {
       border-right: var(--border-solid) var(--nav-desktop-foreground-opacity-10);
     }

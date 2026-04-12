@@ -4,7 +4,7 @@
     {% if settings.full_width_description %}
         <div class="row">
             {% if description_content %}
-                <div class="col-md-10 pr-md-5">
+                <div class="col-md-12 pr-md-5">
             {% endif %}
     {% endif %}
 
@@ -30,9 +30,11 @@
             {% if description_content %}
                 </div>
             {% endif %}
+            {#
             <div class="col-md-2">
                 {% include 'snipplets/social/social-share.tpl' %}
             </div>
+            #}
         </div>
     {% endif %}
 </div>

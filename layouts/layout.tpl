@@ -54,6 +54,7 @@
         {% set is_contact_hours_page = template == 'page' and (page.handle == 'contacto-y-horarios' or page.handle == 'contacto-horarios' or page.handle == 'contacto-y-horarios-de-atencion' or page.handle == 'informacion-de-contacto-y-horarios' or page.handle == 'informacion-de-contacto-y-horarios-de-atencion') %}
         {% set is_warranty_page = template == 'page' and page.handle == 'garantias-y-devoluciones' %}
         {% set is_about_page = template == 'page' and page.handle == 'quienes-somos' %}
+        {% set is_single_product_page = template == 'product' %}
 
         {% if template == 'page' and page.handle == 'envios' %}
             <link rel="stylesheet" href="{{ 'css/shipping-page.scss' | static_url }}" media="all">
@@ -65,6 +66,8 @@
             <link rel="stylesheet" href="{{ 'css/contact-hours-page.scss' | static_url }}" media="all">
         {% elseif is_about_page %}
             <link rel="stylesheet" href="{{ 'css/about-page.scss' | static_url }}" media="all">
+        {% elseif is_single_product_page %}
+            <link rel="stylesheet" href="{{ 'css/single-product.scss' | static_url }}" media="all">
         {% endif %}
 
         {# Loads custom CSS added from Advanced Settings on the admin´s theme customization screen #}

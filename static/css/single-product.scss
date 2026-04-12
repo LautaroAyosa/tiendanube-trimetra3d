@@ -1,0 +1,326 @@
+/*
+ * SINGLE PRODUCT PAGE
+ */
+
+// =========================
+// Variables
+// =========================
+$font-base: Inter, system-ui, sans-serif;
+$font-alt: Inter, sans-serif;
+
+$bp-mobile: 768px;
+$bp-desktop: 769px;
+
+$color-text-muted: #6b7280;
+$color-text-secondary: #4b5563;
+$color-text-body: #555;
+
+$color-border-light: #e5e7eb;
+$color-border-soft: #e2e5e9;
+$color-border-table: #e6e9ec;
+
+$color-bg-soft: #f3f4f6;
+$color-bg-card: #f7f9fa;
+$color-bg-faq: #f8f9fb;
+
+$color-success: #16a34a;
+$color-white: #fff;
+
+// =========================
+// Mixins
+// =========================
+@mixin max($width) {
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin min($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin soft-card($bg, $border, $radius) {
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: $radius;
+}
+
+// =========================
+// Product overview
+// =========================
+.product-overview {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1rem;
+  font-family: $font-base;
+
+  .feature {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 5rem;
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    &__media {
+      flex: 1 1 420px;
+      text-align: center;
+      margin: 0;
+
+      video {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      img {
+        border-radius: 5px;
+        max-height: 400px;
+        object-fit: contain;
+      }
+    }
+
+    &__content {
+      flex: 1 1 420px;
+      padding: 0 2rem;
+
+      h2 {
+        margin: 0.3rem 0 1rem;
+        font-size: 1.75rem;
+      }
+    }
+
+    &__tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: $color-text-muted;
+    }
+  }
+
+  @include max($bp-mobile) {
+    .feature {
+      margin-bottom: 2rem;
+
+      &,
+      &:nth-child(even) {
+        flex-direction: column;
+      }
+
+      &__content {
+        padding: 1rem 0 0.5rem;
+        flex: 1 1 250px !important;
+
+        h2 {
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      &__media {
+        max-height: 60vh;
+
+        video {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  @include min($bp-desktop) {
+    .feature__media {
+      img,
+      video {
+        max-width: 360px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+// =========================
+// Product extra sections
+// =========================
+.product-specs,
+.product-box {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  font-family: $font-alt;
+}
+
+.product-specs {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  th {
+    width: 38%;
+    padding: 0.6rem 0;
+    text-align: left;
+    color: $color-text-secondary;
+  }
+
+  td {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid $color-border-light;
+  }
+}
+
+.product-box {
+  ul {
+    padding-left: 1.2rem;
+    list-style: disc;
+    font-size: 0.95rem;
+  }
+}
+
+.product-cta {
+  background: $color-bg-soft;
+  padding: 2rem;
+  margin-top: 3rem;
+  text-align: center;
+  border-radius: 8px;
+
+  a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.9rem 2rem;
+    background: $color-success;
+    color: $color-white;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
+// =========================
+// Filament description
+// =========================
+.filament-description-wrapper {
+  section {
+    margin-bottom: 60px;
+  }
+}
+
+.filament-description {
+  margin: 0 auto;
+  max-width: 900px;
+  line-height: 1.55;
+
+  h2 {
+    margin: 0 0 0.75rem;
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+
+  h3 {
+    margin: 2.5rem 0 1.25rem;
+    font-size: 1.45rem;
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  th,
+  td {
+    padding: 0.8rem 0.6rem;
+    border-bottom: 1px solid $color-border-table;
+    text-align: left;
+  }
+
+  th {
+    white-space: nowrap;
+  }
+}
+
+// =========================
+// Filament hero
+// =========================
+.filament-hero {
+  p {
+    margin: 0 0 1.75rem;
+    font-size: 1.05rem;
+    color: $color-text-body;
+  }
+}
+
+// =========================
+// Filament highlights
+// =========================
+.filament-highlights {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    flex: 1 0 170px;
+    min-width: 150px;
+    padding: 1rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+
+    @include soft-card($color-bg-card, $color-border-soft, 10px);
+
+    strong {
+      font-size: 1.05rem;
+    }
+  }
+}
+
+// =========================
+// FAQ
+// =========================
+.filament-faq {
+  details {
+    margin-bottom: 1rem;
+    padding: 1rem;
+
+    @include soft-card($color-bg-faq, $color-border-soft, 8px);
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+}
+
+// =========================
+// Variants
+// =========================
+.filament-variants {
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 0.6rem 0.75rem;
+
+    @include soft-card($color-bg-card, $color-border-soft, 8px);
+  }
+}
