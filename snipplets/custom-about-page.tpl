@@ -115,6 +115,12 @@
 		</div>
 	</section>
 
+	{% if settings.reviews_show_about_page %}
+		{% include 'snipplets/reviews/reviews-settings.tpl' with {
+			reviews_id: 'about-reviews'
+		} %}
+	{% endif %}
+
 	<section class="about-page__story">
 		<div class="container about-page__container">
 			<div class="about-page__section-heading">

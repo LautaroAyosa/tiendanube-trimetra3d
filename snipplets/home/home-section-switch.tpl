@@ -205,4 +205,18 @@
 		{% endif %}
 	</section>
 
+{% elseif section_select == 'reviews' %}
+
+	{#  **** Customer reviews ****  #}
+
+	{% if settings.reviews_show_home_page %}
+		<section data-store="home-reviews">
+			{% if show_help or (show_component_help and not has_reviews) %}
+				{% include 'snipplets/defaults/home/reviews_help.tpl' %}
+			{% else %}
+				{% include 'snipplets/home/home-reviews.tpl' %}
+			{% endif %}
+		</section>
+	{% endif %}
+
 {% endif %}

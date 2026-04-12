@@ -20,7 +20,16 @@
 {% set has_testimonial_03 = settings.testimonial_03_description or settings.testimonial_03_name or "testimonial_03.jpg" | has_custom_image %}
 {% set has_testimonials = has_testimonial_01 or has_testimonial_02 or has_testimonial_03 %}
 
-{% set show_help = not (has_main_slider or has_mobile_slider or has_video or has_main_categories or has_banners or has_promotional_banners or has_news_banners or has_image_and_text_module or has_brands or has_informative_banners or has_featured_banners or has_instafeed or has_testimonials or has_institutional_message or has_welcome_message) and not has_products %}
+{% set has_reviews = false %}
+{% for review_index in ['01', '02', '03', '04', '05', '06'] %}
+    {% set review_image = 'reviews_' ~ review_index ~ '_image.jpg' %}
+    {% set review_has_content = attribute(settings, 'reviews_' ~ review_index ~ '_name') or attribute(settings, 'reviews_' ~ review_index ~ '_text') or attribute(settings, 'reviews_' ~ review_index ~ '_rating') or attribute(settings, 'reviews_' ~ review_index ~ '_context') or attribute(settings, 'reviews_' ~ review_index ~ '_product_name') or attribute(settings, 'reviews_' ~ review_index ~ '_source_label') or attribute(settings, 'reviews_' ~ review_index ~ '_date_label') or (review_image | has_custom_image) %}
+    {% if review_has_content %}
+        {% set has_reviews = true %}
+    {% endif %}
+{% endfor %}
+
+{% set show_help = not (has_main_slider or has_mobile_slider or has_video or has_main_categories or has_banners or has_promotional_banners or has_news_banners or has_image_and_text_module or has_brands or has_informative_banners or has_featured_banners or has_instafeed or has_testimonials or has_reviews or has_institutional_message or has_welcome_message) and not has_products %}
 
 {% set show_component_help = params.preview %}
 
@@ -37,10 +46,16 @@
 
     {% endfor %}
 
+    {% if settings.reviews_show_home_page and has_reviews and 'reviews' not in newArray %}
+        {% set section_select = 'reviews' %}
+        {% include 'snipplets/home/home-section-switch.tpl' %}
+        {% set newArray = newArray|merge([section_select]) %}
+    {% endif %}
+
     {#  **** Hidden Sections ****  #}
     {% if show_component_help %}
         <div style="display:none">
-            {% for section_select in ['slider', 'main_categories', 'welcome', 'institutional', 'products', 'informatives', 'categories', 'main_product', 'new', 'video', 'newsletter', 'sale', 'promotion', 'best_seller', 'instafeed', 'promotional', 'news_banners', 'featured_banners', 'brands' , 'testimonials', 'modules'] %}
+            {% for section_select in ['slider', 'main_categories', 'welcome', 'institutional', 'products', 'informatives', 'categories', 'main_product', 'new', 'video', 'newsletter', 'sale', 'promotion', 'best_seller', 'instafeed', 'promotional', 'news_banners', 'featured_banners', 'brands' , 'testimonials', 'reviews', 'modules'] %}
                 {% if section_select not in newArray %}
                     {% include 'snipplets/home/home-section-switch.tpl' %}
                 {% endif %}

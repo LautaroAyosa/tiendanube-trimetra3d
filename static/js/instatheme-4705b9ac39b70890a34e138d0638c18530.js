@@ -35,6 +35,16 @@ window.tiendaNubeInstaTheme = (function(jQueryNuvem) {
 						},
 				},
 				{
+					placeholder: '.js-reviews-placeholder',
+					content: '.js-reviews-top',
+					contentReady: function() {
+						return $(this).find('.js-review-card').text().trim() ||
+								$(this).find('.review-card-image img').map(function(){
+									return $(this).attr("src");
+								}).get().join('').trim();
+					},
+				},
+				{
 					placeholder: '.js-home-slider-placeholder',
 					content: '.js-home-slider-top',
 					contentReady: function() {
@@ -100,6 +110,7 @@ window.tiendaNubeInstaTheme = (function(jQueryNuvem) {
 						'main_product': 'home-product-main',
 						'brands': 'home-brands',
 						'testimonials': 'home-testimonials',
+						'reviews': 'home-reviews',
 						'newsletter' : 'home-newsletter',
 						'modules': 'home-image-text-module',
 					}

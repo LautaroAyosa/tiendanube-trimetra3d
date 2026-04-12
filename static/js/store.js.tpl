@@ -838,6 +838,103 @@ DOMContentLoaded.addEventOrExecute(() => {
         }
     };
 
+    {# /* // Customer reviews */ #}
+
+    function refreshReviewTextToggles(container) {
+        var reviewCards = container.querySelectorAll(".js-review-card");
+
+        Array.prototype.forEach.call(reviewCards, function(reviewCard) {
+            var reviewText = reviewCard.querySelector(".js-review-text");
+            var reviewButton = reviewCard.querySelector(".js-review-more");
+
+            if (!reviewText || !reviewButton) {
+                return;
+            }
+
+            reviewCard.classList.remove("is-copy-expanded");
+            reviewButton.setAttribute("aria-expanded", "false");
+            reviewButton.innerHTML = reviewButton.getAttribute("data-more-label");
+            reviewButton.classList.remove("is-visible");
+
+            if (reviewText.scrollHeight > reviewText.clientHeight + 1) {
+                reviewButton.classList.add("is-visible");
+            }
+        });
+    }
+
+    var reviewsBlocks = document.querySelectorAll(".js-reviews-block");
+
+    Array.prototype.forEach.call(reviewsBlocks, function(reviewsBlock) {
+        refreshReviewTextToggles(reviewsBlock);
+
+        var reviewsShowMore = reviewsBlock.querySelector(".js-reviews-show-more");
+
+        if (reviewsShowMore) {
+            reviewsShowMore.addEventListener("click", function() {
+                var isExpanded = reviewsBlock.classList.toggle("is-expanded");
+
+                reviewsShowMore.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+                reviewsShowMore.innerHTML = isExpanded ? reviewsShowMore.getAttribute("data-less-label") : reviewsShowMore.getAttribute("data-more-label");
+                refreshReviewTextToggles(reviewsBlock);
+            });
+        }
+
+        Array.prototype.forEach.call(reviewsBlock.querySelectorAll(".js-review-more"), function(reviewMoreButton) {
+            reviewMoreButton.addEventListener("click", function() {
+                var reviewCard = reviewMoreButton.closest(".js-review-card");
+                if (!reviewCard) {
+                    return;
+                }
+                var isExpanded = reviewCard.classList.toggle("is-copy-expanded");
+
+                reviewMoreButton.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+                reviewMoreButton.innerHTML = isExpanded ? reviewMoreButton.getAttribute("data-less-label") : reviewMoreButton.getAttribute("data-more-label");
+            });
+        });
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll(".js-reviews-swiper"), function(reviewsSwiper) {
+        var reviewsBlock = reviewsSwiper.closest(".js-reviews-block");
+        if (!reviewsBlock) {
+            return;
+        }
+        var reviewsPrev = reviewsBlock.querySelector(".js-reviews-prev");
+        var reviewsNext = reviewsBlock.querySelector(".js-reviews-next");
+        var reviewsPagination = reviewsBlock.querySelector(".js-reviews-pagination");
+        var reviewsSwiperParams = {
+            watchOverflow: true,
+            threshold: 5,
+            spaceBetween: itemSwiperSpaceBetween,
+            slidesPerView: 1.08,
+            pagination: {
+                el: reviewsPagination,
+                clickable: true,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                }
+            }
+        };
+
+        if (reviewsPrev && reviewsNext) {
+            reviewsSwiperParams.navigation = {
+                nextEl: reviewsNext,
+                prevEl: reviewsPrev,
+            };
+            reviewsSwiperParams.on = {
+                afterInit: function() {
+                    if (reviewsPrev.classList.contains("swiper-button-disabled") && reviewsNext.classList.contains("swiper-button-disabled")) {
+                        reviewsPrev.remove();
+                        reviewsNext.remove();
+                    }
+                },
+            };
+        }
+
+        createSwiper(reviewsSwiper, reviewsSwiperParams);
+    });
+
 	{% if template == 'home' %}
 
 		{# /* // Home slider */ #}

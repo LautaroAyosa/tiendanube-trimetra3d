@@ -76,7 +76,7 @@ Sports
 	home_order_position_13 = products
 	home_order_position_14 = testimonials
 	home_order_position_15 = newsletter
-	home_order_position_16 = empty
+	home_order_position_16 = reviews
 	home_order_position_17 = empty
 	home_order_position_18 = empty
 	home_order_position_19 = empty
@@ -172,7 +172,7 @@ Electronics
 	home_order_position_13 = newsletter
 	home_order_position_14 = main_categories
 	home_order_position_15 = empty
-	home_order_position_16 = empty
+	home_order_position_16 = reviews
 	home_order_position_17 = empty
 	home_order_position_18 = empty
 	home_order_position_19 = empty
@@ -270,7 +270,7 @@ Gifts
 	home_order_position_13 = informatives
 	home_order_position_14 = instafeed
 	home_order_position_15 = empty
-	home_order_position_16 = empty
+	home_order_position_16 = reviews
 	home_order_position_17 = empty
 	home_order_position_18 = empty
 	home_order_position_19 = empty
@@ -368,7 +368,7 @@ Food
 	home_order_position_13 = news_banners
 	home_order_position_14 = empty
 	home_order_position_15 = empty
-	home_order_position_16 = empty
+	home_order_position_16 = reviews
 	home_order_position_17 = empty
 	home_order_position_18 = empty
 	home_order_position_19 = empty
@@ -503,7 +503,7 @@ Dropshipping-hide
 	home_order_position_13 = empty
 	home_order_position_14 = empty
 	home_order_position_15 = empty
-	home_order_position_16 = empty
+	home_order_position_16 = reviews
 	home_order_position_17 = empty
 	home_order_position_18 = empty
 	home_order_position_19 = empty
@@ -654,7 +654,7 @@ Dropshipping-alpha-hide
 	home_order_position_13 = empty
 	home_order_position_14 = empty
 	home_order_position_15 = empty
-	home_order_position_16 = empty
+	home_order_position_16 = reviews
 	home_order_position_17 = empty
 	home_order_position_18 = empty
 	home_order_position_19 = empty

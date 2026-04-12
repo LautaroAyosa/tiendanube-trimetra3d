@@ -1,9 +1,9 @@
 {#
-  Resuelve: mostrar un bloque reusable de reviews con resumen, layouts y CTA.
+  Resuelve: mostrar un bloque reusable y compacto de opiniones.
   Uso: home u otras plantillas via include manual.
   Variables: reviews_id, reviews_title, reviews_summary_score, reviews_summary_count,
   reviews_external_text, reviews_external_url, reviews_layout, reviews_show_desktop_arrows, reviews_items.
-  Estados: vacio, grid, slider, mixed, cards con datos parciales, cards destacadas.
+  Estados: vacio, grid, slider, mixed, datos parciales, extras colapsados.
 #}
 
 {% set reviews_id = reviews_id | default('reviews-block') %}
@@ -15,21 +15,30 @@
 {% set reviews_layout = reviews_layout | default('mixed') %}
 {% set reviews_show_desktop_arrows = reviews_show_desktop_arrows | default(false) %}
 {% set reviews_items = reviews_items | default([]) %}
+{% set reviews_initial_limit = reviews_initial_limit | default(3) %}
 
 {% if reviews_layout not in ['grid', 'slider', 'mixed'] %}
     {% set reviews_layout = 'mixed' %}
 {% endif %}
 
-{% set visible_reviews = [] %}
+{% set highlighted_reviews = [] %}
+{% set regular_reviews = [] %}
+
 {% for review in reviews_items %}
-    {% set review_has_content = review.name or review.text or review.rating or review.context or review.product_name or review.avatar_image or review.media_image or review.source_label or review.date_label %}
+    {% set review_has_content = review.name or review.text or review.rating or review.context or review.product_name or review.image or review.source_label or review.date_label %}
     {% if review_has_content %}
-        {% set visible_reviews = visible_reviews | merge([review]) %}
+        {% if review.highlight | default(false) %}
+            {% set highlighted_reviews = highlighted_reviews | merge([review]) %}
+        {% else %}
+            {% set regular_reviews = regular_reviews | merge([review]) %}
+        {% endif %}
     {% endif %}
 {% endfor %}
 
+{% set visible_reviews = highlighted_reviews | merge(regular_reviews) %}
 {% set reviews_count = visible_reviews | length %}
-{% set reviews_has_slider = reviews_layout != 'grid' and reviews_count > 1 %}
+{% set reviews_has_slider = reviews_layout == 'slider' and reviews_count > 1 %}
+{% set reviews_has_more = reviews_layout != 'slider' and reviews_count > reviews_initial_limit %}
 {% set reviews_show_arrows = reviews_layout == 'slider' and reviews_show_desktop_arrows and reviews_count > 1 %}
 {% set reviews_show_pagination = reviews_has_slider %}
 {% set reviews_has_header = reviews_title or reviews_summary_score or reviews_summary_count or (reviews_external_text and reviews_external_url) %}
@@ -37,10 +46,11 @@
 {% if reviews_count > 0 %}
     <section
         id="{{ reviews_id }}"
-        class="section-reviews js-reviews-block reviews-layout-{{ reviews_layout }}{% if reviews_show_arrows %} reviews-has-desktop-arrows{% endif %}"
+        class="section-reviews js-reviews-block reviews-layout-{{ reviews_layout }}{% if reviews_has_slider %} reviews-has-slider{% endif %}{% if reviews_show_arrows %} reviews-has-desktop-arrows{% endif %}"
         data-reviews-id="{{ reviews_id }}"
         data-reviews-layout="{{ reviews_layout }}"
         data-reviews-count="{{ reviews_count }}"
+        data-reviews-limit="{{ reviews_initial_limit }}"
         data-reviews-show-arrows="{{ reviews_show_arrows ? 'true' : 'false' }}">
         <div class="container">
             {% if reviews_has_header %}
@@ -79,7 +89,7 @@
                 <div class="reviews-slider-shell{% if reviews_has_slider %} js-reviews-swiper swiper-container{% endif %}">
                     <div class="reviews-track{% if reviews_has_slider %} swiper-wrapper{% endif %}">
                         {% for review in visible_reviews %}
-                            <div class="reviews-item js-review-slide{% if reviews_has_slider %} swiper-slide{% endif %}{% if review.highlight | default(false) %} reviews-item-highlight{% endif %}">
+                            <div class="reviews-item js-review-slide{% if reviews_has_slider %} swiper-slide{% endif %}{% if review.highlight | default(false) %} reviews-item-highlight{% endif %}{% if reviews_has_more and loop.index > reviews_initial_limit %} reviews-item-is-extra{% endif %}">
                                 {% include 'snipplets/reviews/review-card.tpl' with {
                                     review: review,
                                     reviews_id: reviews_id,
@@ -91,10 +101,10 @@
                 </div>
 
                 {% if reviews_show_arrows %}
-                    <button type="button" class="js-reviews-prev reviews-slider-control reviews-slider-control-prev swiper-button-prev swiper-button-outside svg-icon-text" data-reviews-id="{{ reviews_id }}" aria-label="Reviews anteriores">
+                    <button type="button" class="js-reviews-prev reviews-slider-control reviews-slider-control-prev swiper-button-prev swiper-button-outside svg-icon-text" data-reviews-id="{{ reviews_id }}" aria-label="Opiniones anteriores">
                         {% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: "icon-inline icon-lg"} %}
                     </button>
-                    <button type="button" class="js-reviews-next reviews-slider-control reviews-slider-control-next swiper-button-next swiper-button-outside svg-icon-text" data-reviews-id="{{ reviews_id }}" aria-label="Reviews siguientes">
+                    <button type="button" class="js-reviews-next reviews-slider-control reviews-slider-control-next swiper-button-next swiper-button-outside svg-icon-text" data-reviews-id="{{ reviews_id }}" aria-label="Opiniones siguientes">
                         {% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: "icon-inline icon-lg"} %}
                     </button>
                 {% endif %}
@@ -102,6 +112,14 @@
 
             {% if reviews_show_pagination %}
                 <div class="js-reviews-pagination reviews-slider-pagination swiper-pagination position-relative d-block" data-reviews-id="{{ reviews_id }}"></div>
+            {% endif %}
+
+            {% if reviews_has_more %}
+                <div class="reviews-block-more">
+                    <button type="button" class="reviews-block-more-button js-reviews-show-more" aria-expanded="false" data-more-label="Ver m&aacute;s opiniones" data-less-label="Ver menos opiniones">
+                        Ver m&aacute;s opiniones
+                    </button>
+                </div>
             {% endif %}
         </div>
     </section>

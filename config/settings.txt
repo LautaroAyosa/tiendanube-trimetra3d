@@ -1503,6 +1503,422 @@ Página de inicio
 		name = testimonial_03_description
 		description = Descripción
 	collapse
+		title = Opiniones de clientes
+		backto = home_order_position
+	description
+		description = Bloque compacto y reutilizable para mostrar opiniones con más contexto y prueba externa.
+	i18n_input
+		name = reviews_title
+		description = Título
+	text
+		name = reviews_summary_score
+		description = Puntaje global
+		placeholder = Ej.: 4.8
+	text
+		name = reviews_summary_count
+		description = Cantidad de opiniones
+		placeholder = Ej.: 247
+	i18n_input
+		name = reviews_external_text
+		description = Texto del link externo
+	i18n_input
+		name = reviews_external_url
+		description = Link externo a opiniones
+	dropdown
+		name = reviews_layout
+		description = Mostrar como:
+		values
+			mixed = Grilla en computadoras y scroll compacto en celulares
+			grid = Grilla
+			slider = Carrusel
+	checkbox
+		name = reviews_show_desktop_arrows
+		description = Mostrar flechas en carrusel de computadoras
+	checkbox
+		name = reviews_show_home_page
+		description = Mostrar también en la página de inicio
+	checkbox
+		name = reviews_show_about_page
+		description = Mostrar también en la página "Quiénes somos"
+	subtitle
+		subtitle = Opinión 1
+	checkbox
+		name = reviews_01_highlight
+		description = Destacar primero
+	image
+		original = reviews_01_image.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 640
+		height = 480
+	image
+		original = reviews_01_profile_image.jpg
+		title = Imagen de perfil del cliente (JPG, GIF, PNG)
+		width = 240
+		height = 240
+	dropdown
+		name = reviews_01_rating
+		description = Valoración
+		values
+			0 = Sin valoración
+			1 = 1 estrella
+			2 = 2 estrellas
+			3 = 3 estrellas
+			4 = 4 estrellas
+			5 = 5 estrellas
+	i18n_input
+		name = reviews_01_name
+		description = Nombre
+	i18n_input
+		name = reviews_01_context
+		description = Ciudad, rubro o tipo de uso
+	i18n_input
+		name = reviews_01_text
+		description = Texto
+	dropdown
+		name = reviews_01_verification_type
+		description = Badge de verificación
+		values
+			none = Sin badge
+			purchase = Compra verificada
+			customer = Cliente verificado
+	dropdown
+		name = reviews_01_source
+		description = Fuente
+		values
+			other = Otra fuente
+			google = Google
+			store = Tienda
+			mercado_libre = Mercado Libre
+			instagram = Instagram
+			facebook = Facebook
+	i18n_input
+		name = reviews_01_source_label
+		description = Fuente personalizada
+	i18n_input
+		name = reviews_01_date_label
+		description = Fecha
+	i18n_input
+		name = reviews_01_product_name
+		description = Producto comprado
+	i18n_input
+		name = reviews_01_product_url
+		description = Link del producto
+	subtitle
+		subtitle = Opinión 2
+	checkbox
+		name = reviews_02_highlight
+		description = Destacar primero
+	image
+		original = reviews_02_image.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 640
+		height = 480
+	image
+		original = reviews_02_profile_image.jpg
+		title = Imagen de perfil del cliente (JPG, GIF, PNG)
+		width = 240
+		height = 240
+	dropdown
+		name = reviews_02_rating
+		description = Valoración
+		values
+			0 = Sin valoración
+			1 = 1 estrella
+			2 = 2 estrellas
+			3 = 3 estrellas
+			4 = 4 estrellas
+			5 = 5 estrellas
+	i18n_input
+		name = reviews_02_name
+		description = Nombre
+	i18n_input
+		name = reviews_02_context
+		description = Ciudad, rubro o tipo de uso
+	i18n_input
+		name = reviews_02_text
+		description = Texto
+	dropdown
+		name = reviews_02_verification_type
+		description = Badge de verificación
+		values
+			none = Sin badge
+			purchase = Compra verificada
+			customer = Cliente verificado
+	dropdown
+		name = reviews_02_source
+		description = Fuente
+		values
+			other = Otra fuente
+			google = Google
+			store = Tienda
+			mercado_libre = Mercado Libre
+			instagram = Instagram
+			facebook = Facebook
+	i18n_input
+		name = reviews_02_source_label
+		description = Fuente personalizada
+	i18n_input
+		name = reviews_02_date_label
+		description = Fecha
+	i18n_input
+		name = reviews_02_product_name
+		description = Producto comprado
+	i18n_input
+		name = reviews_02_product_url
+		description = Link del producto
+	subtitle
+		subtitle = Opinión 3
+	checkbox
+		name = reviews_03_highlight
+		description = Destacar primero
+	image
+		original = reviews_03_image.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 640
+		height = 480
+	image
+		original = reviews_03_profile_image.jpg
+		title = Imagen de perfil del cliente (JPG, GIF, PNG)
+		width = 240
+		height = 240
+	dropdown
+		name = reviews_03_rating
+		description = Valoración
+		values
+			0 = Sin valoración
+			1 = 1 estrella
+			2 = 2 estrellas
+			3 = 3 estrellas
+			4 = 4 estrellas
+			5 = 5 estrellas
+	i18n_input
+		name = reviews_03_name
+		description = Nombre
+	i18n_input
+		name = reviews_03_context
+		description = Ciudad, rubro o tipo de uso
+	i18n_input
+		name = reviews_03_text
+		description = Texto
+	dropdown
+		name = reviews_03_verification_type
+		description = Badge de verificación
+		values
+			none = Sin badge
+			purchase = Compra verificada
+			customer = Cliente verificado
+	dropdown
+		name = reviews_03_source
+		description = Fuente
+		values
+			other = Otra fuente
+			google = Google
+			store = Tienda
+			mercado_libre = Mercado Libre
+			instagram = Instagram
+			facebook = Facebook
+	i18n_input
+		name = reviews_03_source_label
+		description = Fuente personalizada
+	i18n_input
+		name = reviews_03_date_label
+		description = Fecha
+	i18n_input
+		name = reviews_03_product_name
+		description = Producto comprado
+	i18n_input
+		name = reviews_03_product_url
+		description = Link del producto
+	subtitle
+		subtitle = Opinión 4
+	checkbox
+		name = reviews_04_highlight
+		description = Destacar primero
+	image
+		original = reviews_04_image.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 640
+		height = 480
+	image
+		original = reviews_04_profile_image.jpg
+		title = Imagen de perfil del cliente (JPG, GIF, PNG)
+		width = 240
+		height = 240
+	dropdown
+		name = reviews_04_rating
+		description = Valoración
+		values
+			0 = Sin valoración
+			1 = 1 estrella
+			2 = 2 estrellas
+			3 = 3 estrellas
+			4 = 4 estrellas
+			5 = 5 estrellas
+	i18n_input
+		name = reviews_04_name
+		description = Nombre
+	i18n_input
+		name = reviews_04_context
+		description = Ciudad, rubro o tipo de uso
+	i18n_input
+		name = reviews_04_text
+		description = Texto
+	dropdown
+		name = reviews_04_verification_type
+		description = Badge de verificación
+		values
+			none = Sin badge
+			purchase = Compra verificada
+			customer = Cliente verificado
+	dropdown
+		name = reviews_04_source
+		description = Fuente
+		values
+			other = Otra fuente
+			google = Google
+			store = Tienda
+			mercado_libre = Mercado Libre
+			instagram = Instagram
+			facebook = Facebook
+	i18n_input
+		name = reviews_04_source_label
+		description = Fuente personalizada
+	i18n_input
+		name = reviews_04_date_label
+		description = Fecha
+	i18n_input
+		name = reviews_04_product_name
+		description = Producto comprado
+	i18n_input
+		name = reviews_04_product_url
+		description = Link del producto
+	subtitle
+		subtitle = Opinión 5
+	checkbox
+		name = reviews_05_highlight
+		description = Destacar primero
+	image
+		original = reviews_05_image.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 640
+		height = 480
+	image
+		original = reviews_05_profile_image.jpg
+		title = Imagen de perfil del cliente (JPG, GIF, PNG)
+		width = 240
+		height = 240
+	dropdown
+		name = reviews_05_rating
+		description = Valoración
+		values
+			0 = Sin valoración
+			1 = 1 estrella
+			2 = 2 estrellas
+			3 = 3 estrellas
+			4 = 4 estrellas
+			5 = 5 estrellas
+	i18n_input
+		name = reviews_05_name
+		description = Nombre
+	i18n_input
+		name = reviews_05_context
+		description = Ciudad, rubro o tipo de uso
+	i18n_input
+		name = reviews_05_text
+		description = Texto
+	dropdown
+		name = reviews_05_verification_type
+		description = Badge de verificación
+		values
+			none = Sin badge
+			purchase = Compra verificada
+			customer = Cliente verificado
+	dropdown
+		name = reviews_05_source
+		description = Fuente
+		values
+			other = Otra fuente
+			google = Google
+			store = Tienda
+			mercado_libre = Mercado Libre
+			instagram = Instagram
+			facebook = Facebook
+	i18n_input
+		name = reviews_05_source_label
+		description = Fuente personalizada
+	i18n_input
+		name = reviews_05_date_label
+		description = Fecha
+	i18n_input
+		name = reviews_05_product_name
+		description = Producto comprado
+	i18n_input
+		name = reviews_05_product_url
+		description = Link del producto
+	subtitle
+		subtitle = Opinión 6
+	checkbox
+		name = reviews_06_highlight
+		description = Destacar primero
+	image
+		original = reviews_06_image.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 640
+		height = 480
+	image
+		original = reviews_06_profile_image.jpg
+		title = Imagen de perfil del cliente (JPG, GIF, PNG)
+		width = 240
+		height = 240
+	dropdown
+		name = reviews_06_rating
+		description = Valoración
+		values
+			0 = Sin valoración
+			1 = 1 estrella
+			2 = 2 estrellas
+			3 = 3 estrellas
+			4 = 4 estrellas
+			5 = 5 estrellas
+	i18n_input
+		name = reviews_06_name
+		description = Nombre
+	i18n_input
+		name = reviews_06_context
+		description = Ciudad, rubro o tipo de uso
+	i18n_input
+		name = reviews_06_text
+		description = Texto
+	dropdown
+		name = reviews_06_verification_type
+		description = Badge de verificación
+		values
+			none = Sin badge
+			purchase = Compra verificada
+			customer = Cliente verificado
+	dropdown
+		name = reviews_06_source
+		description = Fuente
+		values
+			other = Otra fuente
+			google = Google
+			store = Tienda
+			mercado_libre = Mercado Libre
+			instagram = Instagram
+			facebook = Facebook
+	i18n_input
+		name = reviews_06_source_label
+		description = Fuente personalizada
+	i18n_input
+		name = reviews_06_date_label
+		description = Fecha
+	i18n_input
+		name = reviews_06_product_name
+		description = Producto comprado
+	i18n_input
+		name = reviews_06_product_url
+		description = Link del producto
+	collapse
 		title = Publicaciones de Instagram
 		backto = home_order_position
 	description
@@ -1567,6 +1983,7 @@ Página de inicio
 			main_product = Producto principal
 			instafeed = Publicaciones de Instagram
 			testimonials = Testimonios
+			reviews = Opiniones de clientes
 			modules = Módulos de imagen y texto
 	link
 		text = Pop-up promocional
