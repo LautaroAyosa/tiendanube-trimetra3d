@@ -104,6 +104,11 @@
 	{#  **** Trust bar ****  #}
 	{% include 'snipplets/trust-bar.tpl' %}
 
+{% elseif section_select == 'why_trimetra' %}
+
+	{#  **** Why Trimetra ****  #}
+	{% include 'snipplets/why-trimetra.tpl' %}
+
 {% elseif section_select == 'categories' %}
 
 	{#  **** Categories banners ****  #}
@@ -122,6 +127,15 @@
 		{% snipplet 'defaults/home/main_product_help.tpl' %}
 	{% else %}
 		{% include 'snipplets/home/home-main-product.tpl' %}
+	{% endif %}
+
+{% elseif section_select == 'main_product_video' %}
+
+	{#  **** Main product + short video ****  #}
+	{% if show_help or (show_component_help and not has_main_product_video) %}
+		{% snipplet 'defaults/home/main_product_help.tpl' %}
+	{% else %}
+		{% include 'snipplets/home/home-main-product-video.tpl' %}
 	{% endif %}
 
 {% elseif section_select == 'video' %}

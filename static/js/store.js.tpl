@@ -2112,12 +2112,20 @@ DOMContentLoaded.addEventOrExecute(() => {
             };
 
             {# Product container wrapper #}
-            const wrapper = container ? container : jQueryNuvem('#single-product');
-            if (!wrapper) return;
+            if (!container) {
+                jQueryNuvem('.js-product-container:not(.js-quickshop-container)').each(function(el){
+                    noStockVariants(jQueryNuvem(el));
+                });
+                return;
+            }
+
+            const wrapper = container;
+            if (!wrapper.length) return;
 
             {# Fetch the variants data from the container #}
             const dataVariants = wrapper.data('variants');
             const variantsLength = wrapper.find(config.variantsGroup).length;
+            if (!dataVariants || !variantsLength) return;
 
             {# Get selected options from product variations #}
             const getOptions = (productVariationId, variantOption) => {
@@ -2348,7 +2356,7 @@ DOMContentLoaded.addEventOrExecute(() => {
                 }
                 noStockVariants(parent);
             } else {
-                noStockVariants();
+                noStockVariants(parent);
             }
         {% endif %}
 
@@ -2561,7 +2569,9 @@ DOMContentLoaded.addEventOrExecute(() => {
             {% endif %}
 
         } else {
-            LS.changeVariant(changeVariant, '#single-product');
+            var $product_variant_container = jQueryNuvem(this).closest(".js-product-container");
+            var product_variant_selector = $product_variant_container.attr("id") ? "#" + $product_variant_container.attr("id") : "#single-product";
+            LS.changeVariant(changeVariant, product_variant_selector);
         }
 
         {# Offer and discount labels update #}

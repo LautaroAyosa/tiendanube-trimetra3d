@@ -1205,6 +1205,10 @@ input[type=number] {
   background: linear-gradient(transparent, var(--main-foreground-opacity-40));
 }
 
+.main-product-video-frame {
+  background: var(--main-foreground);
+}
+
 /* // Instafeed */
 .instafeed-title {
   color: var(--main-foreground);

@@ -108,6 +108,7 @@ window.tiendaNubeInstaTheme = (function(jQueryNuvem) {
 						'best_seller': 'home-products-best-seller',
 						'instafeed': 'home-instagram-feed',
 						'main_product': 'home-product-main',
+						'main_product_video': 'home-product-main-video',
 						'brands': 'home-brands',
 						'testimonials': 'home-testimonials',
 						'reviews': 'home-reviews',

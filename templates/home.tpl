@@ -3,6 +3,7 @@
 {% set has_main_slider = settings.slider and settings.slider is not empty %}
 {% set has_mobile_slider = settings.toggle_slider_mobile and settings.slider_mobile and settings.slider_mobile is not empty %}
 {% set has_video = settings.video_embed %}
+{% set has_main_product_video = settings.main_product_video_file and sections.featured.products %}
 {% set has_main_categories = settings.main_categories and settings.slider_categories and settings.slider_categories is not empty %}
 {% set has_banners = settings.banner and settings.banner is not empty %}
 {% set has_promotional_banners = settings.banner_promotional and settings.banner_promotional is not empty %}
@@ -29,7 +30,7 @@
     {% endif %}
 {% endfor %}
 
-{% set show_help = not (has_main_slider or has_mobile_slider or has_video or has_main_categories or has_banners or has_promotional_banners or has_news_banners or has_image_and_text_module or has_brands or has_informative_banners or has_featured_banners or has_instafeed or has_testimonials or has_reviews or has_institutional_message or has_welcome_message) and not has_products %}
+{% set show_help = not (has_main_slider or has_mobile_slider or has_video or has_main_product_video or has_main_categories or has_banners or has_promotional_banners or has_news_banners or has_image_and_text_module or has_brands or has_informative_banners or has_featured_banners or has_instafeed or has_testimonials or has_reviews or has_institutional_message or has_welcome_message) and not has_products %}
 
 {% set show_component_help = params.preview %}
 
@@ -46,6 +47,12 @@
 
     {% endfor %}
 
+    {% if has_main_product_video and 'main_product_video' not in newArray and 'main_product' not in newArray %}
+        {% set section_select = 'main_product_video' %}
+        {% include 'snipplets/home/home-section-switch.tpl' %}
+        {% set newArray = newArray|merge([section_select]) %}
+    {% endif %}
+
     {% if settings.reviews_show_home_page and has_reviews and 'reviews' not in newArray %}
         {% set section_select = 'reviews' %}
         {% include 'snipplets/home/home-section-switch.tpl' %}
@@ -55,7 +62,7 @@
     {#  **** Hidden Sections ****  #}
     {% if show_component_help %}
         <div style="display:none">
-            {% for section_select in ['slider', 'main_categories', 'welcome', 'institutional', 'products', 'informatives', 'trustbar', 'categories', 'main_product', 'new', 'video', 'newsletter', 'sale', 'promotion', 'best_seller', 'instafeed', 'promotional', 'news_banners', 'featured_banners', 'brands' , 'testimonials', 'reviews', 'modules'] %}
+            {% for section_select in ['slider', 'main_categories', 'welcome', 'institutional', 'products', 'informatives', 'trustbar', 'why_trimetra', 'categories', 'main_product', 'main_product_video', 'new', 'video', 'newsletter', 'sale', 'promotion', 'best_seller', 'instafeed', 'promotional', 'news_banners', 'featured_banners', 'brands' , 'testimonials', 'reviews', 'modules'] %}
                 {% if section_select not in newArray %}
                     {% include 'snipplets/home/home-section-switch.tpl' %}
                 {% endif %}

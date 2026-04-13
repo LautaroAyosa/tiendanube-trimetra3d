@@ -1041,6 +1041,23 @@ Página de inicio
 	subtitle
 		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Elegí cuál vas a destacar</a>
 	collapse
+		title = Producto principal + video
+		backto = home_order_position
+	description
+		description = Combina el producto de la sección 'Principal' con un video vertical.
+	i18n_input
+		name = main_product_video_file
+		description = Archivo de video
+	description
+		description = Subí el video como archivo del theme y pegá la ruta. Ej: videos/snapmaker-u1.mp4
+	subtitle
+		subtitle = Imagen del video vertical
+	image
+		original = main_product_video_image.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 1080
+		height = 1920
+	collapse
 		title = Banners de categorías
 		backto = home_order_position
 	description
@@ -1972,6 +1989,7 @@ Página de inicio
 			best_seller = Productos más vendidos
 			informatives = Información de envíos, pagos y compra
 			trustbar = Barra de confianza
+			why_trimetra = Por qué comprar en Trimetra
 			welcome = Mensaje de bienvenida
 			institutional = Mensaje institucional
 			categories = Banners de categorías
@@ -1982,6 +2000,7 @@ Página de inicio
 			video = Video
 			newsletter = Newsletter
 			main_product = Producto principal
+			main_product_video = Producto principal + video
 			instafeed = Publicaciones de Instagram
 			testimonials = Testimonios
 			reviews = Opiniones de clientes

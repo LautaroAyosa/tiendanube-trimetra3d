@@ -513,6 +513,16 @@ a {
   max-width: 21px;
   max-height: 21px;
 }
+.why-trimetra__icon {
+  width: 32px;
+  height: 32px;
+}
+.why-trimetra__icon-svg {
+  width: 16px;
+  height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+}
 .icon-inline.icon-lg{
   vertical-align: -.225em
 }
@@ -1702,6 +1712,32 @@ header.head-main.compress .logo-img-big {
   padding: 40px 0;
 }
 
+.section-main-product-video-home {
+  padding: 40px 0;
+}
+
+.main-product-video-layout {
+  display: grid;
+  gap: 20px;
+}
+
+.main-product-video-frame {
+  width: min(100%, 240px);
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  aspect-ratio: 9 / 16;
+  margin: 0 auto;
+}
+
+.main-product-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /*============================================================================
   #Banners
 ==============================================================================*/
@@ -1793,6 +1829,13 @@ header.head-main.compress .logo-img-big {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+/* Textbanner custom added */
+.js-textbanner.textbanner {
+    height: 150px !important;
+}
+img.js-textbanner-image.textbanner-image-effect.textbanner-image-background.lazyautosizes.fade-in.lazyloaded {
+    height: 150px !important;
 }
 
 /* // Informative banners */
@@ -2552,6 +2595,21 @@ header.head-main.compress .logo-img-big {
 
   .section-main-product-home {
     padding: 60px 0;
+  }
+
+  .section-main-product-video-home {
+    padding: 60px 0;
+  }
+
+  .main-product-video-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(190px, 280px);
+    gap: 24px;
+    align-items: center;
+  }
+
+  .main-product-video-frame {
+    width: 100%;
+    max-height: 500px;
   }
 
   /* //// Product grid */
