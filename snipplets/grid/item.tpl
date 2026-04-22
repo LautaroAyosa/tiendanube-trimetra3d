@@ -176,7 +176,7 @@
             {% set show_labels = not product.has_stock or product.compare_at_price or product.hasVisiblePromotionLabel %}
             <div class="js-item-description item-description{% if horizontal_item %} col{% endif %}" data-store="product-item-info-{{ product.id }}">
                 <a href="{{ product_url_with_selected_variant }}" title="{{ product.name }}" aria-label="{{ product.name }}" class="item-link">
-                    <div class="js-item-name item-name {% if horizontal_item or reduced_item %}mb-2{% else %}mt-1 mb-3{% endif %} opacity-80" data-store="product-item-name-{{ product.id }}">{{ product.name }}</div>
+                    <div class="js-item-name item-name {% if horizontal_item or reduced_item %}mb-2{% else %}mt-1 mb-3{% endif %}" data-store="product-item-name-{{ product.id }}">{{ product.name }}</div>
                     {% if not reduced_item %}
                         {% include 'snipplets/labels.tpl' %}
                     {% endif %}
@@ -210,7 +210,7 @@
                                 {{ component('payment-discount-price', {
                                         visibility_condition: settings.payment_discount_price,
                                         location: 'product',
-                                        container_classes: discount_price_spacing_classes ~ " mt-2 font-weight-bold",
+                                        container_classes: discount_price_spacing_classes ~ " mt-1 js-item-cash-price item-cash-price",
                                     }) 
                                 }}
                                 {% if product_can_show_installments %}
@@ -241,7 +241,7 @@
                     {% if product.available and product.display_price and (settings.quick_shop or settings.product_item_stock) and not reduced_item %}
                         <div class="js-quickshop-or-stock-container row row-grid {% if horizontal_item %}mt-2{% else %}mt-3{% endif %} align-items-center">
                         {% if settings.quick_shop %}
-                            <div class="js-item-quickshop-container item-actions col-grid {% if settings.product_item_stock %}col{% if horizontal_item %}-auto pr-0{% endif %}{% else %}{% if horizontal_item %}col-8{% endif %} col-md-9{% endif %}">
+                            <div class="js-item-quickshop-container item-actions col-grid {% if settings.product_item_stock %}col{% if horizontal_item %}-auto pr-0{% endif %}{% else %}{% if horizontal_item %}col-8{% endif %} col-md-12{% endif %}">
                                 
                                 {% set quickshop_button_classes = 'btn btn-primary btn-small btn-block' %}
                                 

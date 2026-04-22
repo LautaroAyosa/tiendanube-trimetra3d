@@ -23,29 +23,6 @@
 											</div>
 											<div class="col" data-store="product-info-{{ product.id }}">
 												{% include 'snipplets/product/product-form.tpl' with { home_main_product: true } %}
-												{% if product.description is not empty %}
-													<div class="px-md-3 {% if settings.product_stock %}mt-2 mt-md-1{% else %}mt-4 mt-md-2{% endif %}">
-														{# Product description #}
-														<div class="js-product-description product-description user-content font-small">
-															{{ product.description }}
-														</div>
-														<div class="js-view-description" style="display: none;">
-															<div class="btn-link font-small mt-3">
-																{% if settings.positive_color_background %}
-																	{% set view_description_icon_class = 'icon-inline icon-lg svg-icon-invert ml-1' %}
-																 {% else %}
-																	{% set view_description_icon_class = 'icon-inline icon-lg svg-icon-text ml-1' %}
-																{% endif %}
-																<span class="js-view-more">
-																	{{ "Ver mÃ¡s" | translate }}
-																</span>
-																<span class="js-view-less" style="display: none;">
-																	{{ "Ver menos" | translate }}
-																</span>
-															</div>
-														</div>
-													</div>
-												{% endif %}
 											</div>
 										</div>
 								</div>
@@ -57,7 +34,7 @@
 								{% if "main_product_video_image.jpg" | has_custom_image %}
 									{% set main_product_video_image_static_url = "main_product_video_image.jpg" | static_url %}
 								{% endif %}
-								<video class="main-product-video" controls playsinline preload="metadata"{% if main_product_video_image_static_url %} poster="{{ main_product_video_image_static_url | settings_image_url('large') }}"{% endif %}>
+								<video class="js-main-product-video main-product-video" controls muted playsinline preload="none"{% if main_product_video_image_static_url %} poster="{{ main_product_video_image_static_url | settings_image_url('large') }}"{% endif %}>
 									<source src="{{ main_product_video_src }}" type="{{ main_product_video_type }}">
 								</video>
 							</div>

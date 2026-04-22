@@ -1794,6 +1794,40 @@ DOMContentLoaded.addEventOrExecute(() => {
             });
         {% endif %}
 
+        {% if settings.main_product_video_file %}
+            const mainProductVideo = document.querySelector(".js-main-product-video");
+
+            if (mainProductVideo) {
+                mainProductVideo.muted = true;
+                mainProductVideo.playsInline = true;
+
+                const playMainProductVideo = function() {
+                    const playPromise = mainProductVideo.play();
+
+                    if (playPromise) {
+                        playPromise.catch(function() {});
+                    }
+                };
+
+                if ("IntersectionObserver" in window) {
+                    const mainProductVideoObserver = new IntersectionObserver(function(entries) {
+                        entries.forEach(function(entry) {
+                            if (entry.isIntersecting) {
+                                playMainProductVideo();
+                                mainProductVideoObserver.unobserve(entry.target);
+                            }
+                        });
+                    }, {
+                        threshold: 0.35,
+                    });
+
+                    mainProductVideoObserver.observe(mainProductVideo);
+                } else {
+                    playMainProductVideo();
+                }
+            }
+        {% endif %}
+
 	{% endif %}
 
     {% if template == 'product' %}
@@ -1965,6 +1999,43 @@ DOMContentLoaded.addEventOrExecute(() => {
 
     var nav_height = jQueryNuvem(".js-head-main").innerHeight();
 
+    function normalizeProductCardCashLabels(scope) {
+        var $cash_price_items = scope ? jQueryNuvem(scope).find(".js-item-cash-price") : jQueryNuvem(".js-item-cash-price");
+
+        $cash_price_items.each(function() {
+            var $cash_price = jQueryNuvem(this);
+            var current_text = String($cash_price.text() || "").replace(/\s+/g, " ").trim();
+
+            if (!current_text || !/efectivo/i.test(current_text)) {
+                return;
+            }
+
+            if (!this || !this.nodeType) {
+                return;
+            }
+
+            var text_nodes = document.createTreeWalker(this, 4, null, false);
+            var text_node;
+
+            while ((text_node = text_nodes.nextNode())) {
+                if (!text_node || typeof text_node.nodeValue !== "string") {
+                    continue;
+                }
+
+                var node_text = text_node.nodeValue;
+                var normalized_node_text = node_text
+                    .replace(/(\s*)(?:con|pagando con)\s+Efectivo(?:\s*[\u2013\u2014-]\s*ARS\s+o\s+USD)?/i, "$1en Efectivo")
+                    .replace(/\s+[\u2013\u2014-]\s*ARS\s+o\s+USD/i, "");
+
+                if (normalized_node_text !== node_text) {
+                    text_node.nodeValue = normalized_node_text;
+                }
+            }
+        });
+    }
+
+    normalizeProductCardCashLabels();
+
 	{% if template == 'category' or (template == 'search' and search_filter) %}
 
         {# /* // Fixed category controls */ #}
@@ -2086,6 +2157,8 @@ DOMContentLoaded.addEventOrExecute(() => {
                             {% if has_item_slider %}
                                 LS.productItemSlider();
                             {% endif %}
+
+                            normalizeProductCardCashLabels();
                         },
                     });
                 {% endif %}
@@ -2529,6 +2602,7 @@ DOMContentLoaded.addEventOrExecute(() => {
         {% endif %}
 
         LS.subscriptionChangeVariant(variant);
+        normalizeProductCardCashLabels(parent);
 	}
 
 	{# /* // Trigger change variant */ #}
@@ -2622,6 +2696,9 @@ DOMContentLoaded.addEventOrExecute(() => {
 	    }else{
 	        $installment_text.show();
 	    }
+        setTimeout(function(){
+            normalizeProductCardCashLabels($this_product_container);
+        }, 0);
 	});
 
 	{# /* // Submit to contact */ #}

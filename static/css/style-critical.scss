@@ -1721,6 +1721,12 @@ header.head-main.compress .logo-img-big {
   gap: 20px;
 }
 
+.section-main-product-video-home [data-store^="product-info-"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .main-product-video-frame {
   width: min(100%, 240px);
   overflow: hidden;
@@ -1941,6 +1947,17 @@ img.js-textbanner-image.textbanner-image-effect.textbanner-image-background.lazy
   position: relative;
   z-index: 9;
 }
+.item-product:not(.item-product-reduced) {
+  display: flex;
+  flex-direction: column;
+}
+.item-product:not(.item-product-reduced) > .item:not(.item-horizontal),
+.item-product:not(.item-product-reduced) > .item:not(.item-horizontal) > .js-item-quickshop-or-colors-container {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
+}
 .item-image {
   position: relative;
   max-height: 1200px;
@@ -1970,6 +1987,9 @@ img.js-textbanner-image.textbanner-image-effect.textbanner-image-background.lazy
 }
 .item-horizontal .item-name {
   font-size: 12px;
+  font-weight: 400;
+  line-height: 1.1429em;
+  min-height: 0;
   -webkit-line-clamp: 1;
 }
 .item-horizontal .item-price {
@@ -1990,6 +2010,12 @@ img.js-textbanner-image.textbanner-image-effect.textbanner-image-background.lazy
   width: 100%;
   height: 130px;
   object-fit: cover;
+}
+.item-product-reduced .item-name {
+  min-height: 0;
+  font-size: var(--font-small);
+  font-weight: 400;
+  line-height: 1.1429em;
 }
 .item-image-slide img{
   max-width: 100%;
@@ -2019,9 +2045,21 @@ img.js-textbanner-image.textbanner-image-effect.textbanner-image-background.lazy
 .item-description {
   padding: 10px;
 }
+.item-product:not(.item-product-reduced) .item:not(.item-horizontal) .item-description,
+.item-product:not(.item-product-reduced) .item:not(.item-horizontal) .item-link {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+.item-product:not(.item-product-reduced) .item:not(.item-horizontal) .js-quickshop-or-stock-container {
+  margin-top: auto!important;
+  padding-top: 12px;
+}
 .item-name {
-  font-size: var(--font-small);
-  line-height: 1.1429em;
+  min-height: calc(var(--font-base) * 2.6);
+  font-size: var(--font-base);
+  font-weight: 700;
+  line-height: 1.3;
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-line-clamp: 2;
@@ -2034,6 +2072,12 @@ img.js-textbanner-image.textbanner-image-effect.textbanner-image-background.lazy
 .item-price-container {
   font-family: var(--heading-font);
   font-size: var(--font-small);
+}
+.item-cash-price {
+  font-family: var(--body-font);
+  font-size: var(--font-small);
+  font-weight: 400;
+  line-height: 1.25;
 }
 .price-compare {
   margin-left: 5px;
