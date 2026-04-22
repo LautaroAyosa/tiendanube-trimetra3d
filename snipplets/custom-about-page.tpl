@@ -18,11 +18,13 @@
 
 				<div class="about-page__hero-media" aria-label="Fotos reales de Trimetra 3D">
 					<figure class="about-page__photo about-page__photo--main" data-about-photo-card data-about-fallback="Foto real del equipo">
-						<img src="{{ 'images/about/about-team.jpg' | static_url }}" alt="Equipo de Trimetra 3D" width="720" height="520" data-about-photo>
+						<video autoplay muted loop playsinline preload="metadata" aria-label="Equipo de Trimetra 3D" width="720" height="520" data-about-photo>
+							<source src="{{ 'images/about/about-team.webm' | static_url }}" type="video/webm">
+						</video>
 						<figcaption>Equipo y atenci&oacute;n</figcaption>
 					</figure>
 					<figure class="about-page__photo about-page__photo--small" data-about-photo-card data-about-fallback="Foto real de mercader&iacute;a">
-						<img src="{{ 'images/about/about-products.jpg' | static_url }}" alt="Impresoras 3D, filamentos y mercader&iacute;a de Trimetra 3D" width="360" height="260" loading="lazy" data-about-photo>
+						<img src="{{ 'images/about/about-products_small.jpg' | static_url }}" alt="Impresoras 3D, filamentos y mercader&iacute;a de Trimetra 3D" width="360" height="260" loading="lazy" data-about-photo>
 						<figcaption>Mercader&iacute;a real</figcaption>
 					</figure>
 				</div>
@@ -91,11 +93,13 @@
 			<div class="about-page__proof-layout">
 				<div class="about-page__proof-media">
 					<figure class="about-page__photo about-page__photo--proof" data-about-photo-card data-about-fallback="Foto real de operaci&oacute;n">
-						<img src="{{ 'images/about/about-operation.jpg' | static_url }}" alt="Preparaci&oacute;n de pedidos y operaci&oacute;n de Trimetra 3D" width="720" height="520" loading="lazy" data-about-photo>
+						<video autoplay muted loop playsinline preload="metadata" aria-label="Preparaci&oacute;n de pedidos y operaci&oacute;n de Trimetra 3D" width="720" height="520" data-about-photo>
+							<source src="{{ 'images/about/about-operation.mp4' | static_url }}" type="video/mp4">
+						</video>
 						<figcaption>Pedidos y operaci&oacute;n</figcaption>
 					</figure>
 					<figure class="about-page__photo about-page__photo--proof-small" data-about-photo-card data-about-fallback="Foto real de taller">
-						<img src="{{ 'images/about/about-workshop.jpg' | static_url }}" alt="Trabajo t&eacute;cnico e impresoras funcionando en Trimetra 3D" width="420" height="320" loading="lazy" data-about-photo>
+						<img src="{{ 'images/about/about-workshop_small.jpg' | static_url }}" alt="Trabajo t&eacute;cnico e impresoras funcionando en Trimetra 3D" width="420" height="320" loading="lazy" data-about-photo>
 						<figcaption>Taller y soporte</figcaption>
 					</figure>
 				</div>
