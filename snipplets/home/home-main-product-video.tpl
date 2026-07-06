@@ -1,8 +1,18 @@
-{% if settings.main_product_video_file and sections.featured.products %}
+{% set main_product_video_products = sections.main_product_video.products | default([]) %}
+{% if main_product_video_products is empty %}
+	{% set main_product_video_products = sections.featured.products | default([]) %}
+{% endif %}
+
+{% set available_main_product_video_products = [] %}
+{% for product in main_product_video_products if product.available %}
+	{% set available_main_product_video_products = available_main_product_video_products | merge([product]) %}
+{% endfor %}
+
+{% if settings.main_product_video_file and available_main_product_video_products %}
 	{% if settings.main_product_type == 'random' %}
-		{% set product_type = sections.featured.products | shuffle | take(1) %}
+		{% set product_type = available_main_product_video_products | shuffle | take(1) %}
 	{% else %}
-		{% set product_type = sections.featured.products | take(1) %}
+		{% set product_type = available_main_product_video_products | take(1) %}
 	{% endif %}
 
 	{% set main_product_video_file = settings.main_product_video_file | trim %}

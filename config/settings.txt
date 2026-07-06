@@ -1044,7 +1044,9 @@ Página de inicio
 		title = Producto principal + video
 		backto = home_order_position
 	description
-		description = Combina el producto de la sección 'Principal' con un video vertical.
+		description = Combina el producto de la sección 'Producto principal + video' con un video vertical. Si no elegiste uno, usa el producto de la sección 'Principal'. No se muestran productos sin stock.
+	subtitle
+		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Elegí el producto que va junto al video</a>
 	i18n_input
 		name = main_product_video_file
 		description = Archivo de video

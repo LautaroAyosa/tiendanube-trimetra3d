@@ -1185,6 +1185,395 @@ a {
   border-radius: 0 0 $box-radius $box-radius;
 }
 
+{% set checkout_payment_current_installments = include("snipplets/payment-installments-config.tpl", { mode: "current_installments" }) | trim %}
+{% set checkout_payment_has_active_promo = include("snipplets/payment-installments-config.tpl", { mode: "has_active_promo" }) | trim %}
+{% set checkout_payment_installments_badge = checkout_payment_has_active_promo == "true" ? "Promo: " ~ checkout_payment_current_installments ~ " cuotas sin interés" : "Hasta " ~ checkout_payment_current_installments ~ " cuotas sin interés" %}
+
+/* Mercado Pago checkout highlight START */
+#radio-option-mercado_pago_checkout_pro.payment-option {
+  position: relative;
+  margin: 8px 0 14px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #fff7bf 0%, #fffdf0 54%, #eaf8ff 100%);
+  border: 2px solid #00a5e0;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0, 158, 227, .18), 0 2px 8px rgba(3, 38, 76, .08);
+  color: #03264c;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+
+  &:hover,
+  &:focus,
+  &:focus-within {
+    border-color: #008ad6;
+    box-shadow: 0 14px 30px rgba(0, 158, 227, .24), 0 4px 12px rgba(3, 38, 76, .12);
+    transform: translateY(-1px);
+    outline: none;
+  }
+
+  &.active {
+    color: #03264c;
+    background: linear-gradient(135deg, #fff3a6 0%, #fffbe5 50%, #dff4ff 100%);
+    border-color: #008ad6;
+  }
+
+  .label {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .payment-list-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .accordion-section-header-icon,
+  .accordion-rotate-icon {
+    fill: #03264c;
+  }
+
+  .accordion-section-header-icon {
+    flex: 0 0 auto;
+  }
+
+  .accordion-rotate-icon {
+    margin-left: 10px;
+  }
+
+  .accordion-section-header-label {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px 12px;
+    min-width: 0;
+  }
+
+  .accordion-section-header-img {
+    width: auto;
+    max-width: 118px;
+    max-height: 30px;
+  }
+
+  .payment-item-discount {
+    margin: 0;
+    padding: 7px 11px;
+    color: #ffffff;
+    background: #009ee3;
+    border-radius: 999px;
+    box-shadow: 0 3px 8px rgba(0, 158, 227, .25);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .35px;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .payment-item-discount strong {
+    color: inherit;
+    font-weight: 900;
+  }
+
+  .accordion-section-header-label:after {
+    display: block;
+    flex: 0 0 100%;
+    color: #03264c;
+    content: "Pagá en hasta {{ checkout_payment_current_installments }} cuotas sin interés";
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: $sm) {
+  #radio-option-mercado_pago_checkout_pro.payment-option {
+    padding: 12px 14px;
+
+    .payment-list-item {
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .accordion-section-header-label {
+      align-items: flex-start;
+      align-content: flex-start;
+    }
+
+    .accordion-section-header-img {
+      max-width: 112px;
+      max-height: 28px;
+    }
+
+    .payment-item-discount {
+      margin: 8px 0 0;
+      max-width: 100%;
+      white-space: normal;
+    }
+
+    .accordion-section-header-label:after {
+      width: 100%;
+      font-size: 11px;
+    }
+  }
+}
+/* Mercado Pago checkout highlight END */
+
+@supports selector(:has(*)) {
+  :is(
+    button,
+    label,
+    li,
+    a,
+    div[role="button"],
+    div[class*="payment-option" i],
+    div[class*="payment-item" i],
+    div[class*="method-option" i],
+    div[class*="option-item" i],
+    [data-component*="payment" i][data-component*="option" i],
+    [data-component*="payment" i][data-component*="method" i],
+    [data-testid*="payment" i][data-testid*="option" i],
+    [data-testid*="payment" i][data-testid*="method" i]
+  ):has(img[alt*="Mercado Pago" i]),
+  :is(
+    button,
+    label,
+    li,
+    a,
+    div[role="button"],
+    div[class*="payment-option" i],
+    div[class*="payment-item" i],
+    div[class*="method-option" i],
+    div[class*="option-item" i],
+    [data-component*="payment" i][data-component*="option" i],
+    [data-component*="payment" i][data-component*="method" i],
+    [data-testid*="payment" i][data-testid*="option" i],
+    [data-testid*="payment" i][data-testid*="method" i]
+  ):has(img[src*="mercado" i]) {
+    position: relative;
+    min-height: 70px;
+    padding: 14px 190px 14px 18px !important;
+    background: linear-gradient(135deg, #fff7bf 0%, #fffdf0 54%, #eaf8ff 100%) !important;
+    border: 2px solid #00a5e0 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 24px rgba(0, 158, 227, .18), 0 2px 8px rgba(3, 38, 76, .08) !important;
+    color: #03264c !important;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  }
+
+  :is(
+    button,
+    label,
+    li,
+    a,
+    div[role="button"],
+    div[class*="payment-option" i],
+    div[class*="payment-item" i],
+    div[class*="method-option" i],
+    div[class*="option-item" i],
+    [data-component*="payment" i][data-component*="option" i],
+    [data-component*="payment" i][data-component*="method" i],
+    [data-testid*="payment" i][data-testid*="option" i],
+    [data-testid*="payment" i][data-testid*="method" i]
+  ):has(img[alt*="Mercado Pago" i]):hover,
+  :is(
+    button,
+    label,
+    li,
+    a,
+    div[role="button"],
+    div[class*="payment-option" i],
+    div[class*="payment-item" i],
+    div[class*="method-option" i],
+    div[class*="option-item" i],
+    [data-component*="payment" i][data-component*="option" i],
+    [data-component*="payment" i][data-component*="method" i],
+    [data-testid*="payment" i][data-testid*="option" i],
+    [data-testid*="payment" i][data-testid*="method" i]
+  ):has(img[src*="mercado" i]):hover {
+    border-color: #008ad6 !important;
+    box-shadow: 0 14px 30px rgba(0, 158, 227, .24), 0 4px 12px rgba(3, 38, 76, .12) !important;
+    transform: translateY(-1px);
+  }
+
+  :is(
+    button,
+    label,
+    li,
+    a,
+    div[role="button"],
+    div[class*="payment-method" i],
+    div[class*="payment-option" i],
+    div[class*="payment-item" i],
+    div[class*="method-option" i],
+    div[class*="option-item" i],
+    [data-component*="payment" i],
+    [data-testid*="payment" i]
+  ):has(img[alt*="Mercado Pago" i])::after,
+  :is(
+    button,
+    label,
+    li,
+    a,
+    div[role="button"],
+    div[class*="payment-method" i],
+    div[class*="payment-option" i],
+    div[class*="payment-item" i],
+    div[class*="method-option" i],
+    div[class*="option-item" i],
+    [data-component*="payment" i],
+    [data-testid*="payment" i]
+  ):has(img[src*="mercado" i])::after {
+    position: absolute;
+    top: 50%;
+    right: 54px;
+    z-index: 1;
+    max-width: 170px;
+    padding: 7px 11px;
+    color: #ffffff;
+    background: #009ee3;
+    border-radius: 999px;
+    box-shadow: 0 3px 8px rgba(0, 158, 227, .25);
+    content: "{{ checkout_payment_installments_badge }}";
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .35px;
+    line-height: 1.15;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+    white-space: normal;
+  }
+
+  @media (max-width: $sm) {
+    :is(
+      button,
+      label,
+      li,
+      a,
+      div[role="button"],
+      div[class*="payment-option" i],
+      div[class*="payment-item" i],
+      div[class*="method-option" i],
+      div[class*="option-item" i],
+      [data-component*="payment" i][data-component*="option" i],
+      [data-component*="payment" i][data-component*="method" i],
+      [data-testid*="payment" i][data-testid*="option" i],
+      [data-testid*="payment" i][data-testid*="method" i]
+    ):has(img[alt*="Mercado Pago" i]),
+    :is(
+      button,
+      label,
+      li,
+      a,
+      div[role="button"],
+      div[class*="payment-option" i],
+      div[class*="payment-item" i],
+      div[class*="method-option" i],
+      div[class*="option-item" i],
+      [data-component*="payment" i][data-component*="option" i],
+      [data-component*="payment" i][data-component*="method" i],
+      [data-testid*="payment" i][data-testid*="option" i],
+      [data-testid*="payment" i][data-testid*="method" i]
+    ):has(img[src*="mercado" i]) {
+      padding: 12px 120px 12px 14px !important;
+    }
+
+    :is(
+      button,
+      label,
+      li,
+      a,
+      div[role="button"],
+      div[class*="payment-method" i],
+      div[class*="payment-option" i],
+      div[class*="payment-item" i],
+      div[class*="method-option" i],
+      div[class*="option-item" i],
+      [data-component*="payment" i],
+      [data-testid*="payment" i]
+    ):has(img[alt*="Mercado Pago" i])::after,
+    :is(
+      button,
+      label,
+      li,
+      a,
+      div[role="button"],
+      div[class*="payment-method" i],
+      div[class*="payment-option" i],
+      div[class*="payment-item" i],
+      div[class*="method-option" i],
+      div[class*="option-item" i],
+      [data-component*="payment" i],
+      [data-testid*="payment" i]
+    ):has(img[src*="mercado" i])::after {
+      right: 40px;
+      max-width: 94px;
+      padding: 6px 8px;
+      font-size: 9px;
+      letter-spacing: .2px;
+    }
+  }
+}
+
+
+/* Mercado Pago payment iframe overlay START */
+@supports selector(:has(*)) {
+  .panel.panel-with-header:has(> #payment-iframe) {
+    position: relative;
+  }
+
+  .panel.panel-with-header:has(> #payment-iframe)::before {
+    position: absolute;
+    top: 228px;
+    right: 14px;
+    left: 14px;
+    z-index: 2;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(255, 247, 191, .55) 0%, rgba(255, 253, 240, .42) 54%, rgba(234, 248, 255, .52) 100%);
+    border: 2px solid #00a5e0;
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(0, 158, 227, .18), 0 2px 8px rgba(3, 38, 76, .08);
+    content: "";
+    pointer-events: none;
+  }
+
+  .panel.panel-with-header:has(> #payment-iframe)::after {
+    position: absolute;
+    top: 263px;
+    right: 54px;
+    z-index: 3;
+    max-width: 170px;
+    padding: 7px 11px;
+    color: #ffffff;
+    background: #009ee3;
+    border-radius: 999px;
+    box-shadow: 0 3px 8px rgba(0, 158, 227, .25);
+    content: "{{ checkout_payment_installments_badge }}";
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .35px;
+    line-height: 1.15;
+    pointer-events: none;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translateY(-50%);
+    white-space: normal;
+  }
+
+  @media (max-width: $sm) {
+    .panel.panel-with-header:has(> #payment-iframe)::after {
+      right: 40px;
+      max-width: 98px;
+      padding: 6px 8px;
+      font-size: 9px;
+      letter-spacing: .2px;
+    }
+  }
+}
+/* Mercado Pago payment iframe overlay END */
+
 
 {# /* // Overlay */ #}
 

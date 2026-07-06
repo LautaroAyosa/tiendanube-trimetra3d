@@ -1,5 +1,8 @@
 {% set shipping_admin_content = page.content | trim %}
 {% set shipping_contact_url = 'https://trimetra3d.mitiendanube.com/contacto-y-horarios/' %}
+{% set shipping_payment_has_active_promo = include("snipplets/payment-installments-config.tpl", { mode: "has_active_promo" }) | trim %}
+{% set shipping_payment_installments = include("snipplets/payment-installments-config.tpl", { mode: "promo_installments" }) | trim %}
+{% set shipping_payment_promo_end = include("snipplets/payment-installments-config.tpl", { mode: "promo_end_display" }) | trim %}
 
 <main class="shipping-page" data-store="shipping-page">
 	<section class="shipping-page__intro">
@@ -27,6 +30,20 @@
 			</div>
 		</div>
 	</section>
+
+	{% if shipping_payment_has_active_promo == "true" %}
+	<section class="shipping-page__hot-sale">
+		<div class="container shipping-page__container">
+			<div class="shipping-page__hot-sale-notice" role="status" aria-label="Aviso de promo vigente para impresoras 3D">
+				<div class="shipping-page__hot-sale-marker" aria-hidden="true">!</div>
+				<div class="shipping-page__hot-sale-copy">
+					<h2>Promo vigente: {{ shipping_payment_installments }} cuotas sin inter&eacute;s + env&iacute;o gratis en impresoras 3D</h2>
+					<p>Hasta el {{ shipping_payment_promo_end }} las impresoras 3D seleccionadas suman env&iacute;o gratis durante la campa&ntilde;a. Si necesit&aacute;s confirmar alcance, zona o plazo antes de comprar, escribinos y te ayudamos.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endif %}
 
 	<section class="shipping-page__section">
 		<div class="container shipping-page__container">

@@ -9,17 +9,35 @@
 	{% if item.url %}
 		{% set item_url_handle = item.url | trim('/') | split('/') | last | lower %}
 	{% endif %}
+	{% set is_giveaway_nav_item = not subitem and (item_name_normalized == 'sorteo' or item_url_handle == 'sorteo') %}
+	{% set is_hot_days_nav_item = not subitem and (item_name_normalized == 'hot days' or item_url_handle in ['hot-days', 'pre-hot-sale']) %}
+	{% set is_promo_nav_item = not subitem and (item_name_normalized in ['promo', 'promociones', 'pre promo', 'pre-promo', '9 cuotas'] or item_url_handle == 'pre-promo') %}
+	{% set nav_highlight_class = '' %}
+	{% if is_giveaway_nav_item %}
+		{% set nav_highlight_class = ' nav-list-link--giveaway' %}
+	{% elseif is_hot_days_nav_item or is_promo_nav_item %}
+		{% set nav_highlight_class = ' nav-list-link--hot-days' %}
+	{% endif %}
 	{% set is_info_nav_split_item = megamenu and not subitem and (item_name_normalized in ['quienes somos', 'quiénes somos'] or item_url_handle == 'quienes-somos') %}
 	{% if item.subitems %}
 		<li class="{% if megamenu %}js-desktop-nav-item js-item-subitems-desktop nav-item-desktop {% if not subitem %}js-nav-main-item nav-dropdown nav-main-item {% endif %}{% endif %}{% if is_info_nav_split_item %}js-nav-info-split-start {% endif %}nav-item item-with-subitems" data-component="menu.item">
 			{% if megamenu %}
 			<div class="nav-item-container">
 			{% endif %}
-				<a class="{% if hamburger %}js-toggle-menu-panel align-items-center{% endif %} nav-list-link position-relative {{ item.current ? 'selected' : '' }}" href="{% if megamenu and item.url %}{{ item.url }}{% else %}#{% endif %}"{% if is_home_nav_item %} title="{{ 'Inicio' | translate }}" aria-label="{{ 'Inicio' | translate }}"{% endif %}>
+				<a class="{% if hamburger %}js-toggle-menu-panel align-items-center{% endif %} nav-list-link position-relative{{ nav_highlight_class }} {{ item.current ? 'selected' : '' }}" href="{% if megamenu and item.url %}{{ item.url }}{% else %}#{% endif %}"{% if is_home_nav_item %} title="{{ 'Inicio' | translate }}" aria-label="{{ 'Inicio' | translate }}"{% endif %}>
 					{% if is_home_nav_item %}
 						{% include "snipplets/svg/home.tpl" with {svg_custom_class: "icon-inline icon-lg icon-w"} %}
 					{% else %}
 						{{ item.name }}
+						{% if is_hot_days_nav_item or is_promo_nav_item %}
+							<span class="nav-link-flame" aria-hidden="true"></span>
+						{% elseif is_giveaway_nav_item %}
+							<span class="nav-link-sparkles" aria-hidden="true">
+								<span></span>
+								<span></span>
+								<span></span>
+							</span>
+						{% endif %}
 					{% endif %}
 					{% if hamburger %}
 						<span class="nav-list-arrow ml-1">
@@ -91,11 +109,20 @@
 		</li>
 	{% else %}
 		<li class="js-desktop-nav-item {% if megamenu %}{% if not subitem %}js-nav-main-item nav-main-item{% endif %} nav-item-desktop{% endif %} {% if is_info_nav_split_item %}js-nav-info-split-start {% endif %}nav-item" data-component="menu.item">
-			<a class="nav-list-link {{ item.current ? 'selected' : '' }}" href="{% if item.url %}{{ item.url | setting_url }}{% else %}#{% endif %}"{% if is_home_nav_item %} title="{{ 'Inicio' | translate }}" aria-label="{{ 'Inicio' | translate }}"{% endif %}>
+			<a class="nav-list-link{{ nav_highlight_class }} {{ item.current ? 'selected' : '' }}" href="{% if item.url %}{{ item.url | setting_url }}{% else %}#{% endif %}"{% if is_home_nav_item %} title="{{ 'Inicio' | translate }}" aria-label="{{ 'Inicio' | translate }}"{% endif %}>
 				{% if is_home_nav_item %}
 					{% include "snipplets/svg/home.tpl" with {svg_custom_class: "icon-inline icon-lg icon-w"} %}
 				{% else %}
 					{{ item.name }}
+					{% if is_hot_days_nav_item or is_promo_nav_item %}
+						<span class="nav-link-flame" aria-hidden="true"></span>
+					{% elseif is_giveaway_nav_item %}
+						<span class="nav-link-sparkles" aria-hidden="true">
+							<span></span>
+							<span></span>
+							<span></span>
+						</span>
+					{% endif %}
 				{% endif %}
 			</a>
 		</li>

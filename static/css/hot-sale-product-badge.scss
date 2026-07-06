@@ -1,0 +1,111 @@
+.hot-sale-product-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 50px;
+  min-height: 32px;
+  padding: 5px 6px 5px 7px;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 76% 12%, rgba(255, 246, 134, 0.9) 0 8%, transparent 20%),
+    linear-gradient(145deg, #ff2e00 0%, #f05516 46%, #15110f 100%);
+  border: 1px solid rgba(255, 222, 86, 0.82);
+  border-radius: 6px;
+  box-shadow: 0 6px 14px rgba(70, 18, 0, 0.24);
+  font-family: var(--heading-font);
+  line-height: 1;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+.hot-sale-product-badge::before,
+.hot-sale-product-badge::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.hot-sale-product-badge::before {
+  right: 5px;
+  bottom: -5px;
+  width: 12px;
+  height: 15px;
+  background: linear-gradient(180deg, #fff16a 0%, #ff8a00 48%, #ff2e00 100%);
+  border-radius: 80% 20% 70% 30%;
+  opacity: 0.9;
+  transform: rotate(18deg);
+  transform-origin: 50% 90%;
+  animation: hot-sale-product-badge-flame 1.05s ease-in-out infinite;
+}
+
+.hot-sale-product-badge::after {
+  inset: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+}
+
+.hot-sale-product-badge__number {
+  display: block;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.92;
+  text-shadow: 0 1px 2px rgba(40, 8, 0, 0.35);
+}
+
+.hot-sale-product-badge__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #fff7db;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(40, 8, 0, 0.45);
+  white-space: nowrap;
+}
+
+@keyframes hot-sale-product-badge-flame {
+  0%,
+  100% {
+    opacity: 0.74;
+    transform: rotate(14deg) scaleY(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: rotate(23deg) scaleY(1.1);
+  }
+}
+
+@media (max-width: 767px) {
+  .hot-sale-product-badge {
+    top: 6px;
+    right: 6px;
+    min-width: 46px;
+    min-height: 30px;
+    padding: 4px 5px 4px 6px;
+  }
+
+  .hot-sale-product-badge__number {
+    font-size: 16px;
+  }
+
+  .hot-sale-product-badge__text {
+    font-size: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hot-sale-product-badge::before {
+    animation: none;
+  }
+}

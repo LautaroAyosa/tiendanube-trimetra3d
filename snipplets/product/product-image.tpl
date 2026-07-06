@@ -36,6 +36,7 @@
 		<div class="col p-0 px-md-3">
 			<div class="js-swiper-product swiper-container product-detail-slider" data-product-images-amount="{{ product.media_count }}">
                 {% include 'snipplets/labels.tpl' with {product_detail: true, labels_floating: true} %}
+                {% include 'snipplets/promo-3d-printer-badge.tpl' with {product_detail: true} %}
 				<div class="swiper-wrapper">
 					{% for media in product.media %}
 						{% if media.isImage %}

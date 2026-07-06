@@ -3,7 +3,15 @@
 {% set has_main_slider = settings.slider and settings.slider is not empty %}
 {% set has_mobile_slider = settings.toggle_slider_mobile and settings.slider_mobile and settings.slider_mobile is not empty %}
 {% set has_video = settings.video_embed %}
-{% set has_main_product_video = settings.main_product_video_file and sections.featured.products %}
+{% set main_product_video_products = sections.main_product_video.products | default([]) %}
+{% if main_product_video_products is empty %}
+    {% set main_product_video_products = sections.featured.products | default([]) %}
+{% endif %}
+{% set has_main_product_video_product = false %}
+{% for product in main_product_video_products if product.available %}
+    {% set has_main_product_video_product = true %}
+{% endfor %}
+{% set has_main_product_video = settings.main_product_video_file and has_main_product_video_product %}
 {% set has_main_categories = settings.main_categories and settings.slider_categories and settings.slider_categories is not empty %}
 {% set has_banners = settings.banner and settings.banner is not empty %}
 {% set has_promotional_banners = settings.banner_promotional and settings.banner_promotional is not empty %}

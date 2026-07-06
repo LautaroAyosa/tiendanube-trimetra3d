@@ -89,6 +89,7 @@
     {% set section_id = 'best-seller' %}
     {% set section_title = settings.best_seller_products_title %}
 {% endif %}
+{% set section_title = hot_sale_section_title | default(section_title) %}
 {% set section_columns_slider_mobile = section_columns_mobile == '1' ? '1.15' : '2.25' %}
 {% set image_desktop = section_image_desktop | has_custom_image %}
 {% set image_mobile = section_image_mobile | has_custom_image %}

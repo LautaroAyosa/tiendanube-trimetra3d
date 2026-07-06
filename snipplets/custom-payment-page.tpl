@@ -1,5 +1,14 @@
 {% set payment_contact_url = 'https://trimetra3d.mitiendanube.com/contacto-y-horarios/' %}
 {% set oncity_url = 'https://www.oncity.com/trimetra-3d?map=seller' %}
+{% set payment_base_installments = include("snipplets/payment-installments-config.tpl", { mode: "base_installments" }) | trim %}
+{% set payment_current_installments = include("snipplets/payment-installments-config.tpl", { mode: "current_installments" }) | trim %}
+{% set payment_promo_start = include("snipplets/payment-installments-config.tpl", { mode: "promo_start" }) | trim %}
+{% set payment_promo_end = include("snipplets/payment-installments-config.tpl", { mode: "promo_end" }) | trim %}
+{% set payment_promo_start_display = include("snipplets/payment-installments-config.tpl", { mode: "promo_start_display" }) | trim %}
+{% set payment_promo_end_display = include("snipplets/payment-installments-config.tpl", { mode: "promo_end_display" }) | trim %}
+{% set payment_promo_countdown = include("snipplets/payment-installments-config.tpl", { mode: "promo_countdown" }) | trim %}
+{% set payment_promo_installments = include("snipplets/payment-installments-config.tpl", { mode: "promo_installments" }) | trim %}
+{% set payment_promo_scope = include("snipplets/payment-installments-config.tpl", { mode: "promo_scope" }) | trim %}
 
 <main class="payment-page" data-store="payment-page">
 	<section class="payment-page__intro">
@@ -13,7 +22,7 @@
 				<div class="payment-page__intro-summary" aria-label="Resumen rápido de pagos">
 					<div class="payment-page__summary-row">
 						<span>Visa / Mastercard bancarias</span>
-						<strong><span data-payment-installments-value data-payment-installments-base="3">3</span> cuotas sin interés <span data-payment-installments-scope data-payment-installments-scope-template="en {scope}" hidden></span></strong>
+						<strong><span data-payment-installments-value data-payment-installments-base="{{ payment_base_installments }}">{{ payment_current_installments }}</span> cuotas sin interés <span data-payment-installments-scope data-payment-installments-scope-template="en {scope}" hidden></span></strong>
 					</div>
 					<div class="payment-page__summary-row">
 						<span>Transferencia</span>
@@ -32,11 +41,11 @@
 	<section
 		class="payment-page__promo"
 		data-payment-promo
-		data-promo-start="2026-04-10"
-		data-promo-end="2026-04-19"
-		data-promo-countdown="true"
-		data-promo-installments="9"
-		data-promo-scope="BambuLab y Snapmaker"
+		data-promo-start="{{ payment_promo_start }}"
+		data-promo-end="{{ payment_promo_end }}"
+		data-promo-countdown="{{ payment_promo_countdown }}"
+		data-promo-installments="{{ payment_promo_installments }}"
+		data-promo-scope="{{ payment_promo_scope }}"
 		hidden
 		style="--payment-promo-bg: #1d241f; --payment-promo-foreground: #ffffff; --payment-promo-muted: #fff2ed; --payment-promo-accent: #f4c24f; --payment-promo-image: none;"
 	>
@@ -45,12 +54,13 @@
 				<div class="payment-page__promo-copy">
 					<div class="payment-page__promo-copy-body">
 						<p class="payment-page__promo-kicker">Promo vigente</p>
-						<h2>9 cuotas sin interés</h2>
-						<p>Del 11 al 19 de abril, aprovechá 9 cuotas sin interés en productos BambuLab y Snapmaker.</p>
+						<h2>{{ payment_promo_installments }} cuotas sin interés</h2>
+						<p>Del {{ payment_promo_start_display }} al {{ payment_promo_end_display }}, aprovechá {{ payment_promo_installments }} cuotas sin interés en {{ payment_promo_scope }}.</p>
 						<div class="payment-page__promo-tags" aria-label="Resumen de la promo">
-							<span>Vigencia: <strong>11/04 al 19/04</strong></span>
-							<span>Aplica a <strong>BambuLab y Snapmaker</strong></span>
+							<span>Vigencia: <strong>{{ payment_promo_start_display }} al {{ payment_promo_end_display }}</strong></span>
+							<span>Aplica a <strong>{{ payment_promo_scope }}</strong></span>
 							<span><strong>Visa y Mastercard bancarias</strong></span>
+							<span>Impresoras 3D: <strong>env&iacute;o gratis</strong></span>
 						</div>
 					</div>
 					<a class="payment-page__button payment-page__button--accent payment-page__promo-primary-action" href="{{ store.products_url }}">Comprar en la tienda</a>
@@ -58,7 +68,7 @@
 				<div class="payment-page__promo-side">
 					<div class="payment-page__promo-badge" aria-hidden="true">
 						<span>Hasta</span>
-						<strong>9x</strong>
+						<strong>{{ payment_promo_installments }}x</strong>
 					</div>
 					<div class="payment-page__promo-countdown" data-payment-countdown hidden aria-label="Tiempo restante de la promo">
 						<p>Termina en</p>
@@ -73,12 +83,12 @@
 				</div>
 			</div>
 			<div class="payment-page__promo-conditions">
-				<p>Promoción válida para productos BambuLab y Snapmaker durante la vigencia indicada. Aplica con tarjetas Visa y Mastercard bancarias. No acumulable con otras promociones, salvo comunicación explícita. El total final se informa antes de confirmar la compra.</p>
+				<p>Promoci&oacute;n v&aacute;lida en {{ payment_promo_scope }} durante la vigencia indicada. Aplica con tarjetas Visa y Mastercard bancarias. Las impresoras 3D seleccionadas suman env&iacute;o gratis durante la campa&ntilde;a. No acumulable con otras promociones, salvo comunicaci&oacute;n expl&iacute;cita. El total final se informa antes de confirmar la compra.</p>
 			</div>
 		</div>
 	</section>
 
-	<section class="payment-page__oncity" data-oncity-promos data-oncity-base-installments="3" hidden>
+	<section class="payment-page__oncity" data-oncity-promos data-oncity-base-installments="{{ payment_base_installments }}" hidden>
 		<div class="container payment-page__container">
 			<div class="payment-page__oncity-layout">
 				<div class="payment-page__oncity-header">
@@ -94,7 +104,7 @@
 					<div class="payment-page__oncity-header-actions">
 						<div class="payment-page__oncity-status">
 							<span>Plan activo en OnCity</span>
-							<strong><span data-oncity-current-installments>3</span> cuotas + alianzas</strong>
+							<strong><span data-oncity-current-installments>{{ payment_current_installments }}</span> cuotas + alianzas</strong>
 						</div>
 						<a class="payment-page__button payment-page__button--accent payment-page__oncity-button" href="{{ oncity_url }}" target="_blank" rel="noopener noreferrer">Ver en OnCity</a>
 					</div>
@@ -345,7 +355,7 @@
 				</article>
 				<article class="payment-page__benefit-card">
 					<p class="payment-page__card-kicker">Visa / Mastercard bancarias</p>
-					<h2><span data-payment-installments-value data-payment-installments-base="3">3</span> cuotas sin interés</h2>
+					<h2><span data-payment-installments-value data-payment-installments-base="{{ payment_base_installments }}">{{ payment_current_installments }}</span> cuotas sin interés</h2>
 					<p><span data-payment-installments-scope data-payment-installments-scope-template="Durante la promo vigente, aplica en {scope}. " hidden></span>No incluye American Express ni Tarjeta Naranja. Otras tarjetas pueden tener cuotas y costos independientes.</p>
 				</article>
 			</div>
@@ -404,7 +414,7 @@
 			<div class="payment-page__installments-grid" aria-label="Planes y condiciones de cuotas">
 				<article class="payment-page__installment-card payment-page__installment-card--free">
 					<span>Visa / Mastercard</span>
-					<h3><span data-payment-installments-value data-payment-installments-base="3">3</span> cuotas</h3>
+					<h3><span data-payment-installments-value data-payment-installments-base="{{ payment_base_installments }}">{{ payment_current_installments }}</span> cuotas</h3>
 					<strong>Sin interés</strong>
 					<p>Solo con tarjetas Visa y Mastercard bancarias<span data-payment-installments-scope data-payment-installments-scope-template=" en {scope}" hidden></span>.</p>
 				</article>
@@ -472,7 +482,7 @@
 				</article>
 				<article class="payment-page__faq-card">
 					<h3>¿Qué tarjetas tienen cuotas sin interés?</h3>
-					<p>Las <span data-payment-installments-value data-payment-installments-base="3">3</span> cuotas sin interés aplican a Visa y Mastercard bancarias<span data-payment-installments-scope data-payment-installments-scope-template=" en {scope}" hidden></span>. No incluye American Express ni Tarjeta Naranja.</p>
+					<p>Las <span data-payment-installments-value data-payment-installments-base="{{ payment_base_installments }}">{{ payment_current_installments }}</span> cuotas sin interés aplican a Visa y Mastercard bancarias<span data-payment-installments-scope data-payment-installments-scope-template=" en {scope}" hidden></span>. No incluye American Express ni Tarjeta Naranja.</p>
 				</article>
 				<article class="payment-page__faq-card">
 					<h3>¿Aceptan American Express, Naranja y Cabal?</h3>

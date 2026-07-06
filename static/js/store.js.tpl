@@ -549,8 +549,93 @@ DOMContentLoaded.addEventOrExecute(() => {
     {% set adbarMultipleMessages = (adbarMessage01 and adbarMessage02) or (adbarMessage01 and adbarMessage03) or (adbarMessage02 and adbarMessage03) %}
     {% set adbarMessages = adbarMessage01 or adbarMessage02 or adbarMessage03 %}
     {% set hasAdbar = settings.ad_bar and (adbarMessages or 'adbar_img_mobile.jpg' | has_custom_image or 'adbar_img_desktop.jpg' | has_custom_image) %}
+    {% set promoAdbarCountdownEnd = include("snipplets/payment-installments-config.tpl", { mode: "promo_end" }) | trim %}
+    {% set promoAdbarCountdown = ("now" | date("Y-m-d")) <= promoAdbarCountdownEnd %}
 
-    {% if settings.ad_bar and adbarMultipleMessages %}
+    {% if settings.ad_bar and promoAdbarCountdown %}
+
+        function initAdbarCountdown() {
+            var countdownBar = document.querySelector("[data-adbar-countdown]");
+            if (!countdownBar) {
+                return;
+            }
+
+            var startDate = new Date(countdownBar.getAttribute("data-adbar-countdown-start"));
+            var endDate = new Date(countdownBar.getAttribute("data-adbar-countdown-end"));
+            var startTime = startDate.getTime();
+            var endTime = endDate.getTime();
+
+            if (isNaN(startTime) || isNaN(endTime) || startTime > endTime) {
+                countdownBar.hidden = true;
+                return;
+            }
+
+            var labelNode = countdownBar.querySelector("[data-adbar-countdown-label]");
+            var messageNode = countdownBar.querySelector("[data-adbar-countdown-message]");
+            var daysNode = countdownBar.querySelector("[data-adbar-countdown-days]");
+            var hoursNode = countdownBar.querySelector("[data-adbar-countdown-hours]");
+            var minutesNode = countdownBar.querySelector("[data-adbar-countdown-minutes]");
+            var secondsNode = countdownBar.querySelector("[data-adbar-countdown-seconds]");
+
+            function padCountdownValue(value) {
+                return value < 10 ? "0" + value : value.toString();
+            }
+
+            function updateCountdown() {
+                var nowTime = new Date().getTime();
+                var isBeforeStart = nowTime < startTime;
+                var isActive = nowTime >= startTime && nowTime <= endTime;
+
+                if (!isBeforeStart && !isActive) {
+                    countdownBar.hidden = true;
+                    return false;
+                }
+
+                var targetTime = isBeforeStart ? startTime : endTime;
+                var remainingSeconds = Math.max(0, Math.floor((targetTime - nowTime) / 1000));
+                var days = Math.floor(remainingSeconds / 86400);
+                var hours = Math.floor((remainingSeconds % 86400) / 3600);
+                var minutes = Math.floor((remainingSeconds % 3600) / 60);
+                var seconds = remainingSeconds % 60;
+
+                if (labelNode) {
+                    labelNode.textContent = isActive ? countdownBar.getAttribute("data-adbar-countdown-active-label") : countdownBar.getAttribute("data-adbar-countdown-before-label");
+                }
+                if (messageNode) {
+                    messageNode.textContent = isActive ? countdownBar.getAttribute("data-adbar-countdown-active-message") : countdownBar.getAttribute("data-adbar-countdown-before-message");
+                }
+                if (daysNode) {
+                    daysNode.textContent = padCountdownValue(days);
+                }
+                if (hoursNode) {
+                    hoursNode.textContent = padCountdownValue(hours);
+                }
+                if (minutesNode) {
+                    minutesNode.textContent = padCountdownValue(minutes);
+                }
+                if (secondsNode) {
+                    secondsNode.textContent = padCountdownValue(seconds);
+                }
+
+                countdownBar.classList.toggle("section-adbar--countdown-active", isActive);
+                countdownBar.hidden = false;
+                return true;
+            }
+
+            if (updateCountdown()) {
+                var adbarCountdownInterval = window.setInterval(function() {
+                    if (!updateCountdown()) {
+                        window.clearInterval(adbarCountdownInterval);
+                    }
+                }, 1000);
+            }
+        }
+
+        initAdbarCountdown();
+
+    {% endif %}
+
+    {% if settings.ad_bar and not promoAdbarCountdown and adbarMultipleMessages %}
 
         var adbarAutoplayVal = {% if settings.adbar_auto and adbarMultipleMessages %}{delay: 5000,}{% else %}false{% endif %};
 
@@ -751,9 +836,9 @@ DOMContentLoaded.addEventOrExecute(() => {
         {% set adbarImagesOnly = 'adbar_img_desktop.jpg' | has_custom_image or 'adbar_img_mobile.jpg' | has_custom_image %}
         {% set adbarImageMobileOnly = 'adbar_img_mobile.jpg' | has_custom_image and not 'adbar_img_desktop.jpg' | has_custom_image %}
         {% set adbarImageDesktopOnly = 'adbar_img_desktop.jpg' | has_custom_image and not 'adbar_img_mobile.jpg' | has_custom_image %}
-        {% set adbarWithoutMessages = settings.ad_bar and not adbarMessages and adbarImagesOnly %}
+        {% set adbarWithoutMessages = settings.ad_bar and not promoAdbarCountdown and not adbarMessages and adbarImagesOnly %}
 
-        var topbarHeight = jQueryNuvem(".js-adbar").outerHeight();
+        var topbarHeight = jQueryNuvem(".js-adbar").outerHeight() || 0;
 
         window.addEventListener("scroll", function() {
 
@@ -761,6 +846,10 @@ DOMContentLoaded.addEventOrExecute(() => {
 
             var header = jQueryNuvem(".js-head-main");
             var navbarHeight = header.outerHeight();
+
+            {% if settings.ad_bar and promoAdbarCountdown %}
+                topbarHeight = jQueryNuvem(".js-adbar").outerHeight() || 0;
+            {% endif %}
 
             {# Recalculate topbar height in case image has not loaded yet and result is 0 #}
 
@@ -2374,10 +2463,16 @@ DOMContentLoaded.addEventOrExecute(() => {
 
 	{# Installments without interest #}
 
+	var max_installments_without_interests_to_show = parseInt('{{ include("snipplets/payment-installments-config.tpl", { mode: "base_installments" }) | trim | escape('js') }}', 10) || 3;
+
 	function get_max_installments_without_interests(number_of_installment, installment_data, max_installments_without_interests) {
-	    if (parseInt(number_of_installment) > parseInt(max_installments_without_interests[0])) {
+	    var installment_number = parseInt(number_of_installment);
+	    if (installment_number > max_installments_without_interests_to_show) {
+	        return max_installments_without_interests;
+	    }
+	    if (installment_number > parseInt(max_installments_without_interests[0])) {
 	        if (installment_data.without_interests) {
-	            return [number_of_installment, installment_data.installment_value.toFixed(2)];
+	            return [installment_number, installment_data.installment_value.toFixed(2)];
 	        }
 	    }
 	    return max_installments_without_interests;
@@ -2444,7 +2539,7 @@ DOMContentLoaded.addEventOrExecute(() => {
 	    {% endif %}
 
         {# Updates installments on list item and inside payment popup for Payments Apps #}
-        
+
 	    var installment_helper = function($element, amount, price){
 	        $element.find('.js-installment-amount').text(amount);
 	        $element.find('.js-installment-price').attr("data-value", price);
@@ -2492,20 +2587,20 @@ DOMContentLoaded.addEventOrExecute(() => {
 	        var $installments_container = jQueryNuvem(variant.element + ' .js-max-installments-container .js-max-installments');
 	        var $installments_modal_link = jQueryNuvem(variant.element + ' #btn-installments');
 	        var $installmens_card_icon = jQueryNuvem(variant.element + ' .js-installments-credit-card-icon');
+	        var $payment_discount_container = jQueryNuvem(variant.element + ' .js-product-discount-container');
+	        var has_visible_payment_discount = $payment_discount_container.length && $payment_discount_container.css("display") != "none";
 
-	        {% if product.has_direct_payment_only %}
-	        var installments_to_use = max_installments_without_interests[0] >= 1 ? max_installments_without_interests : max_installments_with_interests;
-
-	        if(installments_to_use[0] <= 0 ) {
-	        {%  else %}
-	        var installments_to_use = max_installments_without_interests[0] > 1 ? max_installments_without_interests : max_installments_with_interests;
-
+	        var installments_to_use = max_installments_without_interests;
 	        if(installments_to_use[0] <= 1 ) {
-	        {% endif %}
 	            $installments_container.hide();
-	            $installments_modal_link.hide();
-	            $payments_module.hide();
 	            $installmens_card_icon.hide();
+	            if (has_visible_payment_discount) {
+	                $installments_modal_link.show();
+	                $payments_module.show();
+	            } else {
+	                $installments_modal_link.hide();
+	                $payments_module.hide();
+	            }
 	        } else {
 	            $installments_container.show();
 	            $installments_modal_link.show();

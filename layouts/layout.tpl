@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/" lang="{% for language in languages %}{% if language.active %}{{ language.lang }}{% endif %}{% endfor %}">
     <head>
+        {% set is_hot_days_page = template == 'page' and (page.handle == 'hot-days' or page.handle == 'pre-hot-sale') %}
+        {% set is_pre_promo_page = template == 'page' and page.handle == 'pre-promo' %}
+        {% set hot_days_page_title = 'Hot Sale Trimetra 3D | Ofertas en impresoras 3D y filamentos' %}
+        {% set hot_days_page_description = 'Aprovecha Hot Sale en Trimetra 3D con ofertas en impresoras 3D, filamentos, insumos, cuotas, envios a todo el pais y soporte especializado.' %}
+        {% set pre_promo_page_title = '9 cuotas sin interes Trimetra 3D | Promo del 22 al 30 de junio' %}
+        {% set pre_promo_page_description = 'Promo Trimetra 3D del 22 al 30 de junio de 2026: 9 cuotas sin interes y envio gratis en impresoras 3D seleccionadas.' %}
+        {% if is_hot_days_page %}
+            {% set page_title = hot_days_page_title %}
+            {% set page_description = hot_days_page_description %}
+        {% elseif is_pre_promo_page %}
+            {% set page_title = pre_promo_page_title %}
+            {% set page_description = pre_promo_page_description %}
+        {% endif %}
+
         <link rel="preconnect" href="{{ store_resource_hints }}" />
         <link rel="dns-prefetch" href="{{ store_resource_hints }}" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,6 +68,7 @@
         {% set is_contact_hours_page = template == 'page' and (page.handle == 'contacto-y-horarios' or page.handle == 'contacto-horarios' or page.handle == 'contacto-y-horarios-de-atencion' or page.handle == 'informacion-de-contacto-y-horarios' or page.handle == 'informacion-de-contacto-y-horarios-de-atencion') %}
         {% set is_warranty_page = template == 'page' and page.handle == 'garantias-y-devoluciones' %}
         {% set is_about_page = template == 'page' and page.handle == 'quienes-somos' %}
+        {% set is_giveaway_page = template == 'page' and page.handle == 'sorteo' %}
         {% set is_single_product_page = template == 'product' %}
 
         {% if template == 'page' and page.handle == 'envios' %}
@@ -66,6 +81,13 @@
             <link rel="stylesheet" href="{{ 'css/contact-hours-page.scss' | static_url }}" media="all">
         {% elseif is_about_page %}
             <link rel="stylesheet" href="{{ 'css/about-page.scss' | static_url }}" media="all">
+        {% elseif is_giveaway_page %}
+            <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css" media="all">
+            <link rel="stylesheet" href="{{ 'css/giveaway-page.scss' | static_url }}" media="all">
+        {% elseif is_pre_promo_page %}
+            <link rel="stylesheet" href="{{ 'css/pre-promo-page.scss' | static_url }}" media="all">
+        {% elseif is_hot_days_page %}
+            <link rel="stylesheet" href="{{ 'css/hot-days-page.scss' | static_url }}" media="all">
         {% elseif is_single_product_page %}
             <link rel="stylesheet" href="{{ 'css/single-product.scss' | static_url }}" media="all">
         {% endif %}
@@ -202,6 +224,14 @@
         {% elseif is_about_page %}
             <script type="text/javascript">
                 {% include "static/js/about-page.js.tpl" %}
+            </script>
+        {% elseif is_pre_promo_page %}
+            <script type="text/javascript">
+                {% include "static/js/pre-promo-page.js.tpl" %}
+            </script>
+        {% elseif is_hot_days_page %}
+            <script type="text/javascript">
+                {% include "static/js/hot-days-page.js.tpl" %}
             </script>
         {% endif %}
 

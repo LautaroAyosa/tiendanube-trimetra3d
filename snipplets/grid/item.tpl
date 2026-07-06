@@ -92,6 +92,7 @@
             {% set floating_elements %}
                 {% if not reduced_item %}
                     {% include 'snipplets/labels.tpl' with {labels_floating: true} %}
+                    {% include 'snipplets/promo-3d-printer-badge.tpl' %}
                 {% endif %}
             {% endset %}
             
@@ -181,7 +182,8 @@
                         {% include 'snipplets/labels.tpl' %}
                     {% endif %}
                     {% if product.display_price %}
-                        {% set product_can_show_installments = product.show_installments and product.display_price and product.get_max_installments.installment > 1 and settings.product_installments and not reduced_item %}
+                        {% set product_max_installments_without_interests = product.get_max_installments(false) %}
+                        {% set product_can_show_installments = product.show_installments and product.display_price and product_max_installments_without_interests and product_max_installments_without_interests.installment > 1 and settings.product_installments and not reduced_item %}
                         
                         {% if is_subscription_only %}
                             {# Subscription only products: use subscription-price component with product_list location #}
@@ -214,7 +216,9 @@
                                     }) 
                                 }}
                                 {% if product_can_show_installments %}
-                                    {{ component('installments', {'location' : 'product_item' , 'short_wording' : true, container_classes: { installment: "item-installments mt-1"}}) }}
+                                    {% include 'snipplets/product/product-installments-summary.tpl' with {
+                                        installments_container_class: 'item-installments mt-1'
+                                    } %}
                                 {% endif %}
                             </div>
                         {% endif %}

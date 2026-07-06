@@ -69,13 +69,16 @@
 
         {% set installments_info = product.installments_info_from_any_variant %}
         {% set hasDiscount = product.maxPaymentDiscount.value > 0 %}
-        {% set show_payments_info = settings.product_detail_installments and product.show_installments and product.display_price and installments_info %}
+        {% set product_max_installments_without_interests = product.get_max_installments(false) %}
+        {% set show_payments_info = settings.product_detail_installments and product.show_installments and product.display_price and installments_info and product_max_installments_without_interests and product_max_installments_without_interests.installment > 1 %}
 
         {% if not home_main_product and (show_payments_info or hasDiscount) %}
             <div {% if installments_info %}data-toggle="#installments-modal" data-modal-url="modal-fullscreen-payments"{% endif %} class="{% if installments_info %}js-modal-open js-fullscreen-modal-open{% endif %} js-product-payments-container mb-3" {% if not product.display_price or not (product.get_max_installments and product.get_max_installments(false)) %}style="display: none;"{% endif %}>
         {% endif %}
             {% if show_payments_info %}
-                {{ component('installments', {'short_wording' : true, 'location' : 'product_detail', container_classes: { installment: "mb-2"}}) }}
+                {% include 'snipplets/product/product-installments-summary.tpl' with {
+                    installments_container_class: 'mb-2'
+                } %}
             {% endif %}
 
             {% set hideDiscountContainer = not (hasDiscount and product.showMaxPaymentDiscount) %}

@@ -1,0 +1,24 @@
+{
+  "name": "tiendanube-ftp_server",
+  "version": "1.0.0",
+  "description": "Este directorio ya contiene una copia local del theme para trabajar con Git antes de subir cambios.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LautaroAyosa/tiendanube-trimetra3d.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/LautaroAyosa/tiendanube-trimetra3d/issues"
+  },
+  "homepage": "https://github.com/LautaroAyosa/tiendanube-trimetra3d#readme"
+}
