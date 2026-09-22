@@ -53,3 +53,30 @@ Este directorio ya contiene una copia local del theme para trabajar con Git ante
 ## Si solo queres tocar snipplets
 
 Podes cambiar `path` y `project` a `/snipplets`, pero para mantenimiento general del theme conviene trabajar con la raiz `/`.
+
+## Validacion de paginas custom
+
+Instala las dependencias y ejecuta el control estatico antes de subir cambios:
+
+```powershell
+npm ci
+npm test
+```
+
+La suite de navegador necesita una URL de preview de Tiendanube. Sin esa variable, Playwright descubre los escenarios y los omite de forma intencional.
+
+```powershell
+$env:CUSTOM_PAGES_BASE_URL='https://url-del-preview.example'
+npm run test:e2e:custom-pages
+```
+
+Antes de publicar las paginas custom:
+
+1. Confirma en Administracion el WhatsApp y telefono principal `+54 9 11 7370-3391`, el WhatsApp de respaldo `+54 9 11 7058-7575`, el email y `Rafaela 3724, Ciudadela, Buenos Aires`.
+2. Crea o reactiva los handles `sorteo`, `pre-promo` y `hot-days`; el theme los muestra finalizados y con `noindex,follow`.
+3. Configura en Tiendanube el redirect HTTP 301 de `/pre-hot-sale/` a `/hot-days/`. El theme incluye solo un fallback por canonical, meta refresh y JavaScript.
+4. Obtene aprobacion legal del texto de Garantias y Devoluciones.
+5. Verifica cuotas, descuentos y medios vigentes contra el checkout; la pagina de Pagos no publica valores numericos no confirmados.
+6. En la seccion administrativa `Preventas`, selecciona solo productos cuyo nombre incluya `Preventa` y el mes estimado (por ejemplo, `Preventa Octubre`); los demas se omiten de la landing.
+7. Crea en Chatwoot un atributo personalizado de Contacto, tipo texto y clave `preorder_product`, para que la consulta de se&ntilde;a identifique el producto; si no existe, el chat abre igualmente sin ese contexto.
+8. Confirma que la matriz administrativa de garantia mantenga los componentes versionados de 12, 6 y 3 meses; los 12 meses no se comunican como cobertura de la impresora completa.

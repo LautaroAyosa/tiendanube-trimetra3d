@@ -98,6 +98,7 @@ window.tiendaNubeInstaTheme = (function(jQueryNuvem) {
 						'institutional': 'home-institutional-message',
 						'informatives': 'banner-services',
 						'categories': 'home-banner-categories',
+						'categories_fluid': 'home-banner-categories-fluid',
 						'promotional': 'home-banner-promotional',
 						'news_banners': 'home-banner-news',
 						'featured_banners': 'home-banner-featured',

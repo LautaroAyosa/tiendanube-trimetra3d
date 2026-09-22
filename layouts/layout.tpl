@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/" lang="{% for language in languages %}{% if language.active %}{{ language.lang }}{% endif %}{% endfor %}">
     <head>
-        {% set is_hot_days_page = template == 'page' and (page.handle == 'hot-days' or page.handle == 'pre-hot-sale') %}
-        {% set is_pre_promo_page = template == 'page' and page.handle == 'pre-promo' %}
-        {% set hot_days_page_title = 'Hot Sale Trimetra 3D | Ofertas en impresoras 3D y filamentos' %}
-        {% set hot_days_page_description = 'Aprovecha Hot Sale en Trimetra 3D con ofertas en impresoras 3D, filamentos, insumos, cuotas, envios a todo el pais y soporte especializado.' %}
-        {% set pre_promo_page_title = '9 cuotas sin interes Trimetra 3D | Promo del 22 al 30 de junio' %}
-        {% set pre_promo_page_description = 'Promo Trimetra 3D del 22 al 30 de junio de 2026: 9 cuotas sin interes y envio gratis en impresoras 3D seleccionadas.' %}
-        {% if is_hot_days_page %}
-            {% set page_title = hot_days_page_title %}
-            {% set page_description = hot_days_page_description %}
-        {% elseif is_pre_promo_page %}
-            {% set page_title = pre_promo_page_title %}
-            {% set page_description = pre_promo_page_description %}
+        {% set custom_page_handle = template == 'page' ? page.handle | default('') : '' %}
+        {% set custom_page_is_custom = template == 'page' and include('snipplets/custom-pages/page-context.tpl', { mode: 'is_custom', custom_page_handle: custom_page_handle }) | trim == 'true' %}
+        {% set custom_page_key = include('snipplets/custom-pages/page-context.tpl', { mode: 'page_key', custom_page_handle: custom_page_handle }) | trim %}
+        {% set custom_page_stylesheet = include('snipplets/custom-pages/page-context.tpl', { mode: 'stylesheet', custom_page_handle: custom_page_handle }) | trim %}
+        {% set custom_page_script = include('snipplets/custom-pages/page-context.tpl', { mode: 'script', custom_page_handle: custom_page_handle }) | trim %}
+        {% set custom_page_meta_title = include('snipplets/custom-pages/page-context.tpl', { mode: 'meta_title', custom_page_handle: custom_page_handle }) | trim %}
+        {% set custom_page_meta_description = include('snipplets/custom-pages/page-context.tpl', { mode: 'meta_description', custom_page_handle: custom_page_handle }) | trim %}
+        {% set custom_page_robots = include('snipplets/custom-pages/page-context.tpl', { mode: 'robots', custom_page_handle: custom_page_handle }) | trim %}
+        {% set custom_page_canonical_path = include('snipplets/custom-pages/page-context.tpl', { mode: 'canonical_path', custom_page_handle: custom_page_handle }) | trim %}
+        {% set custom_page_redirect_path = include('snipplets/custom-pages/page-context.tpl', { mode: 'redirect_path', custom_page_handle: custom_page_handle }) | trim %}
+        {% set is_single_product_page = template == 'product' %}
+
+        {% if custom_page_is_custom and custom_page_meta_title %}
+            {% set page_title = custom_page_meta_title %}
+        {% endif %}
+        {% if custom_page_is_custom and custom_page_meta_description %}
+            {% set page_description = custom_page_meta_description %}
         {% endif %}
 
         <link rel="preconnect" href="{{ store_resource_hints }}" />
@@ -24,6 +29,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{{ page_title }}</title>
         <meta name="description" content="{{ page_description }}" />
+        {% if custom_page_robots %}
+            <meta name="robots" content="{{ custom_page_robots }}" />
+        {% endif %}
+        {% if custom_page_canonical_path %}
+            <link rel="canonical" href="{{ store.url | trim('/') }}{{ custom_page_canonical_path }}" />
+        {% endif %}
+        {% if custom_page_redirect_path %}
+            <meta http-equiv="refresh" content="0; url={{ custom_page_redirect_path }}" />
+        {% endif %}
         <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest] | google_fonts_url('400,700') }}" />
         <link rel="preload" href="{{ 'css/style-critical.scss' | static_url }}" as="style" />
         <link rel="preload" href="{{ 'css/style-colors.scss' | static_url }}" as="style" />
@@ -65,29 +79,11 @@
 
         <link rel="stylesheet" href="{{ 'css/style-async.scss' | static_url }}" media="print" onload="this.media='all'">
 
-        {% set is_contact_hours_page = template == 'page' and (page.handle == 'contacto-y-horarios' or page.handle == 'contacto-horarios' or page.handle == 'contacto-y-horarios-de-atencion' or page.handle == 'informacion-de-contacto-y-horarios' or page.handle == 'informacion-de-contacto-y-horarios-de-atencion') %}
-        {% set is_warranty_page = template == 'page' and page.handle == 'garantias-y-devoluciones' %}
-        {% set is_about_page = template == 'page' and page.handle == 'quienes-somos' %}
-        {% set is_giveaway_page = template == 'page' and page.handle == 'sorteo' %}
-        {% set is_single_product_page = template == 'product' %}
-
-        {% if template == 'page' and page.handle == 'envios' %}
-            <link rel="stylesheet" href="{{ 'css/shipping-page.scss' | static_url }}" media="all">
-        {% elseif template == 'page' and page.handle == 'pagos' %}
-            <link rel="stylesheet" href="{{ 'css/payment-page.scss' | static_url }}" media="all">
-        {% elseif is_warranty_page %}
-            <link rel="stylesheet" href="{{ 'css/warranty-page.scss' | static_url }}" media="all">
-        {% elseif is_contact_hours_page %}
-            <link rel="stylesheet" href="{{ 'css/contact-hours-page.scss' | static_url }}" media="all">
-        {% elseif is_about_page %}
-            <link rel="stylesheet" href="{{ 'css/about-page.scss' | static_url }}" media="all">
-        {% elseif is_giveaway_page %}
-            <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css" media="all">
-            <link rel="stylesheet" href="{{ 'css/giveaway-page.scss' | static_url }}" media="all">
-        {% elseif is_pre_promo_page %}
-            <link rel="stylesheet" href="{{ 'css/pre-promo-page.scss' | static_url }}" media="all">
-        {% elseif is_hot_days_page %}
-            <link rel="stylesheet" href="{{ 'css/hot-days-page.scss' | static_url }}" media="all">
+        {% if custom_page_is_custom %}
+            <link rel="stylesheet" href="{{ 'css/custom-pages-base.scss' | static_url }}" media="all">
+            {% if custom_page_stylesheet %}
+                <link rel="stylesheet" href="{{ custom_page_stylesheet | static_url }}" media="all">
+            {% endif %}
         {% elseif is_single_product_page %}
             <link rel="stylesheet" href="{{ 'css/single-product.scss' | static_url }}" media="all">
         {% endif %}
@@ -205,34 +201,15 @@
             });
         </script>
 
-        {% if template == 'page' and page.handle == 'envios' %}
+        {% if custom_page_is_custom %}
             <script type="text/javascript">
-                {% include "static/js/shipping-page.js.tpl" %}
+                {% include "static/js/custom-pages.js.tpl" %}
             </script>
-        {% elseif template == 'page' and page.handle == 'pagos' %}
-            <script type="text/javascript">
-                {% include "static/js/payment-page.js.tpl" %}
-            </script>
-        {% elseif is_warranty_page %}
-            <script type="text/javascript">
-                {% include "static/js/warranty-page.js.tpl" %}
-            </script>
-        {% elseif is_contact_hours_page %}
-            <script type="text/javascript">
-                {% include "static/js/contact-hours-page.js.tpl" %}
-            </script>
-        {% elseif is_about_page %}
-            <script type="text/javascript">
-                {% include "static/js/about-page.js.tpl" %}
-            </script>
-        {% elseif is_pre_promo_page %}
-            <script type="text/javascript">
-                {% include "static/js/pre-promo-page.js.tpl" %}
-            </script>
-        {% elseif is_hot_days_page %}
-            <script type="text/javascript">
-                {% include "static/js/hot-days-page.js.tpl" %}
-            </script>
+            {% if custom_page_script %}
+                <script type="text/javascript">
+                    {% include custom_page_script %}
+                </script>
+            {% endif %}
         {% endif %}
 
         {# Google reCAPTCHA on register page #}

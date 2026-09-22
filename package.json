@@ -7,7 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run check:custom-pages",
+    "check:custom-pages": "node scripts/check-custom-pages.mjs",
+    "test:e2e:custom-pages": "playwright test"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,10 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1"
+  },
   "bugs": {
     "url": "https://github.com/LautaroAyosa/tiendanube-trimetra3d/issues"
   },

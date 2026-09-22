@@ -46,9 +46,7 @@
 
 <header class="js-head-main head-main {{ header_colors_classes }} {{ head_position_mobile }} {{ head_position_desktop }} {{ header_logo_mobile_classes }} {{ header_logo_desktop_classes }} {{ header_search_full_mobile_classes }} {{ header_desktop_and_nav_colors_classes }} {{ header_desktop_nav_colors_classes }} {{ header_desktop_nav_categories_link_classes }} transition-soft" data-store="head">
     {# Adversiting bar #}
-    {% if settings.ad_bar %}
-        {% snipplet "header/header-advertising.tpl" %}
-    {% endif %}
+    {% snipplet "header/header-advertising.tpl" %}
     <div class="head-logo-row position-relative container-fluid">
         <div class="{% if not settings.head_fix_desktop %}js-nav-logo-bar{% endif %} row no-gutters align-items-center">
 

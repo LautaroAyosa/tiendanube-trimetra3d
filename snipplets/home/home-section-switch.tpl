@@ -72,6 +72,15 @@
 		{% include 'snipplets/home/home-featured-products.tpl' with {'has_sale': true} %}
 	{% endif %}
 
+{% elseif section_select == 'sale_video' %}
+
+	{#  **** Sale products + vertical video ****  #}
+	{% if show_help or (show_component_help and not has_sale_video) %}
+		{% include 'snipplets/defaults/home/sale_video_help.tpl' %}
+	{% else %}
+		{% include 'snipplets/home/home-sale-video.tpl' %}
+	{% endif %}
+
 {% elseif section_select == 'promotion' %}
 
 	{#  **** Promotional products ****  #}
@@ -117,6 +126,20 @@
 			{% include 'snipplets/defaults/home/banners_help.tpl' with { banner_name: 'category', banner_title: 'Categoría' | translate, help_text: 'Podés destacar categorías de tu tienda desde' | translate, section_name: 'Banners de categorías' | translate }  %}
 		{% else %}
 			{% include 'snipplets/home/home-banners.tpl' with {'has_banner': true} %}
+		{% endif %}
+	</section>
+
+{% elseif section_select == 'categories_fluid' %}
+
+	{#  **** Fluid categories banners ****  #}
+	<section class="section-banners-home section-category-banners-fluid position-relative" data-store="home-banner-categories-fluid" data-transition="fade-in-up">
+		{% if show_help or (show_component_help and not has_category_banners_fluid) %}
+			{% include 'snipplets/defaults/home/banners_help.tpl' with { banner_name: 'category-fluid', banner_title: 'Categoria' | translate, help_text: 'Podes destacar categorias de tu tienda desde' | translate, section_name: 'Banners de categorias fluidos' | translate }  %}
+		{% else %}
+			{% include 'snipplets/home/home-category-banners-fluid.tpl' %}
+			{% if (settings.toggle_category_banner_fluid_mobile and settings.category_banner_fluid_mobile and settings.category_banner_fluid_mobile is not empty) or show_component_help %}
+				{% include 'snipplets/home/home-category-banners-fluid.tpl' with {mobile: true} %}
+			{% endif %}
 		{% endif %}
 	</section>
 

@@ -1,0 +1,879 @@
+.preventas-page {
+  --preventas-ink: #171717;
+  --preventas-copy: #4b4f54;
+  --preventas-muted: #747b83;
+  --preventas-paper: #ffffff;
+  --preventas-soft: #fff7f2;
+  --preventas-line: #eadbd2;
+  --preventas-dark: #17120f;
+  --preventas-accent: #c93d13;
+  --preventas-accent-dark: #a62f0e;
+  --preventas-orange: #ff8c22;
+  --preventas-blue: #2e7df6;
+  --preventas-yellow: #f2cf63;
+
+  color: var(--preventas-copy);
+  background: var(--preventas-paper);
+  font-family: var(--body-font);
+  overflow: hidden;
+}
+
+.preventas-page *,
+.preventas-page *::before,
+.preventas-page *::after {
+  box-sizing: border-box;
+}
+
+.preventas-page__container {
+  max-width: 1200px;
+}
+
+.preventas-page h1,
+.preventas-page h2,
+.preventas-page h3,
+.preventas-page p,
+.preventas-page figure {
+  margin-top: 0;
+}
+
+.preventas-page h1,
+.preventas-page h2,
+.preventas-page h3 {
+  color: var(--preventas-ink);
+  font-family: var(--heading-font);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.preventas-page p,
+.preventas-page figure {
+  margin-bottom: 0;
+}
+
+.preventas-page a {
+  text-decoration: none;
+}
+
+.preventas-page strong {
+  color: inherit;
+  font-weight: 800;
+}
+
+.preventas-page__hero {
+  position: relative;
+  padding: 74px 0 50px;
+  color: #eef7f2;
+  background: linear-gradient(135deg, #17120f 0%, #221713 56%, #30231c 100%);
+}
+
+.preventas-page__hero-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.78fr);
+  gap: 42px;
+  align-items: center;
+}
+
+.preventas-page__hero-copy,
+.preventas-page__hero-panel,
+.preventas-page__section-heading,
+.preventas-page__products-header > div {
+  min-width: 0;
+}
+
+.preventas-page__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 30px;
+  margin-bottom: 14px !important;
+  padding: 6px 10px;
+  color: var(--preventas-accent-dark);
+  background: rgba(240, 84, 35, 0.1);
+  border: 1px solid rgba(240, 84, 35, 0.28);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.preventas-page__eyebrow--light {
+  color: #f7fff9;
+  background: rgba(240, 84, 35, 0.22);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.preventas-page__title {
+  max-width: 760px;
+  margin-bottom: 18px;
+  color: #ffffff !important;
+  font-size: 62px;
+  line-height: 0.98;
+}
+
+.preventas-page__lead {
+  max-width: 660px;
+  color: #d8e8df;
+  font-size: 18px;
+  line-height: 1.62;
+}
+
+.preventas-page__hero-actions,
+.preventas-page__contact-actions,
+.preventas-page__empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.preventas-page__hero-actions {
+  margin-top: 30px;
+}
+
+.preventas-page__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 14px 20px;
+  color: #ffffff;
+  background: var(--preventas-accent);
+  border: 1px solid var(--preventas-accent);
+  border-radius: 8px;
+  box-shadow: 0 16px 34px rgba(240, 84, 35, 0.24);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.preventas-page__button:hover,
+.preventas-page__button:focus {
+  color: #ffffff;
+  background: var(--preventas-accent-dark);
+  border-color: var(--preventas-accent-dark);
+}
+
+.preventas-page__button:focus-visible,
+.preventas-page__text-link:focus-visible,
+.preventas-page__product-card a:focus-visible,
+.preventas-page__faq-item summary:focus-visible {
+  outline: 3px solid rgba(240, 84, 35, 0.36);
+  outline-offset: 3px;
+}
+
+.preventas-page__button--outline {
+  color: #f7fff9;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow: none;
+}
+
+.preventas-page__button--outline:hover,
+.preventas-page__button--outline:focus {
+  color: var(--preventas-dark);
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.preventas-page__button--outline-dark {
+  color: var(--preventas-ink);
+  background: #ffffff;
+  border-color: var(--preventas-line);
+  box-shadow: none;
+}
+
+.preventas-page__button--outline-dark:hover,
+.preventas-page__button--outline-dark:focus {
+  color: #ffffff;
+  background: var(--preventas-ink);
+  border-color: var(--preventas-ink);
+}
+
+.preventas-page__proof-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.preventas-page__proof-row span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 10px;
+  color: #eef7f2;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.preventas-page__hero-panel {
+  position: relative;
+  display: grid;
+  gap: 14px;
+}
+
+.preventas-page__hero-image-frame {
+  position: relative;
+  min-height: 420px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.preventas-page__hero-image-frame::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 9px;
+  background: linear-gradient(90deg, var(--preventas-accent), var(--preventas-orange), var(--preventas-blue));
+  content: "";
+}
+
+.preventas-page__hero-image {
+  display: block;
+  width: 100%;
+  height: 420px;
+  object-fit: contain;
+  background: #f7f8f6;
+}
+
+.preventas-page__reserve-ticket {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 18px;
+  color: #ffffff;
+  background: rgba(17, 23, 21, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+}
+
+.preventas-page__reserve-ticket span {
+  color: var(--preventas-yellow);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.preventas-page__reserve-ticket strong {
+  color: #ffffff;
+  font-family: var(--heading-font);
+  font-size: 42px;
+  line-height: 1;
+}
+
+.preventas-page__reserve-ticket p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.preventas-page__section {
+  padding: 66px 0;
+}
+
+.preventas-page__section-heading {
+  max-width: 780px;
+}
+
+.preventas-page__section-heading h2,
+.preventas-page__products-header h2,
+.preventas-page__transparency h2,
+.preventas-page__contact h2 {
+  margin-bottom: 10px;
+  color: var(--preventas-ink);
+  font-size: 34px;
+  line-height: 1.13;
+}
+
+.preventas-page__section-heading p,
+.preventas-page__products-header p,
+.preventas-page__transparency p,
+.preventas-page__contact p {
+  color: var(--preventas-copy);
+  font-size: 15px;
+  line-height: 1.62;
+}
+
+.preventas-page__split,
+.preventas-page__faq-layout,
+.preventas-page__contact-layout,
+.preventas-page__transparency-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.45fr) minmax(0, 0.55fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.preventas-page__definition {
+  background: #ffffff;
+}
+
+.preventas-page__fact-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.preventas-page__fact,
+.preventas-page__reason,
+.preventas-page__faq-item {
+  border: 1px solid var(--preventas-line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.preventas-page__fact {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 7px 14px;
+  align-items: start;
+  padding: 20px;
+}
+
+.preventas-page__fact--accent {
+  border-color: rgba(240, 84, 35, 0.34);
+  background: #fff0ea;
+}
+
+.preventas-page__icon {
+  display: inline-flex;
+  grid-row: span 2;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #ffffff;
+  background: var(--preventas-accent);
+  border-radius: 8px;
+}
+
+.preventas-page__icon-svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.preventas-page__fact h3,
+.preventas-page__reason h3,
+.preventas-page__steps h3,
+.preventas-page__empty-products h3 {
+  margin: 0 0 7px;
+  color: var(--preventas-ink);
+  font-size: 21px;
+  line-height: 1.18;
+}
+
+.preventas-page__fact p,
+.preventas-page__reason p,
+.preventas-page__steps p,
+.preventas-page__empty-products p {
+  color: var(--preventas-copy);
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.preventas-page__reasons,
+.preventas-page__timeline,
+.preventas-page__faq {
+  background: var(--preventas-soft);
+}
+
+.preventas-page__reason-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.preventas-page__reason {
+  min-width: 0;
+  padding: 24px;
+}
+
+.preventas-page__anchor {
+  scroll-margin-top: 98px;
+}
+
+.preventas-page__products {
+  background: #ffffff;
+}
+
+.preventas-page__products-header {
+  display: flex;
+  gap: 18px;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.preventas-page__text-link {
+  flex: 0 0 auto;
+  color: var(--preventas-accent-dark);
+  border-bottom: 1px solid rgba(217, 67, 24, 0.45);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.preventas-page__text-link:hover,
+.preventas-page__text-link:focus {
+  color: var(--preventas-ink);
+  border-bottom-color: var(--preventas-ink);
+}
+
+.preventas-page__product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.preventas-page__product-card {
+  min-width: 0;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--preventas-line);
+  border-radius: 12px;
+}
+
+.preventas-page__product-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f7f8f6;
+}
+
+.preventas-page__product-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.preventas-page__product-media:hover img {
+  transform: scale(1.025);
+}
+
+.preventas-page__product-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  padding: 6px 9px;
+  color: #ffffff;
+  background: var(--preventas-accent);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.preventas-page__product-body {
+  display: flex;
+  min-height: 276px;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.preventas-page__product-body h3 {
+  margin: 0 0 12px;
+  color: var(--preventas-ink);
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.preventas-page__product-body h3 a {
+  color: inherit;
+}
+
+.preventas-page__product-body h3 a:hover {
+  color: var(--preventas-accent-dark);
+}
+
+.preventas-page__product-price {
+  margin: 0 0 12px;
+  color: var(--preventas-ink);
+  font-family: var(--heading-font);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.preventas-page__product-price small {
+  display: block;
+  margin-top: 4px;
+  color: var(--preventas-muted);
+  font-family: var(--body-font);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.preventas-page__product-note {
+  margin: 0 0 18px;
+  color: var(--preventas-copy);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.preventas-page__product-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: auto;
+}
+
+.preventas-page__product-button {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 12px;
+  color: #ffffff;
+  background: var(--preventas-ink);
+  border: 1px solid var(--preventas-ink);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.preventas-page__product-button:hover,
+.preventas-page__product-button:focus {
+  color: #ffffff;
+  background: var(--preventas-accent-dark);
+  border-color: var(--preventas-accent-dark);
+}
+
+.preventas-page__product-button--secondary {
+  color: var(--preventas-ink);
+  background: #ffffff;
+  border-color: var(--preventas-line);
+}
+
+.preventas-page__product-button--secondary:hover,
+.preventas-page__product-button--secondary:focus {
+  color: var(--preventas-ink);
+  background: var(--preventas-soft);
+  border-color: var(--preventas-accent);
+}
+
+.preventas-page__empty-products {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  padding: 26px;
+  background:
+    linear-gradient(135deg, rgba(240, 84, 35, 0.1), transparent 42%),
+    #ffffff;
+  border: 1px solid var(--preventas-line);
+  border-radius: 8px;
+}
+
+.preventas-page__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 28px 0 0;
+  padding: 0;
+  background: var(--preventas-line);
+  border: 1px solid var(--preventas-line);
+  border-radius: 8px;
+  list-style: none;
+  overflow: hidden;
+}
+
+.preventas-page__steps li {
+  min-width: 0;
+  padding: 22px;
+  background: #ffffff;
+}
+
+.preventas-page__steps strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 14px;
+  color: #ffffff;
+  background: var(--preventas-ink);
+  border-radius: 8px;
+  font-family: var(--heading-font);
+  font-size: 14px;
+}
+
+.preventas-page__transparency {
+  padding: 66px 0;
+  color: #eef7f2;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 54px
+    ),
+    linear-gradient(135deg, #17120f 0%, #241914 100%);
+}
+
+.preventas-page__transparency h2 {
+  color: #ffffff;
+}
+
+.preventas-page__transparency p {
+  color: rgba(238, 247, 242, 0.8);
+}
+
+.preventas-page__check-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.preventas-page__check-list li {
+  position: relative;
+  min-width: 0;
+  padding: 16px 18px 16px 46px;
+  color: #eef7f2;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.52;
+}
+
+.preventas-page__check-list li::before {
+  position: absolute;
+  top: 17px;
+  left: 18px;
+  width: 15px;
+  height: 15px;
+  background: var(--preventas-accent);
+  border-radius: 4px;
+  content: "";
+}
+
+.preventas-page .section-reviews {
+  margin: 0;
+  padding: 66px 0;
+  background: #ffffff;
+  border-bottom: 1px solid var(--preventas-line);
+}
+
+.preventas-page .reviews-block-header {
+  align-items: end;
+}
+
+.preventas-page__contact {
+  background: #ffffff;
+}
+
+.preventas-page__contact-layout {
+  align-items: center;
+  padding: 28px;
+  background: var(--preventas-soft);
+  border: 1px solid var(--preventas-line);
+  border-radius: 8px;
+}
+
+.preventas-page__contact-actions {
+  justify-content: flex-end;
+}
+
+.preventas-page__faq-layout {
+  grid-template-columns: minmax(250px, 0.38fr) minmax(0, 0.62fr);
+}
+
+.preventas-page__faq-list {
+  display: grid;
+  gap: 10px;
+}
+
+.preventas-page__faq-item {
+  padding: 18px 20px;
+}
+
+.preventas-page__faq-item summary {
+  color: var(--preventas-ink);
+  cursor: pointer;
+  font-family: var(--heading-font);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.preventas-page__faq-item p {
+  margin-top: 10px;
+  color: var(--preventas-copy);
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.preventas-page__admin-section {
+  padding-top: 0;
+  background: #ffffff;
+}
+
+.preventas-page__admin-content {
+  padding-top: 28px;
+  border-top: 1px solid var(--preventas-line);
+}
+
+@media (max-width: 1199px) {
+  .preventas-page__title {
+    font-size: 52px;
+  }
+
+  .preventas-page__hero-layout {
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.72fr);
+  }
+
+  .preventas-page__product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 991px) {
+  .preventas-page__hero-layout,
+  .preventas-page__split,
+  .preventas-page__faq-layout,
+  .preventas-page__contact-layout,
+  .preventas-page__transparency-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .preventas-page__hero-panel {
+    max-width: 620px;
+  }
+
+  .preventas-page__reason-board,
+  .preventas-page__steps,
+  .preventas-page__empty-products {
+    grid-template-columns: 1fr;
+  }
+
+  .preventas-page__contact-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 767px) {
+  .preventas-page__hero {
+    padding: 44px 0 34px;
+  }
+
+  .preventas-page__hero::after {
+    width: 64%;
+    opacity: 0.34;
+  }
+
+  .preventas-page__section,
+  .preventas-page__transparency,
+  .preventas-page .section-reviews {
+    padding: 44px 0;
+  }
+
+  .preventas-page__title {
+    font-size: 38px;
+    line-height: 1.04;
+  }
+
+  .preventas-page__lead {
+    font-size: 15px;
+  }
+
+  .preventas-page__hero-actions,
+  .preventas-page__contact-actions,
+  .preventas-page__empty-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .preventas-page__button {
+    width: 100%;
+  }
+
+  .preventas-page__proof-row {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .preventas-page__hero-image-frame {
+    min-height: 300px;
+  }
+
+  .preventas-page__hero-image {
+    height: 300px;
+  }
+
+  .preventas-page__reserve-ticket {
+    grid-template-columns: 1fr;
+  }
+
+  .preventas-page__section-heading h2,
+  .preventas-page__products-header h2,
+  .preventas-page__transparency h2,
+  .preventas-page__contact h2 {
+    font-size: 26px;
+  }
+
+  .preventas-page__products-header {
+    display: block;
+  }
+
+  .preventas-page__text-link {
+    display: inline-flex;
+    margin-top: 10px;
+  }
+
+
+  .preventas-page__product-grid,
+  .preventas-page__product-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .preventas-page__fact,
+  .preventas-page__reason,
+  .preventas-page__steps li,
+  .preventas-page__empty-products,
+  .preventas-page__contact-layout,
+  .preventas-page__faq-item {
+    padding: 16px;
+  }
+
+  .preventas-page__fact {
+    grid-template-columns: 1fr;
+  }
+
+  .preventas-page__icon {
+    grid-row: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preventas-page__product-media img {
+    transition: none;
+  }
+}

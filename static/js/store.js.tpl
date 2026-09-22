@@ -548,11 +548,12 @@ DOMContentLoaded.addEventOrExecute(() => {
     {% set adbarMessage03 = settings.ad_bar_03_text %}
     {% set adbarMultipleMessages = (adbarMessage01 and adbarMessage02) or (adbarMessage01 and adbarMessage03) or (adbarMessage02 and adbarMessage03) %}
     {% set adbarMessages = adbarMessage01 or adbarMessage02 or adbarMessage03 %}
-    {% set hasAdbar = settings.ad_bar and (adbarMessages or 'adbar_img_mobile.jpg' | has_custom_image or 'adbar_img_desktop.jpg' | has_custom_image) %}
-    {% set promoAdbarCountdownEnd = include("snipplets/payment-installments-config.tpl", { mode: "promo_end" }) | trim %}
-    {% set promoAdbarCountdown = ("now" | date("Y-m-d")) <= promoAdbarCountdownEnd %}
+    {% set promoAdbarCountdownEnabled = include("snipplets/payment-installments-config.tpl", { mode: "promo_countdown" }) | trim %}
+    {% set promoAdbarCountdownHasNotEnded = include("snipplets/payment-installments-config.tpl", { mode: "promo_has_not_ended" }) | trim %}
+    {% set promoAdbarCountdown = promoAdbarCountdownEnabled == "true" and promoAdbarCountdownHasNotEnded == "true" %}
+    {% set hasAdbar = promoAdbarCountdown or (settings.ad_bar and (adbarMessages or 'adbar_img_mobile.jpg' | has_custom_image or 'adbar_img_desktop.jpg' | has_custom_image)) %}
 
-    {% if settings.ad_bar and promoAdbarCountdown %}
+    {% if promoAdbarCountdown %}
 
         function initAdbarCountdown() {
             var countdownBar = document.querySelector("[data-adbar-countdown]");
@@ -847,7 +848,7 @@ DOMContentLoaded.addEventOrExecute(() => {
             var header = jQueryNuvem(".js-head-main");
             var navbarHeight = header.outerHeight();
 
-            {% if settings.ad_bar and promoAdbarCountdown %}
+            {% if promoAdbarCountdown %}
                 topbarHeight = jQueryNuvem(".js-adbar").outerHeight() || 0;
             {% endif %}
 
@@ -1378,6 +1379,85 @@ DOMContentLoaded.addEventOrExecute(() => {
 
         {% endif %}
 
+        {# /* // Sale products + vertical video */ #}
+
+        {% set has_sale_video_section = sections.sale.products and settings.sale_video_file %}
+
+        {% if has_sale_video_section or theme_editor %}
+
+            createSwiper('.js-swiper-sale-video', {
+                lazy: true,
+                watchOverflow: true,
+                centerInsufficientSlides: true,
+                threshold: 5,
+                watchSlideProgress: true,
+                watchSlidesVisibility: true,
+                slideVisibleClass: 'js-swiper-slide-visible',
+                spaceBetween: itemSwiperSpaceBetween,
+                {% if sections.sale.products | length > 4 %}
+                loop: true,
+                {% endif %}
+                navigation: {
+                    nextEl: '.js-swiper-sale-video-next',
+                    prevEl: '.js-swiper-sale-video-prev',
+                },
+                on: {
+                    afterInit: function () {
+                        hideSwiperControls('.js-swiper-sale-video-prev', '.js-swiper-sale-video-next');
+                    },
+                },
+                slidesPerView: 2.05,
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2.5,
+                    },
+                    992: {
+                        slidesPerView: 2,
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                    },
+                },
+            },
+            function(swiperInstance) {
+                window.productsSaleVideoSwiper = swiperInstance;
+            });
+
+            {% if settings.sale_video_autoplay %}
+                const saleVideo = document.querySelector('.js-sale-video[data-autoplay="true"]');
+
+                if (saleVideo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    saleVideo.muted = true;
+                    saleVideo.playsInline = true;
+
+                    const playSaleVideo = function() {
+                        const playPromise = saleVideo.play();
+
+                        if (playPromise && typeof playPromise.catch === 'function') {
+                            playPromise.catch(function() {});
+                        }
+                    };
+
+                    if ('IntersectionObserver' in window) {
+                        const saleVideoObserver = new IntersectionObserver(function(entries) {
+                            entries.forEach(function(entry) {
+                                if (entry.isIntersecting) {
+                                    playSaleVideo();
+                                } else {
+                                    saleVideo.pause();
+                                }
+                            });
+                        }, { threshold: 0.35 });
+
+                        saleVideoObserver.observe(saleVideo);
+                    } else {
+                        playSaleVideo();
+                    }
+                }
+            {% endif %}
+
+        {% endif %}
+
         {# /* // Brands slider */ #}
 
         {% if settings.brands and settings.brands is not empty %}
@@ -1627,6 +1707,79 @@ DOMContentLoaded.addEventOrExecute(() => {
                 },
                 function(swiperInstance) {
                     window.homeBannerMobileSwiper = swiperInstance;
+                });
+            {% endif %}
+
+        {% endif %}
+
+        {# Fluid category banners #}
+
+        {% if settings.category_banner_fluid_slider or theme_editor %}
+
+            {% set category_banner_fluid_columns_desktop = settings.category_banner_fluid_columns_desktop %}
+            {% set category_banner_fluid_columns_mobile = settings.category_banner_fluid_columns_mobile %}
+
+            var categoryBannersFluidPerViewDesktopVal = {% if category_banner_fluid_columns_desktop == 4 %}4{% elseif category_banner_fluid_columns_desktop == 3 %}3{% elseif category_banner_fluid_columns_desktop == 2 %}2{% else %}1{% endif %};
+            var categoryBannersFluidPerViewMobileVal = {% if category_banner_fluid_columns_mobile == 2 %}2.25{% else %}1.15{% endif %};
+            var categoryBannersFluidSpaceBetween = {% if settings.category_banner_fluid_without_margins %}0{% else %}itemSwiperSpaceBetween{% endif %};
+
+            {% if (settings.category_banner_fluid and settings.category_banner_fluid is not empty) or theme_editor %}
+                createSwiper('.js-swiper-category-banners-fluid', {
+                    lazy: true,
+                    watchOverflow: true,
+                    threshold: 5,
+                    watchSlideProgress: true,
+                    watchSlidesVisibility: true,
+                    slideVisibleClass: 'js-swiper-slide-visible',
+                    spaceBetween: categoryBannersFluidSpaceBetween,
+                    navigation: {
+                        nextEl: '.js-swiper-category-banners-fluid-next',
+                        prevEl: '.js-swiper-category-banners-fluid-prev',
+                    },
+                    slidesPerView: categoryBannersFluidPerViewMobileVal,
+                    on: {
+                        afterInit: function () {
+                            hideSwiperControls(".js-swiper-category-banners-fluid-prev", ".js-swiper-category-banners-fluid-next");
+                        },
+                    },
+                    breakpoints: {
+                        768: {
+                            slidesPerView: categoryBannersFluidPerViewDesktopVal,
+                        }
+                    },
+                },
+                function(swiperInstance) {
+                    window.homeCategoryBannerFluidSwiper = swiperInstance;
+                });
+            {% endif %}
+
+            {% if (settings.toggle_category_banner_fluid_mobile and settings.category_banner_fluid_mobile and settings.category_banner_fluid_mobile is not empty) or theme_editor %}
+                createSwiper('.js-swiper-category-banners-fluid-mobile', {
+                    lazy: true,
+                    watchOverflow: true,
+                    threshold: 5,
+                    watchSlideProgress: true,
+                    watchSlidesVisibility: true,
+                    slideVisibleClass: 'js-swiper-slide-visible',
+                    spaceBetween: categoryBannersFluidSpaceBetween,
+                    navigation: {
+                        nextEl: '.js-swiper-category-banners-fluid-mobile-next',
+                        prevEl: '.js-swiper-category-banners-fluid-mobile-prev',
+                    },
+                    slidesPerView: categoryBannersFluidPerViewMobileVal,
+                    on: {
+                        afterInit: function () {
+                            hideSwiperControls(".js-swiper-category-banners-fluid-mobile-prev", ".js-swiper-category-banners-fluid-mobile-next");
+                        },
+                    },
+                    breakpoints: {
+                        768: {
+                            slidesPerView: categoryBannersFluidPerViewDesktopVal,
+                        }
+                    },
+                },
+                function(swiperInstance) {
+                    window.homeCategoryBannerFluidMobileSwiper = swiperInstance;
                 });
             {% endif %}
 
@@ -2316,6 +2469,31 @@ DOMContentLoaded.addEventOrExecute(() => {
                 });
             };
 
+            {# Keep available colors first without changing their configured order #}
+            const sortColorVariantsByStock = () => {
+                wrapper.find('.js-color-variants-container').each(function(group) {
+                    const colorButtons = Array.from(group.querySelectorAll(config.variantButton));
+
+                    colorButtons.forEach((button, index) => {
+                        if (!button.hasAttribute('data-variant-original-order')) {
+                            button.setAttribute('data-variant-original-order', index);
+                        }
+                    });
+
+                    colorButtons.sort((firstButton, secondButton) => {
+                        const stockOrder = Number(firstButton.classList.contains(config.noStockClass)) - Number(secondButton.classList.contains(config.noStockClass));
+
+                        if (stockOrder !== 0) {
+                            return stockOrder;
+                        }
+
+                        return Number(firstButton.getAttribute('data-variant-original-order')) - Number(secondButton.getAttribute('data-variant-original-order'));
+                    });
+
+                    colorButtons.forEach(button => group.appendChild(button));
+                });
+            };
+
             {# Update stock status for variant buttons #}
             const updateStockStatus = (productVariationId) => {
                 const variationGroup = wrapper.find(`${config.variantsGroup}[${config.dataVariationId}="${productVariationId}"]`);
@@ -2336,6 +2514,8 @@ DOMContentLoaded.addEventOrExecute(() => {
             for (let productVariationId = variantsLength - 1; productVariationId >= 0; productVariationId--) {
                 updateStockStatus(productVariationId);
             }
+
+            sortColorVariantsByStock();
         };
 
         noStockVariants();
@@ -2463,9 +2643,9 @@ DOMContentLoaded.addEventOrExecute(() => {
 
 	{# Installments without interest #}
 
-	var max_installments_without_interests_to_show = parseInt('{{ include("snipplets/payment-installments-config.tpl", { mode: "base_installments" }) | trim | escape('js') }}', 10) || 3;
+	var default_max_installments_without_interests_to_show = parseInt('{{ include("snipplets/payment-installments-config.tpl", { mode: "base_installments" }) | trim | escape('js') }}', 10) || 3;
 
-	function get_max_installments_without_interests(number_of_installment, installment_data, max_installments_without_interests) {
+	function get_max_installments_without_interests(number_of_installment, installment_data, max_installments_without_interests, max_installments_without_interests_to_show) {
 	    var installment_number = parseInt(number_of_installment);
 	    if (installment_number > max_installments_without_interests_to_show) {
 	        return max_installments_without_interests;
@@ -2552,6 +2732,8 @@ DOMContentLoaded.addEventOrExecute(() => {
 	    };
 
 	    var $payments_module = jQueryNuvem(variant.element + ' .js-product-payments-container');
+	    var $installments_summary = jQueryNuvem(variant.element + ' .js-max-installments-container');
+	    var max_installments_without_interests_to_show = parseInt($installments_summary.attr('data-max-installments'), 10) || default_max_installments_without_interests_to_show;
 
 	    if (variant.installments_data) {
 	        var variant_installments = JSON.parse(variant.installments_data);
@@ -2570,7 +2752,7 @@ DOMContentLoaded.addEventOrExecute(() => {
                 let installments = variant_installments[payment_method];
 	            for (let number_of_installment in installments) {
                     let installment_data = installments[number_of_installment];
-	                max_installments_without_interests = get_max_installments_without_interests(number_of_installment, installment_data, max_installments_without_interests);
+	                max_installments_without_interests = get_max_installments_without_interests(number_of_installment, installment_data, max_installments_without_interests, max_installments_without_interests_to_show);
 	                max_installments_with_interests = get_max_installments_with_interests(number_of_installment, installment_data, max_installments_with_interests);
 	                var installment_container_selector = '#installment_' + payment_method.replace(" ", "_") + '_' + number_of_installment;
 
@@ -2584,13 +2766,19 @@ DOMContentLoaded.addEventOrExecute(() => {
 	                }
 	            }
 	        }
-	        var $installments_container = jQueryNuvem(variant.element + ' .js-max-installments-container .js-max-installments');
+	        var $installments_container = $installments_summary.find('.js-max-installments');
 	        var $installments_modal_link = jQueryNuvem(variant.element + ' #btn-installments');
 	        var $installmens_card_icon = jQueryNuvem(variant.element + ' .js-installments-credit-card-icon');
 	        var $payment_discount_container = jQueryNuvem(variant.element + ' .js-product-discount-container');
 	        var has_visible_payment_discount = $payment_discount_container.length && $payment_discount_container.css("display") != "none";
 
 	        var installments_to_use = max_installments_without_interests;
+	        var promo_installments = parseInt($installments_summary.attr('data-promo-installments'), 10);
+	        var promo_applies = $installments_summary.attr('data-promo-eligible') === 'true' && parseInt(installments_to_use[0], 10) === promo_installments;
+	        $installments_summary.removeClass('item-installments--promo');
+	        if (promo_applies) {
+	            $installments_summary.addClass('item-installments--promo');
+	        }
 	        if(installments_to_use[0] <= 1 ) {
 	            $installments_container.hide();
 	            $installmens_card_icon.hide();

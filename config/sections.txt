@@ -10,6 +10,9 @@ sale
 promotion
 	name = Promociones
 	description = Los productos aparecen en promoción en la página de inicio (hasta 40 productos).
+preventas
+	name = Preventas
+	description = Productos de preventa (hasta 40). El nombre debe incluir "Preventa" y un mes estimado, por ejemplo "Preventa Octubre".
 best_seller
 	name = Más vendidos
 	description = Los productos aparecen como más vendidos en la página de inicio (hasta 40 productos).

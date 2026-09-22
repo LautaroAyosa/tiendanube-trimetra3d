@@ -1,0 +1,7 @@
+interface:
+  display_name: "Promos Trimetra"
+  short_description: "Configura promos del theme Trimetra"
+  default_prompt: "Usa $trimetra-promos para configurar una nueva promo del theme y validar todos sus estados."
+
+policy:
+  allow_implicit_invocation: true

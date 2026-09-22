@@ -58,6 +58,9 @@
 	{% if banner_name == 'category' %}
 		{% include 'snipplets/home/home-banners.tpl' with {'has_banner': true} %}
 	{% endif %}
+	{% if banner_name == 'category-fluid' %}
+		{% include 'snipplets/home/home-category-banners-fluid.tpl' %}
+	{% endif %}
 	{% if banner_name == 'promotional' %}
 		{% include 'snipplets/home/home-banners.tpl' with {'has_banner_promotional': true} %}
 	{% endif %}

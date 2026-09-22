@@ -1,6 +1,9 @@
 {% set trust_bar_payment_installments = include("snipplets/payment-installments-config.tpl", { mode: "current_installments" }) | trim %}
 {% set trust_bar_payment_has_active_promo = include("snipplets/payment-installments-config.tpl", { mode: "has_active_promo" }) | trim %}
+{% set trust_bar_payment_promo_label = include("snipplets/payment-installments-config.tpl", { mode: "promo_label" }) | trim %}
+{% set trust_bar_payment_promo_scope = include("snipplets/payment-installments-config.tpl", { mode: "promo_scope" }) | trim %}
 {% set trust_bar_payment_promo_end = include("snipplets/payment-installments-config.tpl", { mode: "promo_end_display" }) | trim %}
+{% set trust_bar_payment_promo_end_time = include("snipplets/payment-installments-config.tpl", { mode: "promo_end_time_display" }) | trim %}
 
 <section class="trust-bar" aria-label="Beneficios de compra" data-store="trust-bar">
   <div class="container">
@@ -19,8 +22,8 @@
           <span class="trust-bar__icon" aria-hidden="true">
             {% include "snipplets/svg/credit-card.tpl" with {svg_custom_class: "trust-bar__icon-svg"} %}
           </span>
-          <h3 class="trust-bar__title">{{ trust_bar_payment_installments }} cuotas sin inter&eacute;s</h3>
-          <p class="trust-bar__text">{% if trust_bar_payment_has_active_promo == "true" %}Promo vigente hasta el {{ trust_bar_payment_promo_end }} con tarjetas seleccionadas.{% else %}Pag&aacute; en cuotas con tarjetas seleccionadas.{% endif %}</p>
+          <h3 class="trust-bar__title">{{ trust_bar_payment_installments }} cuotas sin inter&eacute;s{% if trust_bar_payment_has_active_promo == "true" %} en {{ trust_bar_payment_promo_label }}{% endif %}</h3>
+          <p class="trust-bar__text">{% if trust_bar_payment_has_active_promo == "true" %}Promo en {{ trust_bar_payment_promo_scope }} hasta el {{ trust_bar_payment_promo_end }} a las {{ trust_bar_payment_promo_end_time }}, con tarjetas seleccionadas.{% else %}Pag&aacute; en cuotas con tarjetas seleccionadas.{% endif %}</p>
           <a class="trust-bar__link" href="/pagos/">Leer m&aacute;s</a>
         </article>
 

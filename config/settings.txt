@@ -916,6 +916,37 @@ Página de inicio
 	subtitle
 		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Elegí cuáles vas a destacar</a>
 	collapse
+		title = Ofertas + video vertical
+		backto = home_order_position
+	description
+		description = Muestra un video 9:16 a la izquierda y un carrusel con los mismos productos de la sección 'Ofertas'.
+	i18n_input
+		name = sale_video_kicker
+		description = Texto superior
+	i18n_input
+		name = sale_video_title
+		description = Título
+	i18n_input
+		name = sale_video_file
+		description = Archivo de video MP4 o WebM
+	description
+		description = Subí el archivo dentro de static/videos y pegá la ruta. Ej: videos/ofertas-vertical.mp4. También podés usar una URL HTTPS completa.
+	checkbox
+		name = sale_video_autoplay
+		description = Reproducir automáticamente al entrar en pantalla (sin sonido)
+	checkbox
+		name = sale_video_loop
+		description = Repetir el video
+	subtitle
+		subtitle = Portada vertical del video (opcional)
+	image
+		original = sale_video_image.jpg
+		title = Cargar imagen (JPG, GIF, PNG)
+		width = 1080
+		height = 1920
+	subtitle
+		subtitle = <a target='_blank' href='/admin/themes/settings/product_order/'>Elegí los productos de la sección Ofertas</a>
+	collapse
 		title = Productos en promoción
 		backto = home_order_position
 	i18n_input
@@ -1113,6 +1144,55 @@ Página de inicio
 		gallery_link = [Opcional] Página web a la que quieres que te lleve la imagen al hacer click
 		gallery_width = 820
 		gallery_height = 1000
+		gallery_more_info = true
+	collapse
+		title = Banners de categorias fluidos
+		backto = home_order_position
+	description
+		description = Carga banners de categorias sin alto fijo ni recorte de imagen.
+	i18n_input
+		name = category_banner_fluid_title
+		description = Titulo para los banners de categorias fluidos
+	checkbox
+		name = category_banner_fluid_slider
+		description = Mostrar banners dentro de un carrusel
+	checkbox
+		name = category_banner_fluid_without_margins
+		description = Quitar espacios entre los banners
+	subtitle
+		subtitle = Imagenes para computadoras
+	dropdown
+		name = category_banner_fluid_columns_desktop
+		description = Disposicion:
+		values
+			1 = 1 banner por fila
+			2 = 2 banners por fila
+			3 = 3 banners por fila
+			4 = 4 banners por fila
+	gallery
+		name = category_banner_fluid
+		gallery_image = Agregar imagen
+		gallery_link = [Opcional] Pagina web a la que quieres que te lleve la imagen al hacer click
+		gallery_width = 1200
+		gallery_height = 300
+		gallery_more_info = true
+	subtitle
+		subtitle = Imagenes para celulares
+	dropdown
+		name = category_banner_fluid_columns_mobile
+		description = Disposicion:
+		values
+			1 = 1 banner por fila
+			2 = 2 banners por fila
+	checkbox
+		name = toggle_category_banner_fluid_mobile
+		description = Cargar otras imagenes para celulares
+	gallery
+		name = category_banner_fluid_mobile
+		gallery_image = Agregar imagen
+		gallery_link = [Opcional] Pagina web a la que quieres que te lleve la imagen al hacer click
+		gallery_width = 820
+		gallery_height = 300
 		gallery_more_info = true
 	collapse
 		title = Banners promocionales
@@ -1995,6 +2075,7 @@ Página de inicio
 			welcome = Mensaje de bienvenida
 			institutional = Mensaje institucional
 			categories = Banners de categorías
+			categories_fluid = Banners de categorias fluidos
 			promotional = Banners promocionales
 			news_banners = Banners de novedades
 			featured_banners = Banners destacados
@@ -2003,6 +2084,7 @@ Página de inicio
 			newsletter = Newsletter
 			main_product = Producto principal
 			main_product_video = Producto principal + video
+			sale_video = Ofertas + video vertical
 			instafeed = Publicaciones de Instagram
 			testimonials = Testimonios
 			reviews = Opiniones de clientes

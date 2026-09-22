@@ -1,0 +1,144 @@
+/* Base compartida: conserva los tokens del theme y evita que cada pagina
+   implemente de nuevo accesibilidad, ritmo y estados interactivos. */
+[data-cro-page],
+.custom-page {
+  --custom-page-accent: var(--accent-color, #f36c21);
+  --custom-page-action: #c93d13;
+  --custom-page-text: var(--main-foreground, #252525);
+  --custom-page-surface: var(--main-background, #ffffff);
+  --custom-page-border: var(--main-foreground-opacity-20, #d8d8d8);
+  color: var(--custom-page-text);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+[data-cro-page] *,
+[data-cro-page] *::before,
+[data-cro-page] *::after,
+.custom-page *,
+.custom-page *::before,
+.custom-page *::after {
+  box-sizing: border-box;
+}
+
+[data-cro-page] :where(h1, h2, h3),
+.custom-page :where(h1, h2, h3) {
+  text-wrap: balance;
+}
+
+[data-cro-page] :where(p, li),
+.custom-page :where(p, li) {
+  text-wrap: pretty;
+}
+
+.custom-page__container {
+  margin-inline: auto;
+  max-width: 1180px;
+  padding-inline: 20px;
+  width: 100%;
+}
+
+.custom-page__prose {
+  max-width: 68ch;
+}
+
+.custom-page__actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.custom-page__button,
+[data-cro-page] :where([data-cro-cta]) {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.custom-page__button {
+  background: var(--custom-page-action);
+  border: 1px solid var(--custom-page-action);
+  border-radius: 8px;
+  color: #ffffff;
+  display: inline-flex;
+  font-weight: 700;
+  padding: 10px 18px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.custom-page__button--secondary {
+  background: transparent;
+  color: var(--custom-page-text);
+}
+
+[data-cro-page] :where(a, button, summary, input, select, textarea):focus-visible,
+.custom-page :where(a, button, summary, input, select, textarea):focus-visible {
+  outline: 3px solid var(--custom-page-accent);
+  outline-offset: 3px;
+}
+
+[data-cro-page] details,
+.custom-page details {
+  border-block-start: 1px solid var(--custom-page-border);
+}
+
+[data-cro-page] summary,
+.custom-page summary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  min-height: 44px;
+  padding-block: 12px;
+}
+
+[data-cro-page] [id],
+.custom-page [id] {
+  scroll-margin-top: 96px;
+}
+
+.custom-page__status {
+  margin-block: clamp(48px, 10vw, 112px);
+  max-width: 720px;
+  padding-block: clamp(28px, 6vw, 56px);
+  text-align: center;
+}
+
+.custom-page__status p {
+  margin-inline: auto;
+  max-width: 55ch;
+}
+
+.custom-page__sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@media (max-width: 575px) {
+  .custom-page__container {
+    padding-inline: 16px;
+  }
+
+  .custom-page__actions > * {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-cro-page],
+  .custom-page {
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,9 +1,11 @@
 {% set has_advertising_bar = false %}
 {% set promo_adbar_countdown_start_date = include("snipplets/payment-installments-config.tpl", { mode: "promo_start" }) | trim %}
 {% set promo_adbar_countdown_end_date = include("snipplets/payment-installments-config.tpl", { mode: "promo_end" }) | trim %}
-{% set promo_adbar_countdown = ("now" | date("Y-m-d")) <= promo_adbar_countdown_end_date %}
-{% set promo_adbar_countdown_start = promo_adbar_countdown_start_date ~ 'T00:00:00-03:00' %}
-{% set promo_adbar_countdown_end = promo_adbar_countdown_end_date ~ 'T23:59:59-03:00' %}
+{% set promo_adbar_countdown_enabled = include("snipplets/payment-installments-config.tpl", { mode: "promo_countdown" }) | trim %}
+{% set promo_adbar_countdown_has_not_ended = include("snipplets/payment-installments-config.tpl", { mode: "promo_has_not_ended" }) | trim %}
+{% set promo_adbar_countdown = promo_adbar_countdown_enabled == "true" and promo_adbar_countdown_has_not_ended == "true" %}
+{% set promo_adbar_countdown_start = promo_adbar_countdown_start_date %}
+{% set promo_adbar_countdown_end = promo_adbar_countdown_end_date %}
 {% set num_messages = 0 %}
 {% for adbar in ['ad_bar_01', 'ad_bar_02', 'ad_bar_03'] %}
     {% set advertising_text = attribute(settings,"#{adbar}_text") %}
@@ -16,21 +18,22 @@
 {% set adbar_images = 'adbar_img_mobile.jpg' | has_custom_image or 'adbar_img_desktop.jpg' | has_custom_image %}
 {% set both_images_without_messages = 'adbar_img_mobile.jpg' | has_custom_image and 'adbar_img_desktop.jpg' | has_custom_image and not num_messages %}
 
-{% if settings.ad_bar and promo_adbar_countdown %}
+{% if promo_adbar_countdown %}
     <section
         class="js-adbar section-adbar section-adbar--countdown"
         data-adbar-countdown
         data-adbar-countdown-start="{{ promo_adbar_countdown_start }}"
         data-adbar-countdown-end="{{ promo_adbar_countdown_end }}"
-        data-adbar-countdown-before-label="Faltan"
-        data-adbar-countdown-active-label="Termina en"
-        data-adbar-countdown-before-message="La promo empieza el 22/06 a las 9:30am"
-        data-adbar-countdown-active-message="Promo vigente hasta el 30/06"
-        aria-label="Cuenta regresiva para el inicio de la promo"
+        data-adbar-countdown-before-label=""
+        data-adbar-countdown-active-label="solo quedan..."
+        data-adbar-countdown-before-message="SE VIENE TREMENDA PROMO"
+        data-adbar-countdown-active-message="APROVECHA LAS 9 CUOTAS,"
+        aria-label="Cuenta regresiva de la promoci&oacute;n de 9 cuotas sin inter&eacute;s en impresoras Bambu Lab"
         aria-live="polite"
         hidden>
         <div class="adbar-countdown">
-            <span class="adbar-countdown__label" data-adbar-countdown-label>FALTAN</span>
+            <span class="adbar-countdown__message" data-adbar-countdown-message>SE VIENE TREMENDA PROMO</span>
+            <span class="adbar-countdown__label" data-adbar-countdown-label></span>
             <span class="adbar-countdown__timer" aria-hidden="true">
                 <span class="adbar-countdown__unit adbar-countdown__unit--days">
                     <strong data-adbar-countdown-days>00</strong>
@@ -51,7 +54,6 @@
                     <small>SEGUNDOS</small>
                 </span>
             </span>
-            <span class="adbar-countdown__message" data-adbar-countdown-message>LA PROMO EMPIEZA EL LUNES 22/06</span>
         </div>
     </section>
 {% elseif settings.ad_bar and (num_messages or adbar_images ) %}

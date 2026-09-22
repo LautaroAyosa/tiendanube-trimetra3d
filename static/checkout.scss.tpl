@@ -1187,7 +1187,9 @@ a {
 
 {% set checkout_payment_current_installments = include("snipplets/payment-installments-config.tpl", { mode: "current_installments" }) | trim %}
 {% set checkout_payment_has_active_promo = include("snipplets/payment-installments-config.tpl", { mode: "has_active_promo" }) | trim %}
-{% set checkout_payment_installments_badge = checkout_payment_has_active_promo == "true" ? "Promo: " ~ checkout_payment_current_installments ~ " cuotas sin interés" : "Hasta " ~ checkout_payment_current_installments ~ " cuotas sin interés" %}
+{% set checkout_payment_promo_label = include("snipplets/payment-installments-config.tpl", { mode: "promo_label" }) | trim %}
+{% set checkout_payment_installments_badge = checkout_payment_has_active_promo == "true" ? "Promo " ~ checkout_payment_promo_label ~ ": " ~ checkout_payment_current_installments ~ " cuotas sin interés" : "Hasta " ~ checkout_payment_current_installments ~ " cuotas sin interés" %}
+{% set checkout_payment_installments_message = checkout_payment_has_active_promo == "true" ? "Pagá en hasta " ~ checkout_payment_current_installments ~ " cuotas sin interés en " ~ checkout_payment_promo_label : "Pagá en hasta " ~ checkout_payment_current_installments ~ " cuotas sin interés" %}
 
 /* Mercado Pago checkout highlight START */
 #radio-option-mercado_pago_checkout_pro.payment-option {
@@ -1280,7 +1282,7 @@ a {
     display: block;
     flex: 0 0 100%;
     color: #03264c;
-    content: "Pagá en hasta {{ checkout_payment_current_installments }} cuotas sin interés";
+    content: "{{ checkout_payment_installments_message }}";
     font-size: 12px;
     font-weight: 700;
     line-height: 1.35;

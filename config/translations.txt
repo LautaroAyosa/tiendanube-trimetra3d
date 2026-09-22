@@ -4821,3 +4821,38 @@ es "Usá este texto para compartir información de tu negocio, dar la bienvenida
 pt "Use este texto para compartilhar informações da sua loja, dar boas vindas aos clientes ou para dizer o quão incrível são os seus produtos."
 en "Use this text to share information about your business, welcome your customers or tell how amazing your products are."
 es_mx "Usa este texto para compartir información de tu negocio, dar la bienvenida a tus clientes o para contar lo increíble que son tus productos."
+
+es "Producto anterior"
+pt "Produto anterior"
+en "Previous product"
+es_mx "Producto anterior"
+
+es "Producto siguiente"
+pt "Próximo produto"
+en "Next product"
+es_mx "Producto siguiente"
+
+es "Tu navegador no puede reproducir este video."
+pt "Seu navegador não consegue reproduzir este vídeo."
+en "Your browser cannot play this video."
+es_mx "Tu navegador no puede reproducir este video."
+
+es "Ofertas en movimiento"
+pt "Ofertas em movimento"
+en "Offers in motion"
+es_mx "Ofertas en movimiento"
+
+es "Video vertical + carrusel de productos"
+pt "Vídeo vertical + carrossel de produtos"
+en "Vertical video + product carousel"
+es_mx "Video vertical + carrusel de productos"
+
+es "Cargá un video MP4 o WebM y elegí los productos de la sección Ofertas para mostrar este bloque."
+pt "Envie um vídeo MP4 ou WebM e escolha os produtos da seção Ofertas para exibir este bloco."
+en "Upload an MP4 or WebM video and choose products from the Sale section to display this block."
+es_mx "Carga un video MP4 o WebM y elige los productos de la sección Ofertas para mostrar este bloque."
+
+es "Elegir productos en oferta"
+pt "Escolher produtos em oferta"
+en "Choose sale products"
+es_mx "Elegir productos en oferta"
